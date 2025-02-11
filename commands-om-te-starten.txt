@@ -1,0 +1,7 @@
+kijk of je npm, composer en php hebt
+1- cd /path/naar/peer-assesment-tool
+2- composer install
+3- copy .env.example .env
+3- php artisan key:generate
+4- npm run build
+5- php artisan server #om local project the hosten
