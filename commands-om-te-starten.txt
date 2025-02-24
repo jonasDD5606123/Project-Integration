@@ -1,4 +1,10 @@
-kijk of je node, npm, composer en php hebt
+laravel instalatie docs:
+https://laravel.com/docs/11.x/installation
+
+instaleren composer en php
+# Run as administrator...
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.4'))
+
 1- cd /path/naar/peer-assesment-tool
 2- composer install
 3- copy .env.example .env
