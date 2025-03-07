@@ -10,7 +10,7 @@ class Vak extends Model
     protected $table = 'Vak';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'name'
+        'naam'
     ];
     protected $casts = [
         'id' => 'int',
