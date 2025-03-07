@@ -14,7 +14,7 @@ class Vak extends Model
     ];
     protected $casts = [
         'id' => 'int',
-        'name' => 'string'
+        'naam' => 'string'
     ];
 
     public $incrementing = true;
