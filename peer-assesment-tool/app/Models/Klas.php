@@ -16,4 +16,13 @@ class Klas extends Model
         'id' => 'integer',
         'naam' => 'string'
     ];
+
+    public function student()
+    {
+        return $this->hasMany(Student::class, 'klas_id');
+    }
+
+    public function docent_klas() {
+        return $this->hasMany(Docent_Klas::class, 'klas_id');
+    }
 }

@@ -21,4 +21,8 @@ Route::get('/help',function () {
     return view('welcome');
 }); 
 
+Route::get('/Login',function () {
+    return view('login');
+}); 
+
 require __DIR__.'/auth.php';

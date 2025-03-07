@@ -29,4 +29,9 @@ class Gebruiker extends Model
             return $this->hasMany(Docent::class, 'gebruiker_id');
         }
 
+        public function student()
+        {
+            return $this->hasMany(Student::class, 'gebruiker_id');
+        }
+
 }

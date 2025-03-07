@@ -17,4 +17,14 @@ class Groep extends Model
         'naam' => 'string',
         'vak_id' => 'integer'
     ];
+
+    public function student()
+    {
+        return $this->hasMany(Student::class, 'groep_id');
+    }
+
+    public function vak()
+    {
+        return $this->belongsTo(Vak::class, 'vak_id');
+    }
 }

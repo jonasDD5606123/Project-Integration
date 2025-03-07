@@ -20,4 +20,12 @@ class Docent extends Model
         return $this->belongsTo(Gebruiker::class, 'gebruiker_id');
     }
 
+    public function docent_klas() {
+        return $this->hasMany(Docent_Klas::class, 'docent_id');
+    }
+
+    public function docent_vak() {
+        return $this->hasMany(Docent_Vak::class, 'docent_id');
+    }
+
 }
