@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/file-imports', function () {
     return view('file-import');
 });
 
@@ -21,7 +21,7 @@ Route::get('/help',function () {
     return view('welcome');
 }); 
 
-Route::get('/Login',function () {
+Route::get('/',function () {
     return view('login');
 }); 
 
