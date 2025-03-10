@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/file-imports', function () {
+Route::get('/', function () {
     return view('file-import');
 });
 
@@ -17,12 +18,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/help',function () {
+Route::get('/help', function () {
     return view('welcome');
-}); 
+});
 
-Route::get('/',function () {
-    return view('login');
-}); 
+Route::get('/Login', [LoginController::class, 'showLoginForm'])->name('login');;
+Route::post('/Login', [LoginController::class, 'login'])->name('login');
 
-require __DIR__.'/auth.php';
+
+
+Route::get('/registratie', function () {
+    return view('registratie.nieuw');
+})->name('registratie');
+
+require __DIR__ . '/auth.php';
