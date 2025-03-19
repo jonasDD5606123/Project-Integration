@@ -30,4 +30,14 @@ class TestController extends Controller
             'status' => 201
         ], 201);
     }
+
+    public function getVak(Request $request) {
+            $vakken = Vak::all();
+
+            return response()->json([
+                'vakken' => $vakken,
+                'status' => 201
+            ], 201);
+
+    }
 }

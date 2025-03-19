@@ -19,3 +19,5 @@ Route::middleware([DecompressRequest::class])
 
 // test toevoegen vak
 Route::post('/vak', [TestController::class, 'createVak']);
+
+Route::get('/vak', [TestController::class, 'getVak']);
