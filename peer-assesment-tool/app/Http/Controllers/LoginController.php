@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\InlogRequest;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ class LoginController extends Controller
         return view('login');
     }
 
-    public function login(loginRequest $request)
+    public function login(InlogRequest $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
             return redirect()->route('dashboard'); // Stuur door naar dashboard
