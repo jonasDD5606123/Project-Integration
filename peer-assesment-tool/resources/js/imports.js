@@ -42,7 +42,7 @@ async function postStudentList(studentList) {
     return data;
 }
 
-function fromExcel(fileContent) {
+function getStudentsFromExcel(fileContent) {
     const excelWorkbook = XLSX.read(fileContent, { type: 'array' });
     const firstSheetName = excelWorkbook.SheetNames[0];
     const firstSheet = excelWorkbook.Sheets[firstSheetName];
@@ -76,7 +76,7 @@ function fromExcel(fileContent) {
     return data;
 }
 
-function fromCSV(fileContent) {
+function getStudentFromCSV(fileContent) {
     const results = Papa.parse(fileContent, {
         header: true,
         dynamicTyping: true,
@@ -91,13 +91,13 @@ function fromCSV(fileContent) {
 
 async function handleExcelReaderLoad(e) {
     const fileContent = e.target.result;
-    const result = fromExcel(fileContent);
+    const result = getStudentsFromExcel(fileContent);
     console.log(await postStudentList(result));
 }
 
 async function handleCSVReaderLoad(e) {
     const fileContent = e.target.result;
-    const result = fromCSV(fileContent);
+    const result = getStudentFromCSV(fileContent);
     console.log(await postStudentList(result));
 }
 
