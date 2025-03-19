@@ -15,11 +15,11 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" href="#dashboard">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#cursussen">Cursussen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#beoordelingen">Beoordelingen</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#resultaten">Resultaten</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#afmelden">Afmelden</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Cursussen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Beoordelingen</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Resultaten</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Afmelden</a></li>
                 </ul>
             </div>
         </nav>
