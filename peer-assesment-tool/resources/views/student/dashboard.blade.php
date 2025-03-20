@@ -20,7 +20,7 @@
         <div class="container-fluid">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Cursussen</a></li>
+                <li class="nav-item"><a class="nav-link" href="/student/cursussen">Cursussen</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Beoordelingen</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Resultaten</a></li>
                 <li class="nav-item">
@@ -147,4 +147,5 @@
         <p class="mb-0">&copy; 2025 Peer Beoordelingstool</p>
     </footer>
 </body>
+
 </html>
