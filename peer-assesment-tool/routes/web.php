@@ -18,4 +18,8 @@ Route::get('/help', function () {
     return view('welcome');
 });
 
+Route::get('/docent', function () {
+    return view('docent.docentDashboard');
+});
+
 require __DIR__ . '/auth.php';
