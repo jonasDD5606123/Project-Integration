@@ -6,25 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Groep extends Model
 {
-    protected $table = 'Groep';
-
-    protected $fillable = ['naam', 'vak_id'];
-
+    protected $table = 'groepen';
     protected $primaryKey = 'id';
-
-    protected $casts = [
-        'id' => 'integer',
-        'naam' => 'string',
-        'vak_id' => 'integer'
+    protected $fillable = [
+        'naam',
+        'vak_id'
     ];
 
-    public function student()
-    {
-        return $this->hasMany(Student::class, 'groep_id');
-    }
-
-    public function vak()
-    {
-        return $this->belongsTo(Vak::class, 'vak_id');
-    }
+    public $incrementing = true;
+    public $timestamps = false;
+    public $casts = [
+        'id' => 'int',
+        'naam' => 'string',
+        'vak_id' => 'int'
+    ];
 }

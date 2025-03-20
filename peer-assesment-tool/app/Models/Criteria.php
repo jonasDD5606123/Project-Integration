@@ -3,21 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Klas extends Model
+class Criteria extends Model
 {
-    protected $table = 'klassen';
+    protected $table = 'criteria';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'naam',
-        'vak_id'
+        'criterium',
+        'max_waarde',
+        'min_waarde',
     ];
 
     public $incrementing = true;
     public $timestamps = false;
     public $casts = [
-        'id' => 'int',
-        'naam' => 'string',
-        'vak_id' => 'int'
+        'criterium' => 'string',
+        'max_waarde' => 'int',
+        'min_waarde' => 'int'
     ];
 }
