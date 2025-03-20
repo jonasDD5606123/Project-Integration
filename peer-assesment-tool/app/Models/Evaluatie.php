@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-<<<<<<< Updated upstream
 
 class Evaluatie extends Model
 {
@@ -21,23 +20,4 @@ class Evaluatie extends Model
     ];
 
 
-=======
-class Evaluatie extends Model
-{
-    protected $table = 'evaluaties';
-    protected $primaryKey = 'id';
-    protected $fillable = [
-        'titel',
-        'beschrijving',
-        'deadline',
-    ];
-
-    public $incrementing = true;
-    public $timestamps = false;
-    public $casts = [
-        'titel' => 'string',
-        'beschrijving' => 'string',
-        'deadline' => 'datetime'
-    ];
->>>>>>> Stashed changes
 }
