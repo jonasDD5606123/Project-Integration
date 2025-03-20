@@ -2,11 +2,25 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- Name -->
+        <!-- R Nummer -->
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-label for="r_nummer" :value="__('R Nummer')" />
+            <x-text-input id="r_nummer" class="block mt-1 w-full" type="text" name="r_nummer" :value="old('r_nummer')" required autofocus autocomplete="r_nummer" />
+            <x-input-error :messages="$errors->get('r_nummer')" class="mt-2" />
+        </div>
+
+        <!-- Voornaam -->
+        <div class="mt-4">
+            <x-input-label for="voornaam" :value="__('Voornaam')" />
+            <x-text-input id="voornaam" class="block mt-1 w-full" type="text" name="voornaam" :value="old('voornaam')" required autocomplete="voornaam" />
+            <x-input-error :messages="$errors->get('voornaam')" class="mt-2" />
+        </div>
+
+        <!-- Achternaam -->
+        <div class="mt-4">
+            <x-input-label for="achternaam" :value="__('Achternaam')" />
+            <x-text-input id="achternaam" class="block mt-1 w-full" type="text" name="achternaam" :value="old('achternaam')" required autocomplete="achternaam" />
+            <x-input-error :messages="$errors->get('achternaam')" class="mt-2" />
         </div>
 
         <!-- Email Address -->
@@ -37,6 +51,13 @@
                             name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <!-- Role ID (optional) -->
+        <div class="mt-4">
+            <x-input-label for="rol_id" :value="__('Role ID')" />
+            <x-text-input id="rol_id" class="block mt-1 w-full" type="number" name="rol_id" :value="old('rol_id')" required />
+            <x-input-error :messages="$errors->get('rol_id')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
