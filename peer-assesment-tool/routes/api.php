@@ -16,6 +16,3 @@ Route::middleware([DecompressRequest::class])
         $requestBody = $req->json()->all();
         return response()->json($requestBody);
 });
-
-// test toevoegen vak
-Route::post('/vak', [TestController::class, 'createVak']);

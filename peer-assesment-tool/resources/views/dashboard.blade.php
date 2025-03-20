@@ -5,21 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peer Beoordelingstool</title>
-    <!--later css file maken-->
-    <style>
-        .right {
-            right: 0;
-        }
-    </style>
+    @vite(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'resources/js/app.js', 'resources/css/app.css'])
     <!-- Bootstrap CSS via CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
     <header class="bg-primary text-white py-3 ps-3">
         <h1 class="mb-0">
-    Welkom <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
-</h1>
+            Welkom <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
+        </h1>
     </header>
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -42,7 +36,7 @@
     <div class="container mt-4">
         <main class="mt-4">
             <section id="dashboard" class="page active">
-                <h2 class="mb-3">Dashboard</h2>
+                <h2 class="mb-3">Overzicht</h2>
                 <div class="card p-3">
                     <p><strong>Totaal cursussen:</strong> 2</p>
                     <p><strong>Openstaande beoordelingen:</strong> 1</p>
@@ -152,9 +146,5 @@
     <footer class="text-center bg-primary text-white py-2 mt-4">
         <p class="mb-0">&copy; 2025 Peer Beoordelingstool</p>
     </footer>
-
-    <!-- Bootstrap JS via CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
