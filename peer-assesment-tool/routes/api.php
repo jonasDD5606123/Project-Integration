@@ -16,3 +16,4 @@ Route::middleware([DecompressRequest::class])
         $requestBody = $req->json()->all();
         return response()->json($requestBody);
 });
+
