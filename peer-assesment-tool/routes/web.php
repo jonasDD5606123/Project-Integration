@@ -18,20 +18,17 @@ Route::get('/help', function () {
     return view('welcome');
 });
 
-
-
-
-
-
-
-
-
 Route::get('/student/cursussen', function () {
     return view('student.cursussen');
 });
 
 Route::get('/student/dashboard', function () {
     return view('student.dashboard');
+
+});
+
+Route::get('/docent', function () {
+    return view('docent.docentDashboard');
 });
 
 require __DIR__ . '/auth.php';
