@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Gebruiker;  // Use the custom model Gebruiker
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -28,23 +27,31 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+{
+    $request->validate([
+        'r_nummer' => ['required', 'string', 'max:255'],
+        'voornaam' => ['required', 'string', 'max:255'],
+        'achternaam' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:gebruikers'],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        'password_confirmation' => ['required', 'same:password'],
+        'rol_id' => ['required', 'integer']
+    ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+    $gebruiker = Gebruiker::create([
+        'r_nummer' => $request->r_nummer,
+        'voornaam' => $request->voornaam,
+        'achternaam' => $request->achternaam,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'rol_id' => $request->rol_id
+    ]);
 
-        event(new Registered($user));
+    event(new Registered($gebruiker));
 
-        Auth::login($user);
+    Auth::login($gebruiker);
 
-        return redirect(route('dashboard', absolute: false));
-    }
+    return redirect('/');
+}
+
 }
