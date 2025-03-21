@@ -19,9 +19,9 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/student/dashboard">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="/student/cursussen">Cursussen</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Beoordelingen</a></li>
+                <li class="nav-item"><a class="nav-link" href="/student/beoordelingen">Beoordelingen</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Resultaten</a></li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
@@ -50,7 +50,7 @@
                         <div class="card p-3 shadow">
                             <h3>Webontwikkeling</h3>
                             <p>Geen beschrijving beschikbaar</p>
-                            <button class="btn btn-primary">Bekijk Details</button>
+                            <button class="btn btn-primary"><a class="nav-link" href="/student/cursussen">Bekijk Details</a></button>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -75,7 +75,7 @@
                     <progress value="60" max="100" class="progress w-100 mb-3 bg-info"></progress>
 
                     <div class="d-flex justify-content-end mt-3">
-                        <button class="btn btn-primary px-4 py-2">Beoordeling Voortzetten</button>
+                        <button class="btn btn-primary px-4 py-2"><a class="nav-link" href="/student/beoordelingen">bekijk Details</a></button>
                     </div>
                 </div>
             </section>

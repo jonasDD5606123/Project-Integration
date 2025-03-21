@@ -19,12 +19,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container-fluid">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link active" href="#">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/docent">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Peer Evaluatie</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Klassen</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Vakken</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Studenten</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Importing</a></li>
+                <li class="nav-item"><a class="nav-link" href="/docent/klassen">Klassen</a></li>
+                <li class="nav-item"><a class="nav-link" href="/docent/cursussen">cursussen</a></li>
+                <li class="nav-item"><a class="nav-link" href="/docent/studenten">Studenten</a></li>
+                <li class="nav-item"><a class="nav-link" href="/docent/file">Importing</a></li>
                 <li class="nav-item">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -44,14 +44,14 @@
                         <div class="card p-3 shadow">
                             <h3>Student Toevoegen</h3>
                             <p>Geen beschrijving beschikbaar</p>
-                            <button class="btn btn-primary">Bekijk Details</button>
+                            <button class="btn btn-primary"><a class="nav-link" href="/docent/studenten">Klassen</a></button>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card p-3 shadow">
                             <h3>Groep Toevoegen</h3>
                             <p>Geen beschrijving beschikbaar</p>
-                            <button class="btn btn-primary">Bekijk Details</button>
+                            <button class="btn btn-primary"><a class="nav-link" href="/docent/klassen">Klassen</a></button>
                         </div>
                     </div>
                 </div>
@@ -83,29 +83,29 @@
                     </p>
 
                     <div class="d-flex justify-content-end mt-3 ">
-                        <button class="btn btn-primary px-4 py-2">Bekijk meer Details</button>
+                        <button class="btn btn-primary px-4 py-2"><a class="nav-link" href="/docent/klassen">Klassen</a></button>
                     </div>
                 </div>
             </section>
 
             <section id="beoordelingen" class="page mt-4">
-                <h2 class="mb-4 text-start">Vakken</h2>
+                <h2 class="mb-4 text-start">cursussen</h2>
 
                 <div class="card p-4 bg-light border-0 shadow-sm">
-                    <h3 class="card-title text-primary">Vak Toevoegen</h3>
+                    <h3 class="card-title text-primary">Cursus Toevoegen</h3>
 
                     <p class="card-text mb-3">
                         Geen beschrijving beschikbaar
                     </p>
 
                     <div class="d-flex justify-content-end mt-3 ">
-                        <button class="btn btn-primary px-4 py-2">Bekijk meer Details</button>
+                        <button class="btn btn-primary px-4 py-2"><a class="nav-link" href="/docent/cursussen">cursussen</a></button>
                     </div>
                 </div>
             </section>
 
             <div class="container page mt-4">
-            <h2>Importing</h2>
+                <h2>Importing</h2>
                 <div class="row">
                     <div class="col-md-6">
                         <section id="studenten" class="page">
