@@ -29,7 +29,6 @@
 
             <form class="frm__test" method="POST" action="{{ route('login') }}">
                 @csrf
-
                 <!-- Email Address -->
                 <div class="mb-3">
                     <label for="email" class="form-label">{{ __('E-mail') }}</label>

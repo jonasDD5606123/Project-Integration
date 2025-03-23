@@ -12,7 +12,7 @@
 <body>
     <header class="bg-primary text-white py-3 ps-3">
         <h1 class="mb-0">
-            Welkom <span class="user__voornaam">Mohammed</span>
+            Welkom <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
         </h1>
     </header>
 

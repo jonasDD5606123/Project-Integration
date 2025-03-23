@@ -28,8 +28,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
-    }
+        $user = Auth::user(); // Haal de ingelogde gebruiker op
+
+        if ($user->rol_id == 1) {
+            return redirect('/student'); // Docent dashboard
+        }
+        return redirect('/docent');
+    } // Student dashboard
 
     /**
      * Destroy an authenticated session.

@@ -51,7 +51,10 @@ class RegisteredUserController extends Controller
 
     Auth::login($gebruiker);
 
-    return redirect('/');
-}
+    if ($gebruiker->rol_id == 2) {
+        return redirect('/docent'); // Docent dashboard
+    } else {
+        return redirect('/student'); // Student dashboard
+    }}
 
 }

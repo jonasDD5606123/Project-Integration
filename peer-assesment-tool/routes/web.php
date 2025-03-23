@@ -4,9 +4,10 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+
+Route::get('/student', function () {
     return view('student.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(middleware: ['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,14 +20,10 @@ Route::get('/help', function () {
 });
 
 
+
 // student
 Route::get('/student/cursussen', function () {
     return view('student.cursussen');
-});
-
-Route::get('/student/dashboard', function () {
-    return view('student.dashboard');
-
 });
 
 //Route::get('/student/beoordelingen', function () {
@@ -38,7 +35,7 @@ Route::get('/student/dashboard', function () {
 // docent
 Route::get('/docent', function () {
     return view('docent.docentDashboard');
-});
+})->middleware(['auth'])->name('docent.dashboard');
 
 Route::get('/docent/cursussen', function () {
     return view('docent.cursussen');
