@@ -1,58 +1,60 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\DocentMiddleware;
+use App\Models\Vak;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Symfony\Contracts\Service\Attribute\Required;
 
-
-Route::get('/student', function () {
-    return view('student.dashboard');
+Route::get('/', function () {
+    $user = Auth::user();
+    if ($user->rol_id == 1) {
+        return view('student.dashboard');
+    } else if ($user->rol_id == 2) {
+        return view('docent.dashboard');
+    }
 })->middleware(middleware: ['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-Route::get('/help', function () {
-    return view('welcome');
-});
+Route::get('/import', function () {
+    return view('docent.import-students');
+})->middleware(['auth', DocentMiddleware::class])->name('import');
 
 
+Route::get('/create-evaluatie', function () {
+    $userId = Auth::id();
 
-// student
-Route::get('/student/cursussen', function () {
-    return view('student.cursussen');
-});
+    $vakken = Vak::whereIn('id', function ($query) use ($userId) {
+        $query->select('vak_id')
+              ->from('docenten_vakken')
+              ->where('docent_id', $userId);
+    })->get();
 
-//Route::get('/student/beoordelingen', function () {
-//   return view('student.beoordelingen');
+    return view('docent.create-evaluatie', compact('vakken'));
 
-//});
+})->middleware(['auth', DocentMiddleware::class])->name('create-evaluatie');
 
+Route::get('/create-klas', function () {
+    $userId = Auth::id();
 
-// docent
-Route::get('/docent', function () {
-    return view('docent.docentDashboard');
-})->middleware(['auth'])->name('docent.dashboard');
+    $vakken = Vak::whereIn('id', function ($query) use ($userId) {
+        $query->select('vak_id')
+              ->from('docenten_vakken')
+              ->where('docent_id', $userId);
+    })->get();
 
-Route::get('/docent/cursussen', function () {
-    return view('docent.cursussen');
-});
+    return view('docent.create-klas', compact('vakken'));
+})->middleware(['auth', DocentMiddleware::class])->name('create-klas');
 
-Route::get('/docent/file', function () {
-    return view('docent.file-import');
-});
+Route::get('/create-groepen-evaluatie', function () {
+    $userId = Auth::id();
 
-Route::get('/docent/klassen', function () {
-    return view('docent.klassen');
-});
+    $vakken = Vak::whereIn('id', function ($query) use ($userId) {
+        $query->select('vak_id')
+              ->from('docenten_vakken')
+              ->where('docent_id', $userId);
+    })->get();
 
-Route::get('/docent/studenten', function () {
-    return view('docent.studenten');
+    return view('docent.create-groepen-evaluatie', compact('vakken'));
 });
 
 require __DIR__ . '/auth.php';
-
-

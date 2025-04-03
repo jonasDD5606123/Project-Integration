@@ -45,7 +45,7 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'error' => 'Uw inloggegevens zijn onjuist. Controleer uw e-mail en wachtwoord en probeer het opnieuw.',
             ]);
         }
 

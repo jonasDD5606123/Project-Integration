@@ -109,3 +109,17 @@ create view studenten_view as
 create view docenten_view as
     select g.id, g.r_nummer, g.voornaam, g.achternaam, g.email
     from gebruikers g join rollen r on g.rol_id = r.id where g.rol_id = 2;
+
+delimiter $$
+
+create trigger before_insert_gebruikers
+before insert on gebruikers
+for each row
+begin
+    if new.rol_id = 1 and (new.r_nummer is null or new.r_nummer = '') then
+        signal sqlstate '45000'
+        set message_text = 'r_nummer cannot be null or empty when rol_id is 1';
+    end if;
+end $$
+
+delimiter ;

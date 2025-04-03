@@ -20,7 +20,7 @@
                 <!-- R Nummer -->
                 <div class="mb-3">
                     <label for="r_nummer" class="form-label">{{ __('R Nummer') }}</label>
-                    <input id="r_nummer" class="form-control" type="text" name="r_nummer" value="{{ old('r_nummer') }}" required autofocus autocomplete="r_nummer" />
+                    <input id="r_nummer" class="form-control" type="text" name="r_nummer" value="{{ old('r_nummer') }}" autofocus autocomplete="r_nummer" />
                     @error('r_nummer')
                         <div class="text-danger mt-2">{{ $message }}</div>
                     @enderror

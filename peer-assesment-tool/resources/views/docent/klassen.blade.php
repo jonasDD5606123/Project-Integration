@@ -36,6 +36,7 @@
         </div>
     </nav>
 
+
     <footer class="text-center bg-primary text-white py-2 mt-4">
         <p class="mb-0">&copy; 2025 Peer Beoordelingstool</p>
     </footer>

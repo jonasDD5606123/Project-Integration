@@ -1,48 +1,10 @@
 import * as XLSX from 'xlsx';
 import Papa from 'papaparse';
-import Pako from 'pako';
 
-const frmFileImport = document.body.querySelector('#frmFileImport');
-const inFileImport = frmFileImport.querySelector('#inFileImport');
-const btnFileImportSubmit = frmFileImport.querySelector('#btnFileImportSubmit');
+const inFileImports = document.body.querySelectorAll('.file__import');
+export const reader = new FileReader();
 
-async function postStudentList(studentList) {
-    const url = '/api/upload_list';
-
-    let response = null;
-
-    const jsonData = JSON.stringify({ data: studentList });
-
-    const compressedData = Pako.gzip(jsonData);
-
-    try {
-        response = await fetch(url, {
-            method: 'POST', // HTTP method
-            headers: {
-                'Content-Type': 'application/json',
-                'Content-Encoding': 'gzip'
-            },
-            body: compressedData
-        });
-    } catch {
-        throw new Error('Er kon geen verbinding gemaakt worden met de server.');
-    }
-
-    if (!response.ok) {
-        throw new Error('Server heeft met foutcode geantwoord.');
-    }
-
-    let data;
-    try {
-        data = await response.json();
-    } catch {
-        throw new Error('Response van de server is in verkeerde formaat.');
-    }
-
-    return data;
-}
-
-function getStudentsFromExcel(fileContent) {
+export function getTableFromExcel(fileContent) {
     const excelWorkbook = XLSX.read(fileContent, { type: 'array' });
     const firstSheetName = excelWorkbook.SheetNames[0];
     const firstSheet = excelWorkbook.Sheets[firstSheetName];
@@ -71,12 +33,12 @@ function getStudentsFromExcel(fileContent) {
         }
     }
 
-    const data = { rows: rows };
+    const data = { rows: rows, colNames: colNames };
 
     return data;
 }
 
-function getStudentFromCSV(fileContent) {
+function getTableFromCSV(fileContent) {
     const results = Papa.parse(fileContent, {
         header: true,
         dynamicTyping: true,
@@ -89,16 +51,48 @@ function getStudentFromCSV(fileContent) {
     return data;
 }
 
-async function handleExcelReaderLoad(e) {
+function handleExcelReaderLoad(e) {
     const fileContent = e.target.result;
-    const result = getStudentsFromExcel(fileContent);
-    console.log(await postStudentList(result));
+    const result = getTableFromExcel(fileContent);
+    populateTable(result);
 }
 
-async function handleCSVReaderLoad(e) {
+function handleCSVReaderLoad(e) {
     const fileContent = e.target.result;
-    const result = getStudentFromCSV(fileContent);
-    console.log(await postStudentList(result));
+    const result = getTableFromCSV(fileContent);
+    populateTable(result);
+}
+
+function populateTable(data) {
+    const tableBody = document.querySelector('#resultTable tbody');
+    const tableHead = document.querySelector('#resultTable thead');
+
+    // Clear any existing rows in the body and head
+    tableBody.innerHTML = '';
+    tableHead.innerHTML = '';
+
+    // Create the header row based on colNames
+    const headerRow = document.createElement('tr');
+    data.colNames.forEach(colName => {
+        const th = document.createElement('th');
+        th.textContent = colName;
+        headerRow.appendChild(th);
+    });
+    tableHead.appendChild(headerRow);
+
+    // Loop through each student and create a row for the body
+    data.rows.forEach(student => {
+        const row = document.createElement('tr');
+
+        // Loop through each column and create a cell for the student data
+        data.colNames.forEach(colName => {
+            const cell = document.createElement('td');
+            cell.textContent = student[colName]; // Access the student data by column name
+            row.appendChild(cell);
+        });
+
+        tableBody.appendChild(row);
+    });
 }
 
 function handleFileImportChange(e) {
@@ -107,8 +101,6 @@ function handleFileImportChange(e) {
     if (!file) {
         return;
     }
-
-    const reader = new FileReader();
 
     if (file.name.endsWith('.xlsx') || fileName.endsWith('.xls')) {
         reader.addEventListener('load', handleExcelReaderLoad);
@@ -120,4 +112,7 @@ function handleFileImportChange(e) {
     reader.readAsArrayBuffer(file);
 }
 
-inFileImport.addEventListener('change', handleFileImportChange);
+
+inFileImports.forEach(function (inFileImport) {
+    inFileImport.addEventListener('change', handleFileImportChange);
+});

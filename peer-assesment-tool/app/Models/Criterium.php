@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-class Criteria extends Model
+class Criterium extends Model
 {
     protected $table = 'criteria';
     protected $primaryKey = 'id';
@@ -11,6 +11,7 @@ class Criteria extends Model
         'criterium',
         'max_waarde',
         'min_waarde',
+        'evaluatie_id'
     ];
 
     public $incrementing = true;
@@ -18,6 +19,7 @@ class Criteria extends Model
     public $casts = [
         'criterium' => 'string',
         'max_waarde' => 'int',
-        'min_waarde' => 'int'
+        'min_waarde' => 'int',
+        'evaluatie_id' => 'int'
     ];
 }
