@@ -70,7 +70,7 @@ async function handleBtnSubmitClick(e) {
         console.log("Description is missing.");
         return;
     }
-    if (!inDeadline.value) {  // Duplicate check
+    if (!inDeadline.value) {
         console.log("Duplicate check: Deadline is missing.");
         return;
     }
@@ -104,7 +104,7 @@ async function handleBtnSubmitClick(e) {
     });
 
     try {
-        const response = postEvaluatie(
+        const response = await postEvaluatie(
         inTitle.value,
         inDesc.value,
         inDeadline.value,

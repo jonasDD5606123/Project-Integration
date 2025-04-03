@@ -37,6 +37,11 @@ Route::post('/evaluatie', function (Request $req) {
             'evaluatie_id' => $evalId
         ]);
     }
+
+    return response()->json([
+        'msg' => 'success',
+        'status' => 201
+    ]);
 });
 
 Route::post('/studenten-klas', function (Request $req) {

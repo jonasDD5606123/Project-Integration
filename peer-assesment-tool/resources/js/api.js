@@ -16,7 +16,6 @@ export async function postStudentKlas(students, klasNaam, vakId) {
                 'Content-Type': 'application/json',
                 'Content-Encoding': 'gzip',
             },
-            credentials: 'same-origin',
             body: compressedData
         });
     } catch {
@@ -52,7 +51,6 @@ export async function postEvaluatie(titel , beschrijving, deadline, vakId, crite
             headers: {
                 'Content-Type': 'application/json',
             },
-            credentials: 'same-origin',
             body: JSON.stringify(body)
         });
     } catch {
