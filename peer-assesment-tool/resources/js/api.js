@@ -45,6 +45,9 @@ export async function postEvaluatie(titel , beschrijving, deadline, vakId, crite
         vakId: vakId,
         criteria: criteria
     };
+
+    let response = null;
+    
     try {
         response = await fetch(url, {
             method: 'POST', // HTTP method

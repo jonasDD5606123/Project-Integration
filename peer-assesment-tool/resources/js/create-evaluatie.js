@@ -11,7 +11,6 @@ let criteria = [];
 
 function addCriterium() {
     const container = document.getElementById('criteriaContainer');
-    const index = container.children.length;
     const div = document.createElement('div');
     div.classList.add('criterium-group', 'mb-3');
     div.innerHTML = `
@@ -103,19 +102,21 @@ async function handleBtnSubmitClick(e) {
         });
     });
 
+    let response;
     try {
-        const response = await postEvaluatie(
+        response = await postEvaluatie(
         inTitle.value,
         inDesc.value,
         inDeadline.value,
         selVakId.value,
         criteriaValues
     );
-
-    console.log(response);
 } catch (e) {
         console.log(e);
+        return;
     }
+
+    console.log(response);
 }
 
 btnAddCritierium.addEventListener('click', addCriterium);
