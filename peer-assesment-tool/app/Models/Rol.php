@@ -6,21 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rol extends Model
 {
-    protected $table = 'rol';
-
-    protected $fillable = ['naam'];
-
+    protected $table = 'rollen';
     protected $primaryKey = 'id';
-
-    protected $casts = [
-        'id' => 'integer',
-        'naam' => 'string'
+    protected $fillable = [
+        'naam'
     ];
 
+    public $incrementing = true;
     public $timestamps = false;
-
-    public function gebruiker() {
-        return $this->hasMany(Gebruiker::class, 'rol_id');
-    }
-
+    public $casts = [
+        'id' => 'int',
+        'naam' => 'string'
+    ];
 }

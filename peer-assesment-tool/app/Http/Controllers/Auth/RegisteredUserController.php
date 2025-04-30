@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Gebruiker;  // Use the custom model Gebruiker
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,21 +30,28 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'r_nummer' => ['nullable', 'string', 'max:255', 'required_if:rol_id,1'],
+            'voornaam' => ['required', 'string', 'max:255'],
+            'achternaam' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:gebruikers'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password_confirmation' => ['required', 'same:password'],
+            'rol_id' => ['required', 'integer']
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
+        $gebruiker = Gebruiker::create([
+            'r_nummer' => $request->r_nummer,
+            'voornaam' => $request->voornaam,
+            'achternaam' => $request->achternaam,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'rol_id' => $request->rol_id
         ]);
 
-        event(new Registered($user));
+        event(new Registered($gebruiker));
 
-        Auth::login($user);
+        Auth::login($gebruiker);
 
-        return redirect(route('dashboard', absolute: false));
+        return redirect('/'); // Docent dashboard
     }
 }
