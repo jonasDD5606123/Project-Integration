@@ -3,3 +3,25 @@
     height: 300px;
     width: 100%;
 }
+
+.kanban-container {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.student {
+    cursor: grab;
+    background-color: #f8f9fa;
+}
+.kanban-column {
+    min-height: 200px;
+}
+
+.add-column-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 250px;
+}

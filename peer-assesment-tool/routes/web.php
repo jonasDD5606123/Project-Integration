@@ -57,4 +57,7 @@ Route::get('/create-groepen-evaluatie', function () {
     return view('docent.create-groepen-evaluatie', compact('vakken'));
 });
 
+Route::get('/kanban', function () {
+    return view('docent.create-groepen');
+});
 require __DIR__ . '/auth.php';
