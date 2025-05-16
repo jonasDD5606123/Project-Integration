@@ -64,4 +64,8 @@ Route::get('/kanban', function () {
 Route::view('/groepen', 'docent.groepen')->name('groepen.index');
 Route::view('/groep', 'docent.groep-details')->name('groepen.show');
 
+Route::get('/peer-assessment', function () {
+    return view('student.peer-evaluatie');
+});
+
 require __DIR__ . '/auth.php';

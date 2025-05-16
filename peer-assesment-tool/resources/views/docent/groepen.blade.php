@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="container my-4">
+    <div class="container my-4 kanban">
         <h2 class="mb-4">Overzicht van Groepen</h2>
         <div id="groupsContainer" class="row"></div>
     </div>

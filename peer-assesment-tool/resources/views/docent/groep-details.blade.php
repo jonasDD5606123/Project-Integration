@@ -9,7 +9,7 @@
 </head>
 
 <body class="p-4">
-    <div class="container">
+    <div class="container kanban">
         <h2 id="groupTitle"></h2>
         <ul id="studentList" class="list-group mt-3"></ul>
         <a href="{{ route('groepen.index') }}" class="btn btn-secondary mt-4">Terug naar overzicht</a>

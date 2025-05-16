@@ -1,9 +1,9 @@
-body {
+.kanban body {
     overflow-x: hidden;
     min-height: 100vh;
 }
 
-.sidebar {
+.kanban .sidebar {
     width: 220px;
     height: 100vh;
     position: sticky;
@@ -12,7 +12,7 @@ body {
     border-right: 1px solid #dee2e6;
 }
 
-.kanban-container {
+.kanban .kanban-container {
     flex-grow: 1;
     padding: 20px;
     background-color: #f5f7fa;
@@ -20,7 +20,7 @@ body {
     overflow-x: hidden;
 }
 
-.kanban-scroll {
+.kanban .kanban-scroll {
     display: flex;
     gap: 20px;
     padding: 10px 5px;
@@ -30,16 +30,16 @@ body {
     scroll-behavior: smooth;
 }
 
-.kanban-scroll::-webkit-scrollbar {
+.kanban .kanban-scroll::-webkit-scrollbar {
     height: 8px;
 }
 
-.kanban-scroll::-webkit-scrollbar-thumb {
+.kanban .kanban-scroll::-webkit-scrollbar-thumb {
     background-color: #ced4da;
     border-radius: 4px;
 }
 
-.kanban-column {
+.kanban .kanban-column {
     flex: 0 0 auto;
     width: 280px;
     min-height: 400px;
@@ -49,7 +49,7 @@ body {
     border-top: 4px solid #6c757d;
 }
 
-.kanban-column-header {
+.kanban .kanban-column-header {
     padding: 15px;
     border-bottom: 1px solid #eee;
     font-weight: 600;
@@ -59,22 +59,22 @@ body {
     align-items: center;
 }
 
-.edit-icon {
+.kanban .edit-icon {
     font-size: 0.9rem;
     color: #6c757d;
     cursor: pointer;
 }
 
-.edit-icon:hover {
+.kanban .edit-icon:hover {
     color: #343a40;
 }
 
-.kanban-column-body {
+.kanban .kanban-column-body {
     padding: 15px;
     min-height: 300px;
 }
 
-.student {
+.kanban .student {
     background: white;
     padding: 10px;
     margin-bottom: 10px;
@@ -85,12 +85,12 @@ body {
     transition: all 0.2s;
 }
 
-.student:hover {
+.kanban .student:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.add-group-btn {
+.kanban .add-group-btn {
     width: 280px;
     height: 60px;
     background: #f8f9fa;
@@ -100,24 +100,24 @@ body {
     transition: all 0.2s;
 }
 
-.add-group-btn:hover {
+.kanban .add-group-btn:hover {
     background: #e9ecef;
     color: #495057;
     border-color: #adb5bd;
 }
 
-.drop-zone {
+.kanban .drop-zone {
     min-height: 100px;
     border-radius: 6px;
     transition: background 0.2s;
 }
 
-.drop-zone.active {
+.kanban .drop-zone.active {
     background: rgba(78, 115, 223, 0.1);
     border: 2px dashed #4e73df;
 }
 
-#studentList {
+.kanban #studentList {
     min-height: 200px;
     padding: 10px;
     border: 2px dashed #dee2e6;
@@ -126,11 +126,11 @@ body {
     transition: background-color 0.2s;
 }
 
-#studentList.drag-over {
+.kanban #studentList.drag-over {
     background-color: rgba(78, 115, 223, 0.1);
 }
 
-.random-btn {
+.kanban .random-btn {
     width: 100%;
     background: #4e73df;
     border: none;
@@ -143,16 +143,16 @@ body {
     transition: background 0.2s;
 }
 
-.random-btn:hover {
+.kanban .random-btn:hover {
     background: #2e59d9;
 }
 
-.group-card {
+.kanban .group-card {
     cursor: pointer;
     transition: transform 0.2s ease;
 }
 
-.group-card:hover {
+.kanban .group-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }

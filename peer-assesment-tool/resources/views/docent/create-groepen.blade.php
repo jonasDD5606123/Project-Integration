@@ -8,7 +8,7 @@
     @vite(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'resources/js/app.js', 'resources/css/app.css'])
 </head>
 
-<body class="d-flex">
+<body class="d-flex kanban">
 
     <!-- Student Sidebar -->
     <div class="sidebar p-3 d-flex flex-column">
