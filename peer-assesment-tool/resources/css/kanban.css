@@ -1,0 +1,158 @@
+body {
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+}
+
+.kanban-container {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f5f7fa;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.kanban-scroll {
+    display: flex;
+    gap: 20px;
+    padding: 10px 5px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+}
+
+.kanban-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.kanban-scroll::-webkit-scrollbar-thumb {
+    background-color: #ced4da;
+    border-radius: 4px;
+}
+
+.kanban-column {
+    flex: 0 0 auto;
+    width: 280px;
+    min-height: 400px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid #6c757d;
+}
+
+.kanban-column-header {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+    color: #495057;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.edit-icon {
+    font-size: 0.9rem;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.edit-icon:hover {
+    color: #343a40;
+}
+
+.kanban-column-body {
+    padding: 15px;
+    min-height: 300px;
+}
+
+.student {
+    background: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    cursor: grab;
+    border-left: 3px solid #4e73df;
+    transition: all 0.2s;
+}
+
+.student:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-group-btn {
+    width: 280px;
+    height: 60px;
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    color: #6c757d;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.add-group-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+    border-color: #adb5bd;
+}
+
+.drop-zone {
+    min-height: 100px;
+    border-radius: 6px;
+    transition: background 0.2s;
+}
+
+.drop-zone.active {
+    background: rgba(78, 115, 223, 0.1);
+    border: 2px dashed #4e73df;
+}
+
+#studentList {
+    min-height: 200px;
+    padding: 10px;
+    border: 2px dashed #dee2e6;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+#studentList.drag-over {
+    background-color: rgba(78, 115, 223, 0.1);
+}
+
+.random-btn {
+    width: 100%;
+    background: #4e73df;
+    border: none;
+    color: white;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.random-btn:hover {
+    background: #2e59d9;
+}
+
+.group-card {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.group-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}

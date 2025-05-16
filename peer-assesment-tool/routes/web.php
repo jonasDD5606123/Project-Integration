@@ -60,4 +60,8 @@ Route::get('/create-groepen-evaluatie', function () {
 Route::get('/kanban', function () {
     return view('docent.create-groepen');
 });
+
+Route::view('/groepen', 'docent.groepen')->name('groepen.index');
+Route::view('/groep', 'docent.groep-details')->name('groepen.show');
+
 require __DIR__ . '/auth.php';
