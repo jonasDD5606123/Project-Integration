@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kanban Groepen</title>
-    @vite(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'resources/js/app.js', 'resources/css/app.css'])
+    @vite(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'resources/js/import-groepen.js', 'resources/css/app.css'])
 </head>
 
 <body class="d-flex kanban">
