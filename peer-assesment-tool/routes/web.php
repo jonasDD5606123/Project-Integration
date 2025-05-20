@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Route;
 use Symfony\Contracts\Service\Attribute\Required;
 use Illuminate\Http\Request;
 use App\Models\Groep;
+use App\Models\Gebruiker;
 use App\Models\StudentGroepen;
+use Illuminate\Support\Facades\Log;
 
 Route::get('/', function () {
     $user = Auth::user();
@@ -92,21 +94,38 @@ Route::post('/groepen-importeren', function (Request $request) {
         'groepen' => 'required|array',
     ]);
 
-    foreach ($request->groepen as $groepNaam => $studenten) {
-        // Nieuwe groep aanmaken
-        $groep = Groep::create([
-            'naam' => $groepNaam,
-            'vak_id' => $request->vak_id
-        ]);
+   foreach ($request->groepen as $groepNaam => $studenten) {
+    // Nieuwe groep aanmaken
+    $groep = Groep::create([
+        'naam' => $groepNaam,
+        'vak_id' => $request->vak_id
+    ]);
 
-        // Studenten aan groep koppelen
-        foreach ($studenten as $student) {
-            StudentGroepen::create([
-                'groep_id' => $groep->id,
-                'user_id' => $student['user_id']
-            ]);
-        }
+    // Studenten aan groep koppelen
+    foreach ($studenten as $student) {
+        // Gebruiker ophalen of aanmaken
+        $gebruiker = Gebruiker::firstOrCreate(
+            ['id' => $student['user_id']],
+            [
+                'r_nummer' =>$student['user_id'], // Of een default
+                'voornaam' => $student['first_name'],
+                'achternaam' => $student['last_name'],
+                'email' => strtolower($student['first_name']) . '.' . strtolower($student['last_name']) . '@example.com',
+                'password' => bcrypt('defaultpassword'), // tijdelijke default
+                'rol_id' => 1 // bijv. 3 = student
+            ]
+        );
+
+        // Koppelen aan groep
+        StudentGroepen::create([
+            'groep_id' => $groep->id,
+            'student_id' => $gebruiker->id
+        ]);
     }
+}
+
+
+    
 
     return response()->json(['success' => true, 'message' => 'Groepen en studenten succesvol opgeslagen.']);
 })->middleware(['auth', DocentMiddleware::class])->name('groepen.import.save');

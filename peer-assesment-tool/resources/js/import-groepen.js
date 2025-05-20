@@ -74,7 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!response.ok) {
                 const text = await response.text();
-                throw new Error(`Server error: ${text}`);
+                console.error("Server response:", text);
+                alert("Fout bij import: " + text);
+                return;
             }
 
             const result = await response.json();
