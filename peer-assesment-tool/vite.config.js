@@ -11,7 +11,8 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/create-klas.js',
                 'resources/js/create-evaluatie.js',
-                'node_modules/bootstrap/dist/css/bootstrap.min.css'
+                'node_modules/bootstrap/dist/css/bootstrap.min.css',
+                'resources/js/import-groepen.js'
             ],
             refresh: true,
         }),
