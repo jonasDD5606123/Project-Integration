@@ -28,8 +28,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        $user = Auth::user(); // Haal de ingelogde gebruiker op
-
         return redirect('/');
     } // Student dashboard
 

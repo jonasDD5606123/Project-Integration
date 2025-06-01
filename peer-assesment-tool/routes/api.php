@@ -3,15 +3,18 @@
 use App\Http\Controllers\Api\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 use App\Http\Middleware\CompressResponse;
 use App\Http\Middleware\DecompressRequest;
 use App\Http\Middleware\DocentMiddleware;
+use App\Mail\TeacherNewUsersMail;
 use App\Models\Criterium;
 use App\Models\Evaluatie;
 use App\Models\Gebruiker;
 use App\Models\Klas;
 use App\Models\StudentKlassen;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 //protect api routes
@@ -28,6 +31,7 @@ Route::post('/evaluatie', function (Request $req) {
         'deadline' => $requestBody['deadline'],
         'vak_id' => $requestBody['vakId']
     ]);
+
     $evalId = $evaluatie->id;
     foreach ($requestBody['criteria'] as $criterium) {
         Criterium::create([
@@ -41,57 +45,27 @@ Route::post('/evaluatie', function (Request $req) {
     return response()->json([
         'msg' => 'success',
         'status' => 201
-    ]);
+    ], 201);
 });
 
-Route::post('/studenten-klas', function (Request $req) {
-    // schrijf in controller classe
-        $passwords = [];
-        $newUsers = 0;
-        $requestBody = $req->json()->all();
+Route::post('/criterium', function (Request $req) {
+    $data = $req->validate([
+        'criterium' => 'string',
+        'max_waarde' => 'integer',
+        'min_waarde' => 'integer',
+        'evaluatie_id' => 'integer'
+    ]);
 
-        $klas = Klas::create([
-            'naam' => $requestBody['klasNaam'],
-            'vak_id' => $requestBody['vakId']
-        ]);
-        
-        $klasId = $klas->id;
-
-        // validate!!! colnames match {check excel file leerkracht}
-        foreach ($requestBody['students']['rows'] as $row) {
-            $rolId = 1;
-            if ($row['role'] == 'd') {
-                $rolId = 2;
-            }
-            $gebruiker = Gebruiker::where('r_nummer', $row['user id'])->first();
-            if (!$gebruiker) {
-                $newUsers++;
-                $password = \Illuminate\Support\Str::random(12);
-                $gebruiker = Gebruiker::create([
-                    'r_nummer' => $row['user id'],
-                    'voornaam' => $row['first name'],
-                    'achternaam' => $row['last name'],
-                    'email' => $row['email'],
-                    'password' => Hash::make($password),
-                    'rol_id' => $rolId
-                ]);
-
-                $passwords[$gebruiker->r_nummer] = $password;
-            }
-
-            $gebruikerId = $gebruiker->id;
-
-            StudentKlassen::create([
-                'student_id' => $gebruikerId,
-                'klas_id' => $klasId
-            ]);
-        }
-
+    try {
+        Criterium::create($data);
+    } catch (Exception  $e) {
         return response()->json([
-            'msg' => 'added students to klas',
-            'status' => 201,
-            'users_created' => $newUsers,
-            'passwords' => $passwords
-        ]);
-        
-     })->middleware(DecompressRequest::class);
+            'msg' => 'failed creating criterium.',
+            'status' => 400
+        ], 400);
+    }
+    return response()->json([
+        'msg' => 'criterium created succesfully.',
+        'status' => 201
+    ], 201);
+});

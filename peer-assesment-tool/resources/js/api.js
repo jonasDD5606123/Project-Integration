@@ -1,75 +1,73 @@
+import axios from 'axios';
 import Pako from 'pako';
 
+// Function to post student klas with gzip compression
 export async function postStudentKlas(students, klasNaam, vakId) {
-    const url = '/api/studenten-klas';
+    const url = '/studenten-klas';
 
     let response = null;
 
-    const jsonData = JSON.stringify({students: students, klasNaam: klasNaam, vakId: vakId});
+    const jsonData = JSON.stringify({ students, klasNaam, vakId });
 
+    // Compress the data with Pako
     const compressedData = Pako.gzip(jsonData);
 
+    // Get the CSRF token from the meta tag
+    const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+
     try {
-        response = await fetch(url, {
-            method: 'POST', // HTTP method
+        response = await axios.post(url, compressedData, {
             headers: {
                 'Content-Type': 'application/json',
                 'Content-Encoding': 'gzip',
+                'X-CSRF-TOKEN': csrfToken,  // Send CSRF token with the request
             },
-            body: compressedData
+            withCredentials: true, // Ensure cookies (session cookies) are sent
         });
-    } catch {
+    } catch (error) {
         throw new Error('Er kon geen verbinding gemaakt worden met de server.');
     }
 
-    if (!response.ok) {
+    // Handle server errors (non-200 status codes)
+    if (response.ok) {
         throw new Error('Server heeft met foutcode geantwoord.');
     }
 
-    let data;
-    try {
-        data = await response.json();
-    } catch {
-        throw new Error('Response van de server is in verkeerde formaat.');
-    }
-
-    return data;
+    return response.data;
 }
 
-export async function postEvaluatie(titel , beschrijving, deadline, vakId, criteria) {
-    const url = '/api/evaluatie'
+// Function to post evaluatie
+export async function postEvaluatie(titel, beschrijving, deadline, vakId, criteria) {
+    const url = '/api/evaluatie';
     const body = {
-        titel: titel,
-        beschrijving: beschrijving,
-        deadline: deadline,
-        vakId: vakId,
-        criteria: criteria
+        titel,
+        beschrijving,
+        deadline,
+        vakId,
+        criteria,
     };
 
     let response = null;
-    
+
+    // Get the CSRF token from the meta tag
+    const csrfToken = document.head.querySelector('meta[name="csrf-token"]').content;
+
     try {
-        response = await fetch(url, {
-            method: 'POST', // HTTP method
+        response = await axios.post(url, body, {
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,  // Send CSRF token with the request
             },
-            body: JSON.stringify(body)
+            withCredentials: true, // Ensure cookies (session cookies) are sent
         });
-    } catch {
+    } catch (error) {
         throw new Error('Er kon geen verbinding gemaakt worden met de server.');
     }
 
-    if (!response.ok) {
+    // Handle server errors (non-200 status codes)
+    if (response.status !== 200) {
         throw new Error('Server heeft met foutcode geantwoord.');
     }
 
-    let data;
-    try {
-        data = await response.json();
-    } catch {
-        throw new Error('Response van de server is in verkeerde formaat.');
-    }
-
-    return data;
+    return response.data;
 }

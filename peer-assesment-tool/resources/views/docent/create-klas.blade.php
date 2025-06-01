@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Peer Beoordelingstool</title>
     @vite(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'resources/js/app.js', 'resources/css/app.css', 'resources/js/create-klas.js'])
 </head>
@@ -26,8 +27,8 @@
             <div class="mb-3">
                 <label class="form-label">Vak</label>
                 <select id="selVakId" class="form-control" name="vak_id">
+                    <option value=""></option>
                     @foreach($vakken as $vak)
-                        <option value=""></option>
                         <option value="{{ $vak->id }}">{{ $vak->naam }}</option>
                     @endforeach
                 </select>
