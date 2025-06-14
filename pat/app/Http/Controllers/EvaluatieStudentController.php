@@ -17,12 +17,20 @@ class EvaluatieStudentController extends Controller
     public function groepen(Request $request)
     {
         $user = Auth::user();
-        $groepenIds = StudentGroepen::where('student_id', $user->id)->get();
-        $groepen = Groep::with('vak', 'studenten')
-            ->whereIn('id', $groepenIds->pluck('groep_id'))
+
+        // Get groep IDs where the user is a student
+        $groepenIds = StudentGroepen::where('student_id', $user->id)->pluck('groep_id');
+
+        // Get groups with their vak, studenten and evaluatie, but only if evaluatie deadline not passed
+        $groepen = Groep::with('vak', 'studenten', 'evaluatie')
+            ->whereIn('id', $groepenIds)
+            ->whereHas('evaluatie', function ($query) {
+                $query->where('deadline', '>=', now());
+            })
             ->get();
+
         return view('student.groepen', ['groepen' => $groepen]);
-    }   // Logic to retrieve and return groups for the student
+    }   // Logic to retrieve and return groups for the st   udent
 
     public function leden(Request $request, int $groepId)
     {

@@ -26,10 +26,7 @@ Route::get('/', function () {
     }
 })->name("dashboard")->middleware(middleware: ['auth', 'verified']);
 
-Route::get('/groepen', [EvaluatieStudentController::class, 'groepen'])->name('student.groepen');
-
-
-Route::get('/student-groepen', [EvaluatieStudentController::class, 'groepen']);
+Route::get('/student-groepen', [EvaluatieStudentController::class, 'groepen'])->name('student.groepen');
 Route::get('/student-groep/{groep}/', [EvaluatieStudentController::class, 'leden'])->name('student.groep');
 Route::get('/evaluatie/start/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'evalueerPersoon'])
     ->name('evaluatie.start');

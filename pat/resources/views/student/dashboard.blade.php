@@ -19,6 +19,17 @@
 
     <main class="container" role="main">
         <h2>Student Dashboard</h2>
+        <div class="row">
+            <!-- Select Group -->
+            <div class="col-md-6 mb-4">
+                <div class="card border-primary h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Groep Selecteren</h5>
+                        <p class="card-text">Kies een groep waarvoor je een evaluatie wilt doen.</p>
+                        <a href="{{ route('student.groepen')}}" class="btn btn-primary">Ga naar groepen</a>
+                    </div>
+                </div>
+            </div>
 
         <!-- Groep Selecteren -->
         <section class="section" aria-labelledby="groep-selecteren-title">
