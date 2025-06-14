@@ -68,3 +68,4 @@ function getCsrfToken() {
 
 frmKlas.addEventListener('submit', handleFrmKlasSubmit);
 reader.addEventListener('load', handleFileInputLoad)
+

@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #f9fafb;
+    color: #333;
+}
+
+/* Container */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* Formulier smaller centreren */
+.form-wrapper {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* --------- Header zoals op dashboard --------- */
+.header {
+    position: relative;
+    background: linear-gradient(90deg, #00b09b, #96c93d);
+    color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.header .user__voornaam {
+    font-weight: 600;
+}
+
+.logout-form {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Logout knop */
+.btn-back {
+    background: rgba(255 255 255 / 0.25);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: background 0.3s ease;
+    user-select: none;
+}
+
+.btn-back:hover,
+.btn-back:focus {
+    background: rgba(255 255 255 / 0.5);
+    outline: none;
+}
+
+/* --------- Formulier --------- */
+form {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #00b09b;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+label {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input[type="text"],
+input[type="datetime-local"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #fff;
+    transition: border 0.2s, box-shadow 0.2s;
+    width: 640px;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #00b09b;
+    box-shadow: 0 0 0 3px rgba(0, 176, 155, 0.2);
+    outline: none;
+}
+
+/* Criteria-blokken */
+.criteria-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.criterium-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: #f0fdf9;
+    border: 1px solid #d1fae5;
+    border-radius: 12px;
+}
+
+.criterium-group input {
+    background-color: #ffffff;
+    width: 640px;
+}
+
+/* Knoppen */
+button,
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #00b09b;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #019180;
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid #00b09b;
+    color: #00b09b;
+    padding: 10px 20px;
+}
+
+.btn-outline:hover {
+    background-color: rgba(0, 176, 155, 0.1);
+}
+
+.btn-remove {
+    color: #dc2626;
+    border-color: #dc2626;
+}
+
+.btn-remove:hover {
+    background-color: rgba(220, 38, 38, 0.1);
+}
+
+#btnAddCriterium,
+#btnSubmit {
+    align-self: center;
+    margin-top: 10px;
+}
+
+#feedback {
+    margin-top: 20px;
+}
