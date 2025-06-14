@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #f9fafb;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.header {
+    position: relative;
+    background: linear-gradient(90deg, #00b09b, #96c93d);
+    color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+.header .user__voornaam {
+    font-weight: 600;
+}
+
+.logout-form {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    margin: auto 0;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.btn-back {
+      background: rgba(255 255 255 / 0.25);
+      color: white;
+      border: none;
+      padding: 10px 22px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 30px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+      transition: background 0.3s ease;
+      user-select: none;
+    }
+
+.btn-back:hover,
+    .btn-back:focus {
+      background: rgba(255 255 255 / 0.5);
+      outline: none;
+    }
+
+main {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    width: 300px;
+    height: 230px; /* vaste hoogte, pas aan naar wens */
+    display: flex;
+    flex-direction: column;
+    /* let op: geen justify-content: space-between meer */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    color: #00b09b;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0 0 5px 0; /* weinig marge onder */
+    flex-grow: 1; /* p neemt beschikbare ruimte */
+    display: flex;
+    align-items: flex-start; /* optioneel: tekst bovenaan */
+}
+
+.btn {
+    display: inline-block;
+    background: #00b09b;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    margin-top: auto; /* button altijd onderaan */
+}
+
+.btn:hover {
+    background: #019180;
+}

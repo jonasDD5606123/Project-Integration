@@ -4,66 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peer Beoordelingstool</title>
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
-    <!-- Bootstrap CSS via CDN -->
+    <title>Peer Beoordelingstool Dashboard</title>
+    @vite(['resources/js/app.js', 'resources/css/dashboard-docent.css'])
 </head>
 
 <body>
-    <header class="bg-primary text-white py-3 ps-3">
-        <h1 class="mb-0">
-            Welkom <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
-        </h1>
+    <header class="header">
+        <div class="container">
+            <h1>Welkom <span>{{ auth()->user()->voornaam }}</span></h1>
+        </div>
+
+     <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
+        @csrf
+        <button type="submit" class="btn-back">
+            🚪 Uitloggen
+        </button>
+    </form>
     </header>
 
-    <div class="container mt-4">
-        <main class="mt-4">
-            <section id="beoordelingen" class="page mt-4">
-                <h2 class="mb-4 text-start">Evaluaties</h2>
+    <main class="container">
+        <section class="card">
+            <h2>Evaluaties</h2>
+            <p>Peer evaluatie toevoegen of beheren.</p>
+            <a href="{{ route('docent.evaluatie') }}" class="btn">Bekijk Details</a>
+        </section>
 
-                <div class="card p-4 bg-light border-0 shadow-sm">
-                    <h3 class="card-title text-primary">Peer evaluatie toevoegen, beheren</h3>
+        <section class="card">
+            <h2>Studenten</h2>
+            <p>Klassen toevoegen, beheren, onderverdelen in groepen, vakken toevoegen.</p>
+            <a href="{{ route('docent.studentenbeheer') }}" class="btn">Bekijk Details</a>
+        </section>
 
-                    <div class="d-flex justify-content-end mt-3 ">
-                        <a href="{{ route('docent.evaluatie') }}" class="btn btn-primary px-4 py-2">Click voor meer details</a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="beoordelingen" class="page mt-4">
-                <h2 class="mb-4 text-start">Studenten</h2>
-
-                <div class="card p-4 bg-light border-0 shadow-sm">
-                    <h3 class="card-title text-primary">Klassen toevoegen, beheren, onderverdelen in groepen, vakken toevoegen</h3>
-
-                    <p class="card-text mb-3">
-                        Geen beschrijving beschikbaar
-                    </p>
-
-                    <div class="d-flex justify-content-end mt-3 ">
-                        <a href="{{ route('docent.studentenbeheer') }}" class="btn btn-primary px-4 py-2">Click voor meer details</a>
-                    </div>
-                </div>
-            </section>
-
-            <section id="beoordelingen" class="page mt-4">
-                <h2 class="mb-4 text-start">Raportering</h2>
-
-                <div class="card p-4 bg-light border-0 shadow-sm">
-                    <h3 class="card-title text-primary">Klassen toevoegen, beheren, onderverdelen in groepen</h3>
-
-                    <p class="card-text mb-3">
-                        Geen beschrijving beschikbaar
-                    </p>
-
-                    <div class="d-flex justify-content-end mt-3 ">
-                        <button class="btn btn-primary px-4 py-2"><a class="nav-link" href="/docent/klassen">Click voor meer details</a></button>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
-
+        <section class="card">
+            <h2>Rapportering</h2>
+            <p>Rapporten van klassen en groepen bekijken.</p>
+            <a href="/docent/klassen" class="btn">Bekijk Details</a>
+        </section>
+    </main>
 </body>
 
 </html>

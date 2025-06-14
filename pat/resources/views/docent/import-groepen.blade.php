@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <title>Groepen Importeren</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD:peer-assesment-tool/resources/views/docent/import-groepen.blade.php
-    @vite(['node_modules/bootstrap/dist/css/bootstrap.min.css', 'resources/js/import-groepen.js', 'resources/css/app.css'])
-</head>
-<body class="bg-light-gray">
-    <div class="card-container">
-=======
     <meta name="csrf-token" content="{{ csrf_token() }}">
     @vite(['resources/css/app.css', 'resources/css/import-groepen.css', 'resources/js/app.js'])
 </head>
@@ -18,20 +12,10 @@
         <a href="{{ route('docent.studentenbeheer') }}" class="btn btn-outline-secondary mb-3">
             <i class="bi bi-arrow-left"></i> back
         </a>
->>>>>>> jonas:pat/resources/views/docent/import-groepen.blade.php
         <h2 class="heading-primary">Importeer Groepen</h2>
 
         <form id="frmGroepen" class="form-column">
             @csrf
-<<<<<<< HEAD:peer-assesment-tool/resources/views/docent/import-groepen.blade.php
-            <select id="selVakId" name="vak_id" class="input-select">
-                @foreach ($vakken as $vak)
-                    <option value="{{ $vak->id }}">{{ $vak->naam }}</option>
-                @endforeach
-            </select>
-
-            <input type="file" id="inFileImport" class="input-file" />
-=======
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
@@ -52,30 +36,15 @@
             </select>
 
             <input type="file" id="inFileImport" class="file__import" />
->>>>>>> jonas:pat/resources/views/docent/import-groepen.blade.php
 
             <table id="resultTable" class="table-styled">
                 <thead>
                     <tr>
-<<<<<<< HEAD:peer-assesment-tool/resources/views/docent/import-groepen.blade.php
-                        <th>Groep</th>
-                        <th>User ID</th>
-                        <th>Voornaam</th>
-                        <th>Achternaam</th>
-=======
->>>>>>> jonas:pat/resources/views/docent/import-groepen.blade.php
                     </tr>
                 </thead>
                 <tbody></tbody>
             </table>
 
-<<<<<<< HEAD:peer-assesment-tool/resources/views/docent/import-groepen.blade.php
-            <button type="submit" class="btn-primary">Importeer Groepen</button>
-        </form>
-    </div>
-</body>
-</html>
-=======
             <button type="submit" class="btn-primary">
                 <span class="spinner-border spinner-border-sm me-2 d-none" id="importSpinner" role="status" aria-hidden="true"></span>
                 Importeer Groepen
@@ -86,4 +55,3 @@
     @vite(['resources/js/import-groepen.js'])
 </body>
 </html>
->>>>>>> jonas:pat/resources/views/docent/import-groepen.blade.php
