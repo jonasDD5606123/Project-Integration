@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Groep;
@@ -89,33 +90,34 @@ class ImportGroepenController extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
     public function importStudentGroups(Request $request)
-{
-    $groups = $request->input('groups', []);
-    $vakId = $request->input('vakId');
-    $evaluatieId = $request->input('evaluatieId');
+    {
+        $groups = $request->input('groups', []);
+        $vakId = $request->input('vakId');
+        $evaluatieId = $request->input('evaluatieId');
 
-    if (!$vakId || !$evaluatieId || !is_array($groups) || count($groups) === 0) {
-        return response()->json(['error' => 'Ongeldige data'], 422);
-    }
-
-    DB::beginTransaction();
-    try {
-        foreach ($groups as $group) {
-            $groep = \App\Models\Groep::create([
-                'naam' => $group['groupName'],
-                'vak_id' => $vakId,
-                'evaluatie_id' => $evaluatieId,
-            ]);
-            // Koppel studenten op basis van user id (r_nummer)
-            $studentIds = \App\Models\Gebruiker::whereIn('r_nummer', $group['students'])->pluck('id')->toArray();
-            $groep->studenten()->sync($studentIds);
+        if (!$vakId || !$evaluatieId || !is_array($groups) || count($groups) === 0) {
+            return response()->json(['error' => 'Ongeldige data'], 422);
         }
-        DB::commit();
-        return response()->json(['success' => true]);
-    } catch (\Exception $e) {
-        DB::rollBack();
-        return response()->json(['error' => $e->getMessage()], 500);
+
+        DB::beginTransaction();
+        try {
+            foreach ($groups as $group) {
+                $groep = \App\Models\Groep::create([
+                    'naam' => $group['groupName'],
+                    'vak_id' => $vakId,
+                    'evaluatie_id' => $evaluatieId,
+                ]);
+                // Koppel studenten op basis van user id (r_nummer)
+                $studentIds = Gebruiker::whereIn('r_nummer', $group['students'])->pluck('id')->toArray();
+                $groep->studenten()->sync($studentIds);
+            }
+            DB::commit();
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
-}
 }

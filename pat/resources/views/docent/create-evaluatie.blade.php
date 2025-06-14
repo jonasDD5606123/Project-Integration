@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Peer Evaluation & Activities</title>
-    @vite(['resources/js/app.js', 'resources/css/app.css', 'resources/js/create-evaluatie.js', 'resources/css/kanban.css']))
+    @vite(['resources/js/app.js', 'resources/css/app.css', 'resources/js/create-evaluatie.js', 'resources/css/kanban.css'])
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 

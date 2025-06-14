@@ -9,4 +9,3 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::post('/evaluatie', [EvaluatieController::class, 'store'])->name('evaluatie.store');

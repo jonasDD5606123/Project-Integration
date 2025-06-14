@@ -1,125 +1,140 @@
-drop database if exists ID439999_PeerAssessmentT;
-drop database if exists pat_db;
+USE pat_db;
 
-create database if not exists pat_db;
+DROP TRIGGER IF EXISTS before_insert_gebruikers;
 
-use pat_db;
+DROP VIEW IF EXISTS studenten_view;
+DROP VIEW IF EXISTS docenten_view;
 
-create table if not exists vakken (
-    id int primary key auto_increment,
-    naam varchar(100) not null
+DROP TABLE IF EXISTS scores;
+DROP TABLE IF EXISTS studenten_groepen;
+DROP TABLE IF EXISTS studenten_klassen;
+DROP TABLE IF EXISTS docenten_vakken;
+DROP TABLE IF EXISTS criteria;
+DROP TABLE IF EXISTS evaluaties;
+DROP TABLE IF EXISTS groepen;
+DROP TABLE IF EXISTS gebruikers;
+DROP TABLE IF EXISTS klassen;
+DROP TABLE IF EXISTS rollen;
+DROP TABLE IF EXISTS vakken;
+
+-- CREATE TABLES
+
+CREATE TABLE IF NOT EXISTS vakken (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naam VARCHAR(100) NOT NULL
 );
 
-create table if not exists rollen (
-    id int primary key auto_increment,
-    naam varchar(100) not null
+CREATE TABLE IF NOT EXISTS rollen (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naam VARCHAR(100) NOT NULL
 );
 
-create table if not exists klassen (
-    id int primary key auto_increment,
-    naam varchar(100) not null,
-    vak_id int not null,
-    constraint fk_klassen_vakken foreign key (vak_id) references vakken(id)
+CREATE TABLE IF NOT EXISTS klassen (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naam VARCHAR(100) NOT NULL,
+    vak_id INT NOT NULL,
+    CONSTRAINT fk_klassen_vakken FOREIGN KEY (vak_id) REFERENCES vakken(id)
 );
 
-create table if not exists gebruikers (
-    id int primary key auto_increment,
-    r_nummer varchar(10),
-    voornaam varchar(100) not null,
-    achternaam varchar(100) not null,
-    email varchar(255) unique not null,
-    password varchar(255) not null,
-    rol_id int not null,
-    constraint fk_gebruikers_rollen foreign key (rol_id) references rollen(id)
+CREATE TABLE IF NOT EXISTS gebruikers (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    r_nummer VARCHAR(10),
+    voornaam VARCHAR(100) NOT NULL,
+    achternaam VARCHAR(100) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    rol_id INT NOT NULL,
+    CONSTRAINT fk_gebruikers_rollen FOREIGN KEY (rol_id) REFERENCES rollen(id)
 );
 
-create table if not exists groepen (
-    id int primary key auto_increment,
-    naam varchar(100),
-    vak_id int not null,
-    constraint fk_groepen_vakken foreign key (vak_id) references vakken(id)
+CREATE TABLE IF NOT EXISTS groepen (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naam VARCHAR(100),
+    vak_id INT NOT NULL,
+    CONSTRAINT fk_groepen_vakken FOREIGN KEY (vak_id) REFERENCES vakken(id)
 );
 
-create table if not exists evaluaties (
-    id int primary key auto_increment,
-    titel varchar(100),
-    beschrijving varchar(100),
-    deadline datetime not null,
-    vak_id int not null,
-    constraint fk_evaluaties_vakken foreign key (vak_id) references vakken(id)
+CREATE TABLE IF NOT EXISTS evaluaties (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    titel VARCHAR(100),
+    beschrijving VARCHAR(100),
+    deadline DATETIME NOT NULL,
+    vak_id INT NOT NULL,
+    CONSTRAINT fk_evaluaties_vakken FOREIGN KEY (vak_id) REFERENCES vakken(id)
 );
 
-create table if not exists criteria (
-    id int primary key auto_increment,
-    criterium varchar(255) not null,
-    max_waarde decimal(10, 2) not null,
-    min_waarde decimal(10, 2) not null,
-    evaluatie_id int not null,
-    constraint fk_criteria_evaluaties foreign key (evaluatie_id) references evaluaties(id)
+CREATE TABLE IF NOT EXISTS criteria (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    criterium VARCHAR(255) NOT NULL,
+    max_waarde DECIMAL(10, 2) NOT NULL,
+    min_waarde DECIMAL(10, 2) NOT NULL,
+    evaluatie_id INT NOT NULL,
+    CONSTRAINT fk_criteria_evaluaties FOREIGN KEY (evaluatie_id) REFERENCES evaluaties(id)
 );
 
-create table if not exists docenten_vakken (
-    docent_id int not null,
-    vak_id int not null,
-    constraint fk_docenten_vakken_docent foreign key (docent_id) references gebruikers(id),
-    constraint fk_docenten_vakken_vak foreign key (vak_id) references vakken(id),
-    constraint pk_docenten_vakken primary key (docent_id, vak_id)
+CREATE TABLE IF NOT EXISTS docenten_vakken (
+    docent_id INT NOT NULL,
+    vak_id INT NOT NULL,
+    CONSTRAINT fk_docenten_vakken_docent FOREIGN KEY (docent_id) REFERENCES gebruikers(id),
+    CONSTRAINT fk_docenten_vakken_vak FOREIGN KEY (vak_id) REFERENCES vakken(id),
+    CONSTRAINT pk_docenten_vakken PRIMARY KEY (docent_id, vak_id)
 );
 
-create table if not exists studenten_klassen (
-    klas_id int not null,
-    student_id int not null,
-    constraint fk_studenten_klassen_klas foreign key (klas_id) references klassen(id),
-    constraint fk_studenten_klassen_student foreign key (student_id) references gebruikers(id),
-    constraint pk_studenten_klassen primary key (klas_id, student_id)
+CREATE TABLE IF NOT EXISTS studenten_klassen (
+    klas_id INT NOT NULL,
+    student_id INT NOT NULL,
+    CONSTRAINT fk_studenten_klassen_klas FOREIGN KEY (klas_id) REFERENCES klassen(id),
+    CONSTRAINT fk_studenten_klassen_student FOREIGN KEY (student_id) REFERENCES gebruikers(id),
+    CONSTRAINT pk_studenten_klassen PRIMARY KEY (klas_id, student_id)
 );
 
-create table if not exists studenten_groepen (
-    student_id int not null,
-    groep_id int not null,
-    constraint fk_studenten_groepen_student foreign key (student_id) references gebruikers(id),
-    constraint fk_studenten_groepen_groep foreign key (groep_id) references groepen(id),
-    constraint pk_studenten_groepen primary key (student_id, groep_id)
+CREATE TABLE IF NOT EXISTS studenten_groepen (
+    student_id INT NOT NULL,
+    groep_id INT NOT NULL,
+    CONSTRAINT fk_studenten_groepen_student FOREIGN KEY (student_id) REFERENCES gebruikers(id),
+    CONSTRAINT fk_studenten_groepen_groep FOREIGN KEY (groep_id) REFERENCES groepen(id),
+    CONSTRAINT pk_studenten_groepen PRIMARY KEY (student_id, groep_id)
 );
 
-create table if not exists scores (
-    criterium_id int not null,
-    student_id_geevalueerd int not null,
-    student_id_evalueert int not null,
-    score decimal(10, 2) not null,
-    feedback varchar(255) not null,
-    gescoord_op datetime not null,
-    constraint fk_scores_criteria foreign key (criterium_id) references criteria(id),
-    constraint fk_scores_studenten_geevalueerd foreign key (student_id_geevalueerd) references gebruikers(id),
-    constraint fk_scores_studenten_evalueert foreign key (student_id_evalueert) references gebruikers(id),
-    constraint pk_scores primary key (criterium_id, student_id_geevalueerd, student_id_evalueert)
+CREATE TABLE IF NOT EXISTS scores (
+    criterium_id INT NOT NULL,
+    student_id_geevalueerd INT NOT NULL,
+    student_id_evalueert INT NOT NULL,
+    score DECIMAL(10, 2) NOT NULL,
+    feedback VARCHAR(255) NOT NULL,
+    gescoord_op DATETIME NOT NULL,
+    CONSTRAINT fk_scores_criteria FOREIGN KEY (criterium_id) REFERENCES criteria(id),
+    CONSTRAINT fk_scores_studenten_geevalueerd FOREIGN KEY (student_id_geevalueerd) REFERENCES gebruikers(id),
+    CONSTRAINT fk_scores_studenten_evalueert FOREIGN KEY (student_id_evalueert) REFERENCES gebruikers(id),
+    CONSTRAINT pk_scores PRIMARY KEY (criterium_id, student_id_geevalueerd, student_id_evalueert)
 );
 
-/*
-rol_id 1 = student
-rol_id 2 = docent
-*/
+-- Insert default roles
+INSERT INTO rollen (naam) VALUES ('student'), ('docent');
 
-insert into rollen (naam) values ('student'), ('docent');
+-- Create views
+CREATE VIEW studenten_view AS 
+SELECT g.id, g.r_nummer, g.voornaam, g.achternaam, g.email
+FROM gebruikers g
+WHERE g.rol_id = 1;
 
-create view studenten_view as 
-    select g.id, g.r_nummer, g.voornaam, g.achternaam, g.email
-    from gebruikers g  join rollen r on g.rol_id = r.id where g.rol_id = 1;
+CREATE VIEW docenten_view AS
+SELECT g.id, g.r_nummer, g.voornaam, g.achternaam, g.email
+FROM gebruikers g
+WHERE g.rol_id = 2;
 
-create view docenten_view as
-    select g.id, g.r_nummer, g.voornaam, g.achternaam, g.email
-    from gebruikers g join rollen r on g.rol_id = r.id where g.rol_id = 2;
+-- Create trigger
 
-delimiter $$
+DELIMITER $$
 
-create trigger before_insert_gebruikers
-before insert on gebruikers
-for each row
-begin
-    if new.rol_id = 1 and (new.r_nummer is null or new.r_nummer = '') then
-        signal sqlstate '45000'
-        set message_text = 'r_nummer cannot be null or empty when rol_id is 1';
-    end if;
-end $$
+CREATE TRIGGER before_insert_gebruikers
+BEFORE INSERT ON gebruikers
+FOR EACH ROW
+BEGIN
+    IF NEW.rol_id = 1 AND (NEW.r_nummer IS NULL OR NEW.r_nummer = '') THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'r_nummer cannot be null or empty when rol_id is 1';
+    END IF;
+END $$
 
-delimiter ;
+DELIMITER ;

@@ -14,6 +14,10 @@
         <h1 class="mb-0">
             Welkom <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
         </h1>
+        <form method="POST" action="{{ route('logout') }}" class="me-3">
+            @csrf
+            <button type="submit" class="btn btn-light text-primary">Uitloggen</button>
+        </form>
     </header>
 
     <div class="container mt-4">
