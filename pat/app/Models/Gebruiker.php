@@ -3,9 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User;
+use Illuminate\Notifications\Notifiable;
+
 
 class Gebruiker extends User
 {
+        use Notifiable;
     protected $table = 'gebruikers';
     protected $primaryKey = 'id';
     protected $fillable = [

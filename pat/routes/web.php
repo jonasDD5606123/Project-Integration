@@ -1,11 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth\PasswordSetupController as AuthPasswordSetupController;
 use App\Http\Controllers\DocentController;
 use App\Http\Controllers\EvaluatieController;
 use App\Http\Controllers\EvaluatieStudentController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ImportGroepenController;
 use App\Http\Controllers\KlasController;
+use App\Http\Controllers\PasswordSetupController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VakController;
 use App\Http\Middleware\DecompressRequest;
@@ -25,6 +27,14 @@ Route::get('/', function () {
         return view('docent.dashboard');
     }
 })->name("dashboard")->middleware(middleware: ['auth', 'verified']);
+
+Route::get('/password-setup/{user}/{password}', [PasswordSetupController::class, 'show'])
+    ->name('password.setup')
+    ->middleware('signed'); // to enforce signed URL validation
+
+    Route::post('/password-setup/{user}', [PasswordSetupController::class, 'update'])
+    ->name('password.setup.update')
+    ->middleware('signed');
 
 Route::get('/student-groepen', [EvaluatieStudentController::class, 'groepen'])->name('student.groepen');
 Route::get('/student-groep/{groep}/', [EvaluatieStudentController::class, 'leden'])->name('student.groep');
