@@ -21,7 +21,7 @@ class EvaluatieStudentController extends Controller
         // Get groep IDs where the user is a student
         $groepenIds = StudentGroepen::where('student_id', $user->id)->pluck('groep_id');
 
-        // Get groups with their vak, studenten and evaluatie, but only if evaluatie deadline not passed
+        // G        et groups with their vak, studenten and evaluatie, but only if evaluatie deadline not passed
         $groepen = Groep::with('vak', 'studenten', 'evaluatie')
             ->whereIn('id', $groepenIds)
             ->whereHas('evaluatie', function ($query) {
@@ -95,28 +95,43 @@ class EvaluatieStudentController extends Controller
         ]);
     }
 
-    public function submit(Request $request, $evaluatieId, $studentId, $groepId)
-    {
-        $evaluatorId = $request->input('evaluator_id');
-        $scores = $request->input('scores', []);
-        $feedbacks = $request->input('feedbacks', []);
+public function submit(Request $request, $evaluatieId, $studentId, $groepId)
+{
+    $evaluatorId = $request->input('evaluator_id');
+    $scores = $request->input('scores', []);
+    $feedbacks = $request->input('feedbacks', []);
 
-        foreach ($scores as $criteriumId => $scoreValue) {
-            $feedback = $feedbacks[$criteriumId] ?? null;
+    foreach ($scores as $criteriumId => $scoreValue) {
+        $feedback = $feedbacks[$criteriumId] ?? null;
 
+        $existing = Score::where('criterium_id', $criteriumId)
+            ->where('student_id_geevalueerd', $studentId)
+            ->where('student_id_evalueert', $evaluatorId)
+            ->first();
+
+        if ($existing) {
+            // Update existing record using query builder update
+            Score::where('criterium_id', $criteriumId)
+                ->where('student_id_geevalueerd', $studentId)
+                ->where('student_id_evalueert', $evaluatorId)
+                ->update([
+                    'score' => $scoreValue,
+                    'feedback' => $feedback,
+                    'gescoord_op' => now(),
+                ]);
+        } else {
+            // Create new record
             Score::create([
                 'criterium_id' => $criteriumId,
                 'student_id_geevalueerd' => $studentId,
                 'student_id_evalueert' => $evaluatorId,
                 'score' => $scoreValue,
                 'feedback' => $feedback,
-                'gescoord_op' => Carbon::now(),
+                'gescoord_op' => now(),
             ]);
         }
-
-        // Optionally, handle algemene feedback
-        // You could store it in a separate table if needed.
-
-        return redirect()->back()->with('success', 'Evaluatie succesvol ingediend.');
     }
+
+    return redirect()->back()->with('success', 'Evaluatie succesvol ingediend.');
+}
 }
