@@ -7,8 +7,6 @@ use App\Models\Gebruiker;
 use App\Models\Groep;
 use App\Models\Score;
 use App\Models\StudentGroepen;
-use Carbon\Carbon;
-use COM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -95,43 +93,80 @@ class EvaluatieStudentController extends Controller
         ]);
     }
 
-public function submit(Request $request, $evaluatieId, $studentId, $groepId)
-{
-    $evaluatorId = $request->input('evaluator_id');
-    $scores = $request->input('scores', []);
-    $feedbacks = $request->input('feedbacks', []);
+    public function submit(Request $request, $evaluatieId, $studentId, $groepId)
+    {
+        $evaluatorId = $request->input('evaluator_id');
+        $scores = $request->input('scores', []);
+        $feedbacks = $request->input('feedbacks', []);
 
-    foreach ($scores as $criteriumId => $scoreValue) {
-        $feedback = $feedbacks[$criteriumId] ?? null;
+        foreach ($scores as $criteriumId => $scoreValue) {
+            $feedback = $feedbacks[$criteriumId] ?? null;
 
-        $existing = Score::where('criterium_id', $criteriumId)
-            ->where('student_id_geevalueerd', $studentId)
-            ->where('student_id_evalueert', $evaluatorId)
-            ->first();
-
-        if ($existing) {
-            // Update existing record using query builder update
-            Score::where('criterium_id', $criteriumId)
+            $existing = Score::where('criterium_id', $criteriumId)
                 ->where('student_id_geevalueerd', $studentId)
                 ->where('student_id_evalueert', $evaluatorId)
-                ->update([
+                ->first();
+
+            if ($existing) {
+                // Update existing record using query builder update
+                Score::where('criterium_id', $criteriumId)
+                    ->where('student_id_geevalueerd', $studentId)
+                    ->where('student_id_evalueert', $evaluatorId)
+                    ->update([
+                        'score' => $scoreValue,
+                        'feedback' => $feedback,
+                        'gescoord_op' => now(),
+                    ]);
+            } else {
+                // Create new record
+                Score::create([
+                    'criterium_id' => $criteriumId,
+                    'student_id_geevalueerd' => $studentId,
+                    'student_id_evalueert' => $evaluatorId,
                     'score' => $scoreValue,
                     'feedback' => $feedback,
                     'gescoord_op' => now(),
                 ]);
-        } else {
-            // Create new record
-            Score::create([
-                'criterium_id' => $criteriumId,
-                'student_id_geevalueerd' => $studentId,
-                'student_id_evalueert' => $evaluatorId,
-                'score' => $scoreValue,
-                'feedback' => $feedback,
-                'gescoord_op' => now(),
-            ]);
+            }
         }
+
+        return redirect()->back()->with('success', 'Evaluatie succesvol ingediend.');
     }
 
-    return redirect()->back()->with('success', 'Evaluatie succesvol ingediend.');
-}
+    public function index()
+    {
+        $studentId = Auth::id();
+
+        // All evaluations related to student's groups or subjects
+        $allEvaluaties = Evaluatie::with('criteria')->get();
+
+        $pending = [];
+        $inProgress = [];
+        $done = [];
+
+        foreach ($allEvaluaties as $evaluatie) {
+            // Count how many criteria have scores for this student & evaluator (self?)
+            $criteriaCount = $evaluatie->criteria->count();
+
+            $scoresCount = Score::where('student_id_geevalueerd', $studentId)
+                ->whereIn('criterium_id', $evaluatie->criteria->pluck('id'))
+                ->count();
+
+            // Check deadline (optional)
+            $deadlinePassed = $evaluatie->deadline && $evaluatie->deadline->isPast();
+
+            if ($scoresCount === 0) {
+                // no scores = pending
+                $pending[] = $evaluatie;
+            } elseif ($scoresCount < $criteriaCount && !$deadlinePassed) {
+                // started but not finished & before deadline = in progress
+                $inProgress[] = $evaluatie;
+            } else {
+                // done = either finished all or deadline passed
+                $done[] = $evaluatie;
+            }
+        }
+
+        return view('student.evaluations', compact('pending', 'inProgress', 'done'));
+    }
 }

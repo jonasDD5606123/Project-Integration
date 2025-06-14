@@ -20,37 +20,13 @@
     <main class="container" role="main">
         <h2>Student Dashboard</h2>
         <div class="row">
-            <!-- Select Group -->
-            <div class="col-md-6 mb-4">
-                <div class="card border-primary h-100">
-                    <div class="card-body">
-                        <h5 class="card-title">Groep Selecteren</h5>
-                        <p class="card-text">Kies een groep waarvoor je een evaluatie wilt doen.</p>
-                        <a href="{{ route('student.groepen')}}" class="btn btn-primary">Ga naar groepen</a>
-                    </div>
-                </div>
-            </div>
-
-        <!-- Groep Selecteren -->
-        <section class="section" aria-labelledby="groep-selecteren-title">
-            <h4 id="groep-selecteren-title">Groep Selecteren</h4>
+            <!-- Beheer Evaluaties -->
+        <section class="section" aria-labelledby="beheer-evaluaties-title">
+            <h4 id="beheer-evaluaties-title">Beheer Evaluaties</h4>
             <p class="text-muted">
-                Kies een groep waarvoor je een evaluatie wilt doen.
+                Bekijk of wijzig eerder ingevulde evaluaties.
             </p>
-            <a href="{{ url('/groepen') }}" class="btn"><span class="emoji">👥</span> Ga naar groepen</a>
-        </section>
-
-        <!-- Evaluatie Invullen -->
-        <section class="section" aria-labelledby="evaluatie-invullen-title">
-            <h4 id="evaluatie-invullen-title">Evaluatie Invullen</h4>
-            <p class="text-muted">
-                Evalueer een groepsgenoot op basis van criteria.
-            </p>
-            @if(isset($groep))
-                <a href="{{ route('student.groep', ['groep' => $groep->id]) }}" class="btn"><span class="emoji">📝</span> Kies groepsgenoot</a>
-            @else
-                <p class="text-muted">Nog geen groep geselecteerd.</p>
-            @endif
+            <a href="{{ route('student.groepen')}}" class="btn btn-primary">Ga naar groepen</a>
         </section>
 
         <!-- Beheer Evaluaties -->
