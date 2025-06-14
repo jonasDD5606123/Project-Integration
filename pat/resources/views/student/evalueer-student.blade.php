@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Evaluatie invullen</title>
     @vite(['resources/js/app.js', 'resources/css/app.css'])
@@ -11,9 +11,9 @@
 
 <body>
     <div class="container mt-4">
-        <h2>Evaluatie: {{ $evaluatie->titel }}</h2>
+        <h2 class="mb-4 text-danger">Evaluatie: {{ $evaluatie->titel }}</h2>
 
-        <form action="{{ route('evaluatie.submit', ['evaluatie' => $evaluatie->id, 'student' => $gebruiker->id, 'groep' => $groep->id]) }}" method="POST">
+        <form method="POST" action="{{ route('evaluatie.opslaan', [$evaluatie->id, $groep->id]) }}">
             @csrf
 
             <input type="hidden" name="evaluator_id" value="{{ Auth::id() }}">
@@ -55,8 +55,8 @@
             @endforeach
 
             <div class="text-center">
-                <button type="submit" class="btn btn-success btn-lg">
-                    <i class="fas fa-check"></i> Evaluatie Indienen
+                <button type="submit" class="btn btn-danger btn-lg">
+                    <i class="fas fa-save"></i> Opslaan
                 </button>
                 <a href="{{ url()->previous() }}" class="btn btn-secondary btn-lg ms-2">Annuleren</a>
             </div>

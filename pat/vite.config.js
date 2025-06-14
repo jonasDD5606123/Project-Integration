@@ -15,8 +15,9 @@ export default defineConfig({
                 'resources/js/edit-evaluatie.js',
                 'resources/css/import-groepen.css',
                 'resources/css/dashboard-docent.css',
-                'resources/css/groepen-beheer.css',
-                'resources/css/student-beheer.css'
+                'resources/css/student-beheer.css',
+                'resources/css/Student/student-dashboard.css'
+
             ],
             refresh: true,
         }),
