@@ -4,24 +4,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Groepsgenoten Evaluatie</title>
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
 
 <body>
-    <!-- Step 2: Select Partner -->
-    <div id="partner-selection" class="step-container">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <h5>Stap 2: Kies je groepsgenoot</h5>
-
-            <!-- Back button -->
-            <button class="btn btn-outline-secondary btn-sm" onclick="window.history.back();">
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-danger">Stap 2: Kies je groepsgenoot</h2>
+            <a class="btn btn-outline-secondary btn-sm" href="{{ url()->previous() }}">
                 <i class="fas fa-arrow-left"></i> Terug naar groepen
-            </button>
+            </a>
         </div>
 
-        <div class="alert alert-info">
-            <strong>Groep:</strong> {{ $groep->naam }}<br />
+        <div class="alert alert-danger">
+            <strong>Groep:</strong> {{ $groep->naam }}<br>
             <strong>Vak:</strong> {{ $groep->vak->naam ?? 'Onbekend vak' }}
         </div>
 
@@ -29,27 +27,29 @@
 
         <div class="row">
             @forelse ($studenten as $student)
-            <div class="col-md-4 mb-3">
-                <div class="card border-success">
-                    <div class="card-body text-center">
-                        <div class="mb-3">
-                            <i class="fas fa-user-circle fa-3x text-success"></i>
+                <div class="col-md-4 mb-3">
+                    <div class="card border-danger text-center h-100">
+                        <div class="card-header bg-danger text-white">
+                            <i class="fas fa-user-circle fa-2x"></i>
                         </div>
-                        <h6 class="card-title">{{ $student->name }}</h6>
-                        <p class="card-text">
-                            <small class="text-muted">{{ $student->email }}</small>
-                        </p>
-                        <a href="{{ route('evaluatie.start', ['evaluatie' => $groep->evaluatie_id, 'student' => $student->id, 'groep' => $groep->id]) }}"
-                            class="btn btn-success btn-sm">
-                            Evalueer {{ explode(' ', $student->name)[0] ?? $student->name }}
-                        </a>
-
-
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <h5 class="card-title">{{ $student->name }}</h5>
+                                <p class="card-text">
+                                    <small class="text-muted">{{ $student->email }}</small>
+                                </p>
+                            </div>
+                            <a href="{{ route('evaluatie.start', ['evaluatie' => $groep->evaluatie_id, 'student' => $student->id, 'groep' => $groep->id]) }}"
+                                class="btn btn-danger btn-sm mt-3">
+                                Evalueer {{ explode(' ', $student->name)[0] ?? $student->name }}
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
             @empty
-            <p class="text-muted">Geen groepsgenoten beschikbaar om te evalueren.</p>
+                <div class="col-12">
+                    <p class="text-muted">Geen groepsgenoten beschikbaar om te evalueren.</p>
+                </div>
             @endforelse
         </div>
     </div>
