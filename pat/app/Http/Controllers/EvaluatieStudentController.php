@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Evaluatie;
 use App\Models\Gebruiker;
 use App\Models\Groep;
+use App\Models\Score;
 use App\Models\StudentGroepen;
+use Carbon\Carbon;
+use COM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -51,35 +54,61 @@ class EvaluatieStudentController extends Controller
     {
         $authUser = Auth::user();
 
-        // ✅ Check 1: Prevent self-evaluation
         if ($authUser->id === $student) {
             abort(403, 'Je kunt jezelf niet evalueren.');
         }
 
-        // ✅ Fetch the group and check if the authenticated user is in it
         $groep = Groep::with('studenten')->findOrFail($groepId);
 
-        $isUserInGroup = $groep->studenten->contains('id', $authUser->id);
-        if (!$isUserInGroup) {
+        if (!$groep->studenten->contains('id', $authUser->id)) {
             abort(403, 'Je maakt geen deel uit van deze groep.');
         }
 
-        // ✅ Optional: Check if the target gebruiker is also in the group
-        $isTargetInGroup = $groep->studenten->contains('id', $student);
-        if (!$isTargetInGroup) {
+        if (!$groep->studenten->contains('id', $student)) {
             abort(403, 'De geselecteerde student zit niet in deze groep.');
         }
 
-        // ✅ Optional: Load the evaluation
         $evaluatie = Evaluatie::with('criteria')->findOrFail($evaluatieId);
         $criteria = $evaluatie->criteria()->orderBy('id')->get();
 
-        // ✅ Continue to evaluation logic or show view
+        // ✅ Fetch existing scores by this evaluator for the selected student and criteria
+        $existingScores = Score::where('student_id_geevalueerd', $student)
+            ->where('student_id_evalueert', $authUser->id)
+            ->whereIn('criterium_id', $criteria->pluck('id'))
+            ->get()
+            ->keyBy('criterium_id'); // Makes it easy to access in the view
+
         return view('student.evalueer-student', [
             'evaluatie' => $evaluatie,
             'groep' => $groep,
             'gebruiker' => Gebruiker::findOrFail($student),
             'criteria' => $criteria,
+            'existingScores' => $existingScores,
         ]);
+    }
+
+    public function submit(Request $request, $evaluatieId, $studentId, $groepId)
+    {
+        $evaluatorId = $request->input('evaluator_id');
+        $scores = $request->input('scores', []);
+        $feedbacks = $request->input('feedbacks', []);
+
+        foreach ($scores as $criteriumId => $scoreValue) {
+            $feedback = $feedbacks[$criteriumId] ?? null;
+
+            Score::create([
+                'criterium_id' => $criteriumId,
+                'student_id_geevalueerd' => $studentId,
+                'student_id_evalueert' => $evaluatorId,
+                'score' => $scoreValue,
+                'feedback' => $feedback,
+                'gescoord_op' => Carbon::now(),
+            ]);
+        }
+
+        // Optionally, handle algemene feedback
+        // You could store it in a separate table if needed.
+
+        return redirect()->back()->with('success', 'Evaluatie succesvol ingediend.');
     }
 }

@@ -20,21 +20,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $user = Auth::user();
     if ($user->rol_id == 1) {
-        $groepenIds = StudentGroepen::where('student_id', $user->id)->get();
-        $groepen = Groep::with('vak', 'studenten')
-            ->whereIn('id', $groepenIds->pluck('groep_id'))
-            ->get();
-        return view('student.groepen', ['groepen' => $groepen]);
+        return view('student.dashboard');
     } else if ($user->rol_id == 2) {
         return view('docent.dashboard');
     }
 })->name("dashboard")->middleware(middleware: ['auth', 'verified']);
+
+Route::get('/groepen', [EvaluatieStudentController::class, 'groepen'])->name('student.groepen');
+
 
 Route::get('/student-groepen', [EvaluatieStudentController::class, 'groepen']);
 Route::get('/student-groep/{groep}/', [EvaluatieStudentController::class, 'leden'])->name('student.groep');
 Route::get('/evaluatie/start/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'evalueerPersoon'])
     ->name('evaluatie.start');
 Route::post('/evaluatie/submit/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'storeEvaluatie'])->name('evaluatie.submit');
+Route::post('/evaluatie/{evaluatie}/student/{student}/groep/{groep}/submit', [EvaluatieStudentController::class, 'submit'])->name('evaluatie.submit');
 
 
 Route::middleware('auth', DocentMiddleware::class)->group(function () {
@@ -60,11 +60,8 @@ Route::middleware('auth', DocentMiddleware::class)->group(function () {
     Route::post('/vakken/link', [VakController::class, 'link'])->name('vakken.link');
     Route::delete('/vakken/unlink', [VakController::class, 'unlink'])->name('vakken.unlink');
     Route::post('/api/evaluatie', [EvaluatieController::class, 'store'])->name('evaluatie.store');
-    // Page to manage classes & add students (shows the blade view)
-    // Show all classes with students
     Route::get('/klas/manage', [KlasController::class, 'manage'])->name('klas.manage');
 
-    // Add student to a class via form POST
     Route::post('/klas/add-student', [KlasController::class, 'addStudent'])->name('klas.addStudent');
 });
 
