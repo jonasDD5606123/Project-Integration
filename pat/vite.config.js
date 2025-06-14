@@ -5,7 +5,7 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/css/app.css', 
+                'resources/css/app.css',
                 'resources/js/app.js',
                 'resources/js/import-groepen.js',
                 'resources/js/create-evaluatie.js',
@@ -17,6 +17,7 @@ export default defineConfig({
                 'resources/css/dashboard-docent.css',
                 'resources/css/student-beheer.css',
                 'resources/css/evaluatie-docent.css',
+                'resources/css/groepen-beheer.css',
             ],
             refresh: true,
         }),

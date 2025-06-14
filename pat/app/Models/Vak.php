@@ -33,4 +33,9 @@ class Vak extends Model
     {
         return $this->hasMany(Klas::class, 'vak_id');
     }
+
+    public function docenten()
+    {
+        return $this->belongsToMany(Gebruiker::class, 'docenten_vakken', 'vak_id', 'docent_id');
+    }
 }
