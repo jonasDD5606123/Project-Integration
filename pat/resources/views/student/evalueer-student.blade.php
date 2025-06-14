@@ -13,7 +13,7 @@
     <div class="container mt-4">
         <h2 class="mb-4 text-danger">Evaluatie: {{ $evaluatie->titel }}</h2>
 
-        <form method="POST" action="{{ route('evaluatie.opslaan', [$evaluatie->id, $groep->id]) }}">
+        <form method="POST"  action="{{ route('evaluatie.submit', ['evaluatie' => $evaluatie->id, 'student' => $gebruiker->id, 'groep' => $groep->id]) }}">
             @csrf
 
             <input type="hidden" name="evaluator_id" value="{{ Auth::id() }}">
