@@ -21,6 +21,16 @@ class EvaluatieController extends Controller
             'criteria.*.min_waarde' => 'required|numeric',
         ]);
 
+        foreach ($validated['criteria'] as $index => $item) {
+            if ($item['min_waarde'] >= $item['max_waarde']) {
+                return back()
+                    ->withErrors([
+                        "criteria.$index.min_waarde" => 'De minimale waarde moet kleiner zijn dan de maximale waarde.',
+                    ])
+                    ->withInput();
+            }
+        }
+
         $evaluatie = Evaluatie::create([
             'titel' => $validated['titel'],
             'beschrijving' => $validated['beschrijving'],

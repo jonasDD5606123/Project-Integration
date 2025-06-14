@@ -14,19 +14,19 @@ function addCriterium() {
     const div = document.createElement('div');
     div.classList.add('criterium-group', 'mb-3');
     div.innerHTML = `
-        <div class="mb-3">
-            <label class="form-label">Criterium</label>
-            <input type="text" class="form-control in__criterium" name="criterium[]" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Max Waarde</label>
-            <input type="number" class="form-control in__min" name="max_waarde[]" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Min Waarde</label>
-            <input type="number" class="form-control in__max" name="min_waarde[]" required>
-        </div>
-    ` ;
+    <div class="mb-3">
+        <label class="form-label">Criterium</label>
+        <input type="text" class="form-control in__criterium" name="criterium[]" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Max Waarde</label>
+        <input type="number" class="form-control in__max" name="max_waarde[]" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Min Waarde</label>
+        <input type="number" class="form-control in__min" name="min_waarde[]" required>
+    </div>
+`;
     const btn = document.createElement('button');
     btn.classList.add('btn', 'btn-danger');
     btn.attributes.type = 'button';

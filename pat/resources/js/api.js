@@ -8,7 +8,7 @@ export async function postStudentKlas(students, klasNaam, vakId, token = null) {
     const url = '/studenten-klas';
     token = token || getCsrfToken();
     console.log('CSRF Token (postStudentKlas):', token);
-    const jsonData = JSON.stringify({students, klasNaam, vakId});
+    const jsonData = JSON.stringify({ students, klasNaam, vakId });
     const compressedData = Pako.gzip(jsonData);
 
     try {
@@ -65,27 +65,23 @@ export async function postSutdentGroups(groepen, vakId, evaluatieId, token = nul
         throw new Error('Response van de server is in verkeerde formaat.');
     }
 
-    return data;    
+    return data;
 }
 
-export async function postEvaluatie(titel, beschrijving, deadline, vakId, criteria, token = null) {
+export async function postEvaluatie(titel, beschrijving, deadline, vakId, criteria) {
     await fetch('/sanctum/csrf-cookie', { credentials: 'include' });
 
-    token = token || getCsrfToken();
-    console.log('CSRF Token (postEvaluatie):', token);
-
-    const headers = {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    };
-    if (token) {
-        headers['X-CSRF-TOKEN'] = token;
-    }
+    const token = getCsrfToken();
 
     const response = await fetch('/api/evaluatie', {
         method: 'POST',
-        headers: headers,
         credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-CSRF-TOKEN': token,
+
+        },
         body: JSON.stringify({
             titel,
             beschrijving,
@@ -94,5 +90,6 @@ export async function postEvaluatie(titel, beschrijving, deadline, vakId, criter
             criteria
         })
     });
+
     return await response.json();
 }
