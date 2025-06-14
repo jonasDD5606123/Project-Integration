@@ -30,13 +30,16 @@ Route::get('/', function () {
 })->name("dashboard")->middleware(middleware: ['auth', 'verified']);
 
 
-Route::get('/student-groepen', [EvaluatieStudentController::class, 'groepen'])->name('student.groepen');
-Route::get('/student-groep/{groep}/', [EvaluatieStudentController::class, 'leden'])->name('student.groep');
-Route::get('/evaluatie/start/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'evalueerPersoon'])
-    ->name('evaluatie.start');
-Route::post('/evaluatie/submit/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'storeEvaluatie'])->name('evaluatie.submit');
-Route::post('/evaluatie/{evaluatie}/student/{student}/groep/{groep}/submit', [EvaluatieStudentController::class, 'submit'])->name('evaluatie.submit');
-Route::get('/student/evaluations', [EvaluatieStudentController::class, 'index'])->name('student.evaluations');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/student-groepen', [EvaluatieStudentController::class, 'groepen'])->name('student.groepen');
+    Route::get('/student-groep/{groep}/', [EvaluatieStudentController::class, 'leden'])->name('student.groep');
+    Route::get('/evaluatie/start/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'evalueerPersoon'])
+        ->name('evaluatie.start');
+    Route::post('/evaluatie/submit/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'storeEvaluatie'])->name('evaluatie.submit');
+    Route::post('/evaluatie/{evaluatie}/student/{student}/groep/{groep}/submit', [EvaluatieStudentController::class, 'submit'])->name('evaluatie.submit');
+    Route::get('/student/evaluations', [EvaluatieStudentController::class, 'index'])->name('student.evaluations');
+});
 
 Route::middleware('auth', DocentMiddleware::class)->group(function () {
     Route::get('/groepen', [DocentController::class, 'groepen'])->name('docent.groepen');
