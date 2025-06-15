@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Evaluatie invullen</title>
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
-</head>
+@section('title', 'Dashboard')
 
-<body>
-    @include(view: 'partials.header')
-
+@section('content')
+    <h2 class="text-2xl font-semibold mb-4">Welcome to the dashboard</h2>
     <div class="container mt-4">
         <h2 class="mb-4 text-danger">Evaluatie: {{ $evaluatie->titel }}</h2>
 
@@ -64,6 +56,4 @@
             </div>
         </form>
     </div>
-</body>
-
-</html>
+@endsection
