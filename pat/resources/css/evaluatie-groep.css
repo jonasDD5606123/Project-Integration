@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f0f4f8;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto 80px;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  min-height: 100px;
+  background: linear-gradient(90deg, #00b09b, #96c93d);
+  color: white;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.logout-form {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+}
+
+.btn-back {
+  background: rgba(255 255 255 / 0.25);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn-back:hover {
+  background: rgba(255 255 255 / 0.5);
+}
+
+/* Titel */
+h2 {
+  color: #00b09b;
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* Tabellen */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+}
+
+thead {
+  background: #00b09b;
+  color: white;
+}
+
+thead th, tfoot th {
+  padding: 12px 16px;
+  font-size: 1rem;
+  text-align: left;
+}
+
+tbody td {
+  padding: 12px 16px;
+  border-top: 1px solid #eee;
+}
+
+tbody tr:hover {
+  background-color: #f9fdfd;
+}
+
+tfoot {
+  background-color: #f4f4f4;
+}
+
+/* Knoppen */
+.btn-group {
+  margin-bottom: 30px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn,
+.btn-outline-secondary {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn {
+  background: #00b09b;
+  color: white;
+}
+
+.btn:hover {
+  background: #019180;
+  box-shadow: 0 4px 10px rgba(1, 145, 128, 0.3);
+}
+
+.btn-outline-secondary {
+  background: transparent;
+  border: 2px solid #00b09b;
+  color: #00b09b;
+}
+
+.btn-outline-secondary:hover {
+  background: #00b09b;
+  color: white;
+}
+
+.matrix-scroll {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.matrix-scroll table {
+  min-width: 800px;
+}

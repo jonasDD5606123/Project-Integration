@@ -21,7 +21,7 @@ body.groepen-body {
     color: white;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .header h1 {
@@ -68,7 +68,7 @@ body.groepen-body {
     outline: none;
 }
 
-main.container > div {
+main.container>div {
     display: flex;
     gap: 30px;
     width: 100%;
@@ -80,7 +80,7 @@ main.container > div {
     background: white;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
     display: flex;
     flex-direction: column;
     height: 85vh;
@@ -100,6 +100,35 @@ main.container > div {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
+}
+
+/* ✅ AANGEPAST */
+.editable-input {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 4px 8px;
+    border: 2px solid #00b09b;
+    border-radius: 6px;
+    background: #fff;
+    color: #333;
+    transition: border 0.2s ease;
+    flex: 1;
+    width: auto;
+    margin-right: 10px;
+}
+
+/* ✅ NIEUW */
+.editable-wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.editable-input:focus {
+    outline: none;
+    border-color: #019180;
+    box-shadow: 0 0 4px rgba(0, 144, 128, 0.4);
 }
 
 .btn.small {
@@ -150,7 +179,7 @@ main.container > div {
     border-radius: 6px;
     cursor: grab;
     user-select: none;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .student:active {
@@ -226,7 +255,7 @@ main.container > div {
     padding: 15px;
     background: white;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
 
 /* Aangepast: raster met 4 kolommen */
@@ -246,16 +275,23 @@ main.container > div {
     height: 350px;
 }
 
+/* ✅ AANGEPAST */
 .column-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    gap: 10px;
 }
 
 .editable-title {
     font-weight: 600;
     font-size: 1.1rem;
+}
+
+.column-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* ruimte tussen iconen */
 }
 
 .column-actions span {
@@ -333,6 +369,11 @@ main.container > div {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

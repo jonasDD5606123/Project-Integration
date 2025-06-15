@@ -14,12 +14,12 @@
             <h1>Welkom <span>{{ auth()->user()->voornaam }}</span></h1>
         </div>
 
-     <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
-        @csrf
-        <button type="submit" class="btn-back">
-            🚪 Uitloggen
-        </button>
-    </form>
+        <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
+            @csrf
+            <button type="submit" class="btn-back">
+                🚪 Uitloggen
+            </button>
+        </form>
     </header>
 
     <main class="container">

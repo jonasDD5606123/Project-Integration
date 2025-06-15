@@ -115,76 +115,70 @@ document.addEventListener('DOMContentLoaded', () => {
     ev.currentTarget.classList.remove('drag-over');
   };
 
-  window.addGroup = function () {
-    groupCount++;
-    const row = document.getElementById('kanbanRow');
-    if (!row) return;
+window.addGroup = function () {
+  groupCount++;
+  const row = document.getElementById('kanbanRow');
+  if (!row) return;
 
-    const addGroupBtn = row.lastElementChild;
+  const addGroupBtn = row.lastElementChild;
 
-    const column = document.createElement('div');
-    column.className = 'col-12 col-sm-6 col-md-4 col-lg-3';
-    column.innerHTML = `
-      <div class="kanban-column card h-100">
-        <div class="card-header kanban-column-header d-flex justify-content-between align-items-center">
-          <span class="editable-title">Groep ${groupCount}</span>
-          <div>
-            <a href="javascript:void(0);" class="edit-icon text-primary me-2" onclick="editGroupName(this)">
-              <i class="bi bi-pencil"></i>
-            </a>
-            <a href="javascript:void(0);" class="delete-icon text-danger" onclick="deleteGroup(this)">
-              <i class="bi bi-trash"></i>
-            </a>
-          </div>
-        </div>
-        <div class="card-body kanban-column-body drop-zone"
-             id="group_new_${groupCount}"
-             data-group-id=""
-             ondrop="drop(event)"
-             ondragover="allowDrop(event)">
-        </div>
+  const column = document.createElement('div');
+  column.className = 'kanban-column';
+  column.innerHTML = `
+    <div class="column-header">
+      <span class="editable-title">Groep ${groupCount}</span>
+      <div class="column-actions">
+        <span onclick="editGroupName(this)">✏️</span>
+        <span onclick="deleteGroup(this)">🗑️</span>
       </div>
-    `;
-    row.insertBefore(column, addGroupBtn);
-  };
+    </div>
+    <div class="column-body drop-zone"
+         id="group_new_${groupCount}"
+         data-group-id=""
+         ondrop="drop(event)"
+         ondragover="allowDrop(event)">
+    </div>
+  `;
+  row.insertBefore(column, addGroupBtn);
+};
 
-  window.editGroupName = function (icon) {
-    // Zoek de span.editable-title binnen de parent
-    const parent = icon.closest('.kanban-column-header');
-    const titleSpan = parent.querySelector('.editable-title');
-    if (!titleSpan) return;
 
-    const currentName = titleSpan.textContent;
+ window.editGroupName = function (icon) {
+  const parent = icon.closest('.column-header');
+  const titleSpan = parent.querySelector('.editable-title');
+  if (!titleSpan) return;
 
-    // Maak een input aan
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.value = currentName;
-    input.className = 'form-control form-control-sm';
-    input.style.maxWidth = '150px';
+  const currentName = titleSpan.textContent;
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.value = currentName;
+  input.className = 'editable-input';
 
-    // Vervang alleen de span door input
-    titleSpan.replaceWith(input);
+  // Wrap de input in een div voor betere layout
+  const inputWrapper = document.createElement('div');
+  inputWrapper.className = 'editable-wrapper';
+  inputWrapper.appendChild(input);
 
-    input.focus();
+  titleSpan.replaceWith(inputWrapper);
+  input.focus();
 
-    function save() {
-      if (input.parentNode) {
-        const newSpan = document.createElement('span');
-        newSpan.className = 'editable-title';
-        newSpan.textContent = input.value.trim() || currentName;
-        input.replaceWith(newSpan);
-      }
+  function save() {
+    const val = input.value.trim() || currentName;
+    const newSpan = document.createElement('span');
+    newSpan.className = 'editable-title';
+    newSpan.textContent = val;
+    inputWrapper.replaceWith(newSpan);
+  }
+
+  input.addEventListener('blur', save);
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      save();
     }
+  });
+};
 
-    input.addEventListener('blur', save);
-    input.addEventListener('keydown', e => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        save();
-      }
-    });
-  };
 
   window.goToSummary = function () {
     const groups = Array.from(document.querySelectorAll('.drop-zone')).map((zone, i) => {
@@ -315,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Pas je deleteGroup functie aan:
   window.deleteGroup = function (icon) {
-    const col = icon.closest('.col-12, .col-sm-6, .col-md-4, .col-lg-3');
+    const col = icon.closest('.kanban-column');
     if (!col) return;
     const dropZone = col.querySelector('.drop-zone');
     let groupId = dropZone.getAttribute('data-group-id');
