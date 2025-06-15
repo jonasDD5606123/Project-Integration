@@ -48,7 +48,7 @@
                 <div class="form-actions">
                     <button type="submit" class="btn-opslaan">Wijzig wachtwoord</button>
                 </div>
+                
             </form>
         </div>
-    @endif
 @endsection
