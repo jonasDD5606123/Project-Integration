@@ -9,48 +9,44 @@
 </head>
 
 <body>
-
     <header class="header" role="banner">
-        <h1 class="title">
-            <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
-        </h1>
-        <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
-            @csrf
-            <button type="submit" class="btn-back">
-                🚪 Uitloggen
-            </button>
+        <div class="header-content">
+            <h1 class="title">
+                Welkom, <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
+            </h1>
+            <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
+                @csrf
+                <button type="submit" class="btn-back">🚪 Uitloggen</button>
+            </form>
+        </div>
     </header>
 
     <main class="container" role="main">
-        <h2>Student Dashboard</h2>
-        <div class="dashboard-grid">
-            <!-- Beheer Evaluaties -->
-            <section class="section" aria-labelledby="beheer-evaluaties-title">
-                <h4 id="beheer-evaluaties-title">Beheer Evaluaties</h4>
-                <p class="text-muted">
-                    Bekijk of wijzig eerder ingevulde evaluaties.
-                </p>
-                <a href="{{ route('student.groepen')}}" class="btn btn-primary">Ga naar groepen</a>
+        <h2 class="dashboard-title">Student Dashboard</h2>
+
+        <div class="dashboard-sections">
+            <!-- Section 1 -->
+            <section class="section" aria-labelledby="groepen-title">
+                <h4 id="groepen-title">Beheer Groepen</h4>
+                <p class="text-muted">Bekijk of wijzig je groepen.</p>
+                <a href="{{ route('student.groepen') }}" class="btn btn-primary">Ga naar groepen</a>
             </section>
 
-            <!-- Beheer Evaluaties -->
-            <section class="section" aria-labelledby="beheer-evaluaties-title">
-                <h4 id="beheer-evaluaties-title">Beheer Evaluaties</h4>
-                <p class="text-muted">
-                    Bekijk of wijzig eerder ingevulde evaluaties.
-                </p>
-                <a href="{{route('student.evaluations')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
+            <!-- Section 2 -->
+            <section class="section" aria-labelledby="evaluaties-title">
+                <h4 id="evaluaties-title">Beheer Evaluaties</h4>
+                <p class="text-muted">Bekijk of wijzig eerder ingevulde evaluaties.</p>
+                <a href="{{ route('student.evaluations') }}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
             </section>
-            <!-- Profiel / Hulp -->
-            <section class="section" aria-labelledby="profiel-hulp-title">
-                <h4 id="profiel-hulp-title">Profiel / Hulp</h4>
-                <p class="text-muted">
-                    Bekijk je profiel of krijg hulp bij het invullen van evaluaties.
-                </p>
-                <a href="{{route('profile.edit')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
+
+            <!-- Section 3 -->
+            <section class="section" aria-labelledby="profiel-title">
+                <h4 id="profiel-title">Profiel / Hulp</h4>
+                <p class="text-muted">Bekijk je profiel of krijg hulp bij het invullen van evaluaties.</p>
+                <a href="{{ route('profile.edit') }}" class="btn"><span class="emoji">👤</span> Bekijk profiel</a>
             </section>
+        </div>
     </main>
-
 </body>
 
 </html>
