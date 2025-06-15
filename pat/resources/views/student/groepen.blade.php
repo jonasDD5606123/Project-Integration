@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Groepen Selectie</title>
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
-</head>
+@section('title', 'Dashboard')
 
-
-<body class="display d-flex flex-column">
-    @include('partials.header')
+@section('content')
+    <h2 class="text-2xl font-semibold mb-4">Welcome to the dashboard</h2>
     <div class="container mt-4">
 
         <h2 class="mb-4 text-danger">Stap 1: Kies je groep</h2>
@@ -24,7 +16,7 @@
                         <div class="card-header bg-danger text-white">
                             {{ $groep->naam }}
                         </div>
-                        <div class="card-body">
+                        <div class="card-body ">
                             <p class="card-text">
                                 <strong>Vak:</strong> {{ $groep->vak->naam }}<br>
                                 <strong>Evaluatie:</strong> {{ $groep->evaluatie->titel }}<br>
@@ -39,6 +31,4 @@
             @endforeach
         </div>
     </div>
-</body>
-
-</html>
+@endsection

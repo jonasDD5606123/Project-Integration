@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
+@extends('layouts.app')
 
+@section('title', 'Dashboard')
 
-<body>
-    @include('partials.header')
+@section('content')
+    <h2 class="text-2xl font-semibold mb-4">Welcome to the dashboard</h2>
     <h1>Evaluaties - Mijn Groepen</h1>
 
     <table border="1" cellpadding="6" cellspacing="0">
@@ -45,4 +45,4 @@
         </tbody>
     </table>
 
-</body>
+@endsection
