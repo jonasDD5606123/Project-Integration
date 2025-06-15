@@ -5,7 +5,7 @@
 @section('content')
     <main class="page-content">
         <div class="page-header">
-            <h2>Stap 2: Kies je groepsgenoot</h2>
+            <h2 class="page-title">Stap 2: Kies je groepsgenoot</h2>
             <a href="{{ url()->previous() }}" class="btn-back">← Terug naar groepen</a>
         </div>
 
@@ -29,9 +29,7 @@
                     $isFullyEvaluated = in_array($student->id, $fullyEvaluatedStudentIds ?? []);
                 @endphp
                 <div class="student-card">
-                    <div class="student-card-header">
-                        <i class="fas fa-user-circle fa-2x"></i>
-                    </div>
+
                     <div class="student-card-body">
                         <h4>{{ $student->name }}</h4>
                         <p class="student-email">{{ $student->email }}</p>
