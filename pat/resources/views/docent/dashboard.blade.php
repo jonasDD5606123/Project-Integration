@@ -36,9 +36,14 @@
         </section>
 
         <section class="card">
-            <h2>Rapportering</h2>
+            <h2>docent acount aanmake</h2>
             <p>Rapporten van klassen en groepen bekijken.</p>
-            <a href="/docent/raporten" class="btn">Bekijk Details</a>
+            <a href="/create-docent" class="btn">Bekijk Details</a>
+        </section>
+        <section class="card">
+            <h2>Student acount aanmaken</h2>
+            <p>Rapporten van klassen en groepen bekijken.</p>
+            <a href="/create-student" class="btn">Bekijk Details</a>
         </section>
     </main>
 </body>

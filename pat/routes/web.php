@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/evaluatie/submit/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'storeEvaluatie'])->name('evaluatie.submit');
     Route::post('/evaluatie/{evaluatie}/student/{student}/groep/{groep}/submit', [EvaluatieStudentController::class, 'submit'])->name('evaluatie.submit');
     Route::get('/student/evaluations', [EvaluatieStudentController::class, 'index'])->name('student.evaluations');
-        Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+    Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     Route::get('/profile/password', [ProfileController::class, 'editPassword'])->name('profile.edit');
 });
 
@@ -70,8 +70,12 @@ Route::middleware('auth', DocentMiddleware::class)->group(function () {
     Route::get('/docent/evaluaties/{evaluatie}/export', [EvaluatieController::class, 'exportExcel'])->name('evaluatie.export');
     Route::get('/create-student', [RegisteredUserController::class, 'create'])->name('docent.student');
     Route::post('/create-student', [RegisteredUserController::class, 'store'])->name('create-student');
-});
+    // Show the docent creation form
+    Route::get('/create-docent', [RegisteredUserController::class, 'createDocent'])->name('docent.create');
 
+    // Handle the docent creation POST
+    Route::post('/create-docent', [RegisteredUserController::class, 'storeDocent'])->name('create-docent');
+});
 // For API route (recommended)
 
 

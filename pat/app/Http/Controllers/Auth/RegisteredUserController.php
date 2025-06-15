@@ -86,4 +86,37 @@ class RegisteredUserController extends Controller
 
         return redirect('/create-student'); // Or wherever you want to redirect
     }
+
+    public function createDocent(): \Illuminate\View\View
+    {
+        return view('docent.create-docent');
+    }
+
+    public function storeDocent(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'voornaam' => ['required', 'string', 'max:255'],
+            'achternaam' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:gebruikers'],
+            // No password validation, since password is generated
+        ]);
+
+        // Always generate a random password
+        $password = \Illuminate\Support\Str::random(12);
+
+        $gebruiker = \App\Models\Gebruiker::create([
+            'r_nummer' => null, // Docenten hebben geen r_nummer
+            'voornaam' => $request->voornaam,
+            'achternaam' => $request->achternaam,
+            'email' => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($password),
+            'rol_id' => 2 // Always set to 2 for docent
+        ]);
+
+        event(new \Illuminate\Auth\Events\Registered($gebruiker));
+
+        // Optionally: dispatch(new MailUserPasswordJob($gebruiker, $password));
+
+        return redirect('/create-docent')->with('success', 'Docent succesvol toegevoegd!');
+    }
 }
