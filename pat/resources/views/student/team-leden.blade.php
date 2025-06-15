@@ -6,7 +6,6 @@
     <main class="page-content">
         <div class="page-header">
             <h2 class="page-title">Stap 2: Kies je groepsgenoot</h2>
-            <a href="{{ url()->previous() }}" class="btn-back">← Terug naar groepen</a>
         </div>
 
 
@@ -32,9 +31,9 @@
 
                     <div class="student-card-body">
                         <h4>{{ $student->name }}</h4>
-                        <p class="student-email">{{ $student->email }}</p>
+                        <p class="student-email">{{ $student->voornaam }} {{ $student->achternaam }}</p>
                         <a href="{{ route('evaluatie.start', ['evaluatie' => $groep->evaluatie_id, 'student' => $student->id, 'groep' => $groep->id]) }}"
-                            class="btn {{ $isFullyEvaluated ? 'btn-success' : 'btn-danger' }}">
+                            class="btn btn-evalueer {{ $isFullyEvaluated ? 'btn-success' : 'btn-danger' }}">
                             @if ($isFullyEvaluated)
                                 ✅ Evaluatie bewerken
                             @else
