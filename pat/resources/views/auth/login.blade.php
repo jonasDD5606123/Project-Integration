@@ -70,7 +70,6 @@
             <a href="{{ route('password.request') }}">Wachtwoord vergeten?</a>
             @endif
             <br>
-            <a href="/register">Nog geen account? Registreer nu</a>
         </div>
     </div>
 
