@@ -36,8 +36,8 @@
         </section>
 
         <section class="card">
-            <h2>Studenten</h2>
-            <p>Klassen toevoegen, beheren, onderverdelen in groepen, vakken toevoegen.</p>
+            <h2>Rapportering van evaluaties</h2>
+            <p>Je kan de resultaten van de evaluaties van elke groep bekijken en opvolgen.</p>
             <a href="/docent/raporten" class="btn">Bekijk Details</a>
         </section>
 
@@ -47,7 +47,7 @@
             <p>Rapporten van klassen en groepen bekijken.</p>
             <a href="/create-docent" class="btn">Bekijk Details</a>
         </section>
-        
+
         <section class="card">
             <h2>Student account aanmaken</h2>
             <p>Rapporten van klassen en groepen bekijken.</p>
