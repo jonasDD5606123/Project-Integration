@@ -36,10 +36,18 @@
         </section>
 
         <section class="card">
+            <h2>Studenten</h2>
+            <p>Klassen toevoegen, beheren, onderverdelen in groepen, vakken toevoegen.</p>
+            <a href="/docent/raporten" class="btn">Bekijk Details</a>
+        </section>
+
+
+        <section class="card">
             <h2>docent acount aanmake</h2>
             <p>Rapporten van klassen en groepen bekijken.</p>
             <a href="/create-docent" class="btn">Bekijk Details</a>
         </section>
+        
         <section class="card">
             <h2>Student acount aanmaken</h2>
             <p>Rapporten van klassen en groepen bekijken.</p>
