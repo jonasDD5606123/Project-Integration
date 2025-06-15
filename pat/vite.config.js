@@ -22,7 +22,9 @@ export default defineConfig({
                 'resources/css/import-klas.css',
                 'resources/css/groepen.css',
                 'resources/css/klassenbeheer.css',
-                'resources/css/evaluaties.css'
+                'resources/css/evaluaties.css',
+                'resources/css/evaluatie-groep.css',
+                'resources/css/vakkenbeheer.css',
             ],
             refresh: true,
         }),
