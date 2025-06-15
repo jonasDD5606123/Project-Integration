@@ -37,6 +37,8 @@
             <input type="password" name="password_confirmation" id="password_confirmation" required>
         </div>
 
-        <button type="submit">Wijzig wachtwoord</button>
+        <button type="submit" class="btn btn-custom w-100" style="background: linear-gradient(90deg, #4f8cff 0%, #6edb8f 100%); color: #fff; font-weight: bold; border: none; border-radius: 8px; padding: 0.75rem 1.5rem; box-shadow: 0 2px 8px rgba(79,140,255,0.15); transition: background 0.3s;">
+            <span style="margin-right: 0.5em;">🔒</span>Wijzig wachtwoord
+        </button>
     </form>
 @endsection
