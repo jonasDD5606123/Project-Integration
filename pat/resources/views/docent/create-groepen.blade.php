@@ -16,7 +16,7 @@
         </div>
         <div class="logout-form">
             @csrf
-        <a href="{{ route('docent.studentenbeheer') }}" class="btn-back">← Terug</a>
+            <a href="{{ route('docent.studentenbeheer') }}" class="btn-back">← Terug</a>
         </div>
     </header>
 
@@ -35,9 +35,9 @@
                 <div id="studentList" class="student-list" ondrop="dropSidebar(event)" ondragover="allowDropSidebar(event)">
                     @php
                         $studentenInGroepen = collect();
-                        if(isset($groepen)) {
-                            foreach($groepen as $groep) {
-                                if(isset($groep->studenten)) {
+                        if (isset($groepen)) {
+                            foreach ($groepen as $groep) {
+                                if (isset($groep->studenten)) {
                                     $studentenInGroepen = $studentenInGroepen->merge($groep->studenten->pluck('r_nummer'));
                                 }
                             }
@@ -111,6 +111,7 @@
 
                 <!-- Kanban board -->
                 <div class="kanban-board">
+                    <div id="feedback"></div>
                     <div class="kanban-columns" id="kanbanRow">
                         @if(isset($groepen))
                             @foreach($groepen as $groep)
