@@ -14,7 +14,11 @@
         <h1 class="title">
             <span class="user__voornaam">{{ Auth::user()->name }}</span>
         </h1>
-        <a href="{{ url('/') }}" class="btn-back" role="button" aria-label="Terug naar home">← Terug</a>
+        <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
+            @csrf
+            <button type="submit" class="btn-back">
+                🚪 Uitloggen
+            </button>
     </header>
 
     <main class="container" role="main">
