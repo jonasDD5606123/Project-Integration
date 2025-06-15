@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-        <h2>Evaluaties</h2>
+        <h2 class="page-title">Evaluaties</h2>
 
         @if(count($evaluaties))
             <div class="dashboard-grid">

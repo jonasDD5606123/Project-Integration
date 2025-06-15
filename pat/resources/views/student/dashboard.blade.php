@@ -5,7 +5,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Student Dashboard</title>
-    @vite(['resources/js/app.js', 'resources/css/Student/student-dashboard.css'])
+    @vite(['resources/js/app.js', 'resources/css/Student/student-dashboard.css', 'resources/css/dashboard-docent.css'])
+    <style>
+        .header {
+            background: linear-gradient(90deg, #d32f2f, #f44336);
+        }
+    </style>
 </head>
 
 <body>
@@ -26,24 +31,24 @@
 
         <div class="dashboard-sections">
             <!-- Section 1 -->
-            <section class="section" aria-labelledby="groepen-title">
+            <section class="card" aria-labelledby="groepen-title">
                 <h4 id="groepen-title">Beheer Groepen</h4>
                 <p class="text-muted">Bekijk of wijzig je groepen.</p>
                 <a href="{{ route('student.groepen') }}" class="btn btn-primary">Ga naar groepen</a>
             </section>
 
             <!-- Section 2 -->
-            <section class="section" aria-labelledby="evaluaties-title">
+            <section class="card" aria-labelledby="evaluaties-title">
                 <h4 id="evaluaties-title">Beheer Evaluaties</h4>
                 <p class="text-muted">Bekijk of wijzig eerder ingevulde evaluaties.</p>
                 <a href="{{ route('student.evaluations') }}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
             </section>
 
             <!-- Section 3 -->
-            <section class="section" aria-labelledby="profiel-title">
+            <section class="card" aria-labelledby="profiel-title">
                 <h4 id="profiel-title">Profiel / Hulp</h4>
-                <p class="text-muted">Bekijk je profiel of krijg hulp bij het invullen van evaluaties.</p>
-                <a href="{{ route('profile.edit') }}" class="btn"><span class="emoji">👤</span> Bekijk profiel</a>
+                <p class="text-muted">Wijzig hier je wachtwoord.</p>
+                <a href="{{ route('profile.edit') }}" class="btn"><span class="emoji">👤</span> Wijzig wachtwoord</a>
             </section>
         </div>
     </main>

@@ -5,7 +5,7 @@
 @section('content')
 
     <div class="container">
-        <h2>Evaluatie: {{ $evaluatie->titel }}</h2>
+        <h2 class="page-title">Evaluatie: {{ $evaluatie->titel }}</h2>
 
         <form method="POST" action="{{ route('evaluatie.submit', ['evaluatie' => $evaluatie->id, 'student' => $gebruiker->id, 'groep' => $groep->id]) }}">
             @csrf
@@ -18,7 +18,7 @@
                     $existingFeedback = $existingScores[$criterium->id]->feedback ?? '';
                 @endphp
 
-                <div class="section">
+                <div class="section section-evaluation">
                     <h4>{{ $criterium->criterium }}</h4>
 
                     <label for="score_{{ $criterium->id }}">Score ({{ $criterium->min_waarde }} - {{ $criterium->max_waarde }})</label>
@@ -43,12 +43,12 @@
                         name="feedbacks[{{ $criterium->id }}]"
                         rows="3"
                         placeholder="Geef hier je feedback...">
-                                {{ old('feedbacks.' . $criterium->id, $existingFeedback) }}</textarea>
+                                                                {{ old('feedbacks.' . $criterium->id, $existingFeedback) }}</textarea>
                 </div>
             @endforeach
 
             <div class="form-actions">
-                <button type="submit" class="btn">
+                <button type="submit" class="btn-opslaan">
                     💾 Opslaan
                 </button>
                 <a href="{{ url()->previous() }}" class="btn-outline-secondary">

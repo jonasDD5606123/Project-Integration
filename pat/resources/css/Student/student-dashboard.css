@@ -15,7 +15,6 @@ body {
     width: 90%;
     max-width: 1100px;
     margin: 40px auto 80px;
-
     gap: 30px 40px;
 }
 
@@ -57,7 +56,7 @@ header {
     min-height: 100px;
     background: linear-gradient(90deg, #d32f2f, #f44336);
     color: white;
-    padding: 40px 60px;
+    padding: 20px 30px;
     box-sizing: border-box;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -123,7 +122,7 @@ h2 {
     color: #d32f2f;
     font-weight: 700;
     margin-bottom: 40px;
-    font-size: 2.5rem;
+    font-size: 2.0rem;
     text-align: center;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     grid-column: 1 / -1;
@@ -134,15 +133,23 @@ h2 {
     background-color: #fff;
     border: 1px solid #ddd;
     padding: 1rem;
+    margin: 2rem auto;
     border-radius: 8px;
     flex: 1 1 30%;
-    /* allows 3 in a row with space */
     min-width: 250px;
 }
 
 .section:hover {
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
     transform: translateY(-6px);
+}
+
+.logout-form {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .section h4 {
@@ -181,16 +188,44 @@ a.btn:focus {
     outline: none;
 }
 
+.form-actions .btn-opslaan {
+    font-size: 1rem;
+    margin: 10px;
+    padding: 14px 36px;
+    background-color: #d32f2f;
+    color: white;
+    border-radius: 40px;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(211, 47, 47, 0.5);
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.section-evaluation {
+    max-width: 800px;
+}
+
+a.btn-evalueer {
+    min-width: 220px;
+    text-align: center;
+
+}
+
+.form-actions .btn-opslaan:hover,
+.form-actions .btn-opslaan:focus {
+    background-color: #b71c1c;
+    transform: scale(1.03);
+}
+
 .btn-outline-secondary {
     border: 2px solid #e57373;
     background: transparent;
     color: #e57373;
-    border-radius: 30px;
-    padding: 10px 30px;
-    font-weight: 600;
+    border-radius: 40px;
+    padding: 14px 36px;
+    font-weight: 700;
     font-size: 1rem;
     text-decoration: none;
-    transition: background 0.3s ease, color 0.3s ease;
+    transition: background 0.3s ease, color 0.2s ease;
     margin-bottom: 30px;
     display: inline-block;
     user-select: none;
@@ -278,6 +313,7 @@ a.btn>span.emoji {
     margin-top: 2rem;
 }
 
+
 /* Individual student card */
 .student-card {
     background: white;
@@ -298,8 +334,22 @@ a.btn>span.emoji {
     background: #d32f2f;
     color: white;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     font-size: 1.5rem;
+}
+
+.student-card-title2 {
+    color: black;
+    font-size: 1.4rem;
+    text-align: center;
+    margin: 0;
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+/* Optioneel: extra ruimte tussen tekstregels */
+.group-info p {
+    margin-bottom: 12px;
 }
 
 /* Card body */
@@ -310,6 +360,8 @@ a.btn>span.emoji {
     justify-content: space-between;
     flex: 1;
     text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
 }
 
 .dashboard-grid {
@@ -326,7 +378,7 @@ a.btn>span.emoji {
 }
 
 .student-email {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: #666;
     margin-bottom: 1rem;
 }
