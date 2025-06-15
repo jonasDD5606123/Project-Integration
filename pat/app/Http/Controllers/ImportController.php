@@ -51,14 +51,7 @@ class ImportController extends Controller
                 'password' => '', // initially empty, set in job
                 'rol_id' => $rolId,
             ]);
-
-            // Generate signed URL with user ID and password as params
-            $signedUrl = URL::signedRoute('password.setup', [
-                'user' => $gebruiker->id,
-                'password' => $randomPassword,
-            ]);
-
-            dispatch(new MailUserPasswordJob($gebruiker, $randomPassword, $signedUrl));
+            dispatch(new MailUserPasswordJob($gebruiker));
         }
 
         $klas->studenten()->syncWithoutDetaching([$gebruiker->id]);
