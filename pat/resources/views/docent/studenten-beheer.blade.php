@@ -4,9 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Klas & Groups Management</title>
+  <title>Klas & Groepen Beheer</title>
   @vite(['resources/js/app.js', 'resources/css/student-beheer.css'])
-
 </head>
 
 <body>
@@ -21,56 +20,55 @@
     </div>
   </header>
 
-
   <main class="container" role="main">
-    <h2>Klas &amp; Groups Management</h2>
+    <h2>Klas &amp; Groepen Beheer</h2>
 
     <section class="section" aria-labelledby="klas-users-title">
-      <h4 id="klas-users-title">Create a Klas from Users</h4>
+      <h4 id="klas-users-title">Maak een Klas aan vanuit Gebruikers</h4>
       <p class="text-muted">
-        Select users from the system to create a new klas. Click the button below to start the process.
+        Selecteer gebruikers uit het systeem om een nieuwe klas aan te maken. Klik op de knop hieronder om te beginnen.
       </p>
-      <a href="{{ route('docent.klas.create') }}" class="btn"><span class="emoji">👥</span> Create Klas from Users</a>
+      <a href="{{ route('docent.klas.create') }}" class="btn"><span class="emoji">👥</span> Maak Klas aan vanuit Gebruikers</a>
     </section>
 
     <section class="section" aria-labelledby="klas-import-title">
-      <h4 id="klas-import-title">Create a Klas from Import</h4>
+      <h4 id="klas-import-title">Maak een Klas aan via Import</h4>
       <p class="text-muted">
-        Import a klas and its students from a CSV or Excel file. Click the button below to upload your file.
+        Importeer een klas met leerlingen vanuit een CSV- of Excel-bestand. Klik op de knop hieronder om je bestand te uploaden.
       </p>
-      <a href="{{ route('docent.klas.import') }}" class="btn"><span class="emoji">📂</span> Import Klas (CSV/Excel)</a>
+      <a href="{{ route('docent.klas.import') }}" class="btn"><span class="emoji">📂</span> Importeer Klas (CSV/Excel)</a>
     </section>
 
     <section class="section" aria-labelledby="groups-users-title">
-      <h4 id="groups-users-title">Create Groups from System</h4>
+      <h4 id="groups-users-title">Maak Groepen aan vanuit Systeem</h4>
       <p class="text-muted">
-        Create groups by selecting students from the system. Click the button below to start grouping.
+        Maak groepen aan door leerlingen uit het systeem te selecteren. Klik op de knop hieronder om te beginnen met groeperen.
       </p>
-      <a href="{{ route('docent.groepen.create') }}" class="btn"><span class="emoji">👥</span> Create Groups from Users</a>
+      <a href="{{ route('docent.groepen.create') }}" class="btn"><span class="emoji">👥</span> Maak Groepen aan vanuit Gebruikers</a>
     </section>
 
     <section class="section" aria-labelledby="groups-import-title">
-      <h4 id="groups-import-title">Import Groups from File</h4>
+      <h4 id="groups-import-title">Importeer Groepen vanuit Bestand</h4>
       <p class="text-muted">
-        Import groups from a CSV or Excel file. Click the button below to upload your groups file.
+        Importeer groepen vanuit een CSV- of Excel-bestand. Klik op de knop hieronder om je groepsbestand te uploaden.
       </p>
-      <a href="{{ route('docent.groepen.import') }}" class="btn"><span class="emoji">📂</span> Import Groups (CSV/Excel)</a>
+      <a href="{{ route('docent.groepen.import') }}" class="btn"><span class="emoji">📂</span> Importeer Groepen (CSV/Excel)</a>
     </section>
 
     <section class="section" aria-labelledby="classes-add-title">
-      <h4 id="classes-add-title">Add Students to Class</h4>
+      <h4 id="classes-add-title">Voeg Leerlingen toe aan Klas</h4>
       <p class="text-muted">
-        Add students to a class using a CSV or Excel file. Click the button below to upload your students file.
+        Voeg leerlingen toe aan een klas met behulp van een CSV- of Excel-bestand. Klik op de knop hieronder om je leerlingenbestand te uploaden.
       </p>
-      <a href="/klas/manage" class="btn"><span class="emoji">➕</span> Add Students</a>
+      <a href="/klas/manage" class="btn"><span class="emoji">➕</span> Voeg Leerlingen toe</a>
     </section>
 
-    <section class="section" aria-labelledby="groups-import-title">
-      <h4 id="groups-import-title">Manage Subjects</h4>
+    <section class="section" aria-labelledby="subjects-management-title">
+      <h4 id="subjects-management-title">Beheer Vakken</h4>
       <p class="text-muted">
-        Here you can add or manage subjects (courses) used in your evaluations. Click the button below to open the subject management page.
+        Hier kan je vakken toevoegen of beheren die worden gebruikt in je evaluaties. Klik op de knop hieronder om naar het vakkenbeheer te gaan.
       </p>
-      <a href="/vakken" class="btn"><span class="emoji">📘</span> Subject Management</a>
+      <a href="/vakken" class="btn"><span class="emoji">📘</span> Vakkenbeheer</a>
     </section>
   </main>
 

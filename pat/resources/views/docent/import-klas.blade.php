@@ -14,61 +14,61 @@
         <div class="container" style="display: flex; align-items: center; justify-content: space-between; position: relative;">
             <h1>Klas Aanmaken <span class="user__voornaam">{{ auth()->user()->voornaam ?? 'Docent' }}</span></h1>
 
-            <a href="{{ route('docent.studentenbeheer') }}" class="btn-back">Back</a>
+            <a href="{{ route('docent.studentenbeheer') }}" class="btn-back">Terug</a>
         </div>
     </header>
 
     <main class="container">
-        <h2 class="mb-4">Create Klas</h2>
+        <h2 class="mb-4">Klas Aanmaken</h2>
 
-        <!-- Combined form for klas creation and student import -->
+        <!-- Gecombineerd formulier voor klas aanmaken en studenten importeren -->
         <form id="frmKlas" enctype="multipart/form-data">
             @csrf
 
-            <!-- Klas Name -->
+            <!-- Klas Naam -->
             <div class="mb-3">
-                <label class="form-label">Klas Name</label>
-                <input id="inKlasNaam" type="text" class="form-control" name="naam">
+                <label class="form-label">Klas Naam</label>
+                <input id="inKlasNaam" type="text" class="form-control" name="naam" placeholder="Vul de klasnaam in">
             </div>
 
-            <!-- Vak Selection -->
+            <!-- Vak Selectie -->
             <div class="mb-3">
                 <label class="form-label">Vak</label>
                 <select id="selVakId" class="form-control" name="vak_id">
-                    <option value="">Select a vak</option>
+                    <option value="">Selecteer een vak</option>
                     @foreach ($vakken as $vak)
                         <option value="{{ $vak->id }}">{{ $vak->naam }}</option>
                     @endforeach
                 </select>
             </div>
 
-            <!-- Import Students Section -->
+            <!-- Studenten Import Sectie -->
             <section id="studenten" class="page w-100 mt-4">
-                <h3>Importeer Studenten</h3>
+                <h3>Studenten Importeren</h3>
                 <div class="card p-4 shadow-sm">
                     <div class="row">
-                        <!-- File Upload Column -->
+                        <!-- Bestand Upload Kolom -->
                         <div class="col-md-6">
-                            <h4><i class="fas fa-user-graduate"></i> Import Students</h4>
-                            <p>Import students from Excel file (.xlsx, .csv)</p>
+                            <h4><i class="fas fa-user-graduate"></i> Studenten Importeren</h4>
+                            <p>Importeer studenten vanuit een Excel-bestand (.xlsx, .csv)</p>
                             <div class="border p-4 rounded mb-3">
                                 <label for="inFileImport" class="form-label">
-                                    <span class="fas fa-upload">&#128193;</span> Choose File
+                                    <span class="fas fa-upload">&#128193;</span> Kies Bestand
                                 </label>
                                 <input class="file__import" id="inFileImport" type="file" class="form-control"
-                                    name="inFileImport">
+                                    name="inFileImport" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
                             </div>
                         </div>
 
-                        <!-- Table Column -->
+                        <!-- Tabel Kolom -->
                         <div class="col-md-6">
                             <div class="table-responsive table__container">
                                 <table id="resultTable" class="table table-striped table-bordered mx-auto">
                                     <thead>
-                                        <!-- Add table headers if needed -->
+                                        <!-- Voeg hier eventueel kolomkoppen toe -->
                                     </thead>
                                     <tbody>
-                                        <!-- Table rows will be inserted here -->
+                                        <!-- Tabelrijen worden hier toegevoegd -->
                                     </tbody>
                                 </table>
                             </div>
@@ -79,14 +79,14 @@
                 </div>
             </section>
 
-            <!-- Feedback Section -->
+            <!-- Feedback Sectie -->
             <div id="feedback"></div>
 
-            <!-- Submit Button for Klas Creation -->
+            <!-- Verzenden knop voor klas aanmaken -->
             <button type="submit" class="btn btn-primary mt-4" id="submitBtn">
                 <span id="submitBtnSpinner" class="spinner-border spinner-border-sm me-2" style="display:none;"
                     role="status" aria-hidden="true"></span>
-                <span id="submitBtnText">Create Klas</span>
+                <span id="submitBtnText">Klas Aanmaken</span>
             </button>
         </form>
     </main>
