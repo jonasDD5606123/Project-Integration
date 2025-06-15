@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f9fafb;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+.header {
+    position: relative;
+    background: linear-gradient(90deg, #00b09b, #96c93d);
+    color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+
+.logout-form {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+}
+
+.btn-back {
+    background: rgba(255, 255, 255, 0.25);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.btn-back:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px 15px; /* Iets minder padding */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    min-height: auto; /* voorkom vaste hoogte */
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+    color: #00b09b;
+    font-size: 1.4rem;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.btn {
+    background: #00b09b;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    margin-top: auto;
+    align-self: center;
+}
+
+.btn:hover {
+    background: #019180;
+}
+
+.list-group {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.list-group-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    text-align: left;
+    transition: box-shadow 0.3s ease;
+}
+
+.list-group-item:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.05);
+}
+
+.list-group-item strong {
+    color: #00b09b;
+    font-size: 1.1rem;
+}
+
+.list-group-item span {
+    font-size: 0.85rem;
+    color: #777;
+}
+
+.list-group-item p {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.btn-sm {
+    background: #f0ad4e;
+    color: #fff;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 10px;
+    transition: background 0.3s ease;
+}
+
+.btn-sm:hover {
+    background: #ec971f;
+}
+
+.card-wrapper {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap; /* Voor responsive gedrag op kleine schermen */
+}
+
+.card-wrapper .card {
+    flex: 1 1 45%; /* Beide cards nemen ongeveer 45% van de ruimte */
+    max-width: 500px;
+}
+
+.new-evaluatie {
+    background: #fff;
+    padding: 20px 15px; /* minder padding voor minder witruimte */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: auto; /* voorkomt vaste hoogte */
+    height: 230px;
+}
+
+.new-evaluatie:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+}
+
+.new-evaluatie h2 {
+    color: #00b09b;
+    font-size: 1.4rem;
+    margin-bottom: 5px; /* minder witruimte */
+}
+
+.new-evaluatie p {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 10px; /* minder witruimte */
+}
+
+.new-evaluatie .btn {
+    background: #00b09b;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.3s ease;
+    align-self: center;
+}
+
+.new-evaluatie .btn:hover {
+    background: #019180;
+}

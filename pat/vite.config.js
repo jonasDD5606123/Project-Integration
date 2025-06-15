@@ -16,8 +16,11 @@ export default defineConfig({
                 'resources/css/import-groepen.css',
                 'resources/css/dashboard-docent.css',
                 'resources/css/student-beheer.css',
-                'resources/css/Student/student-dashboard.css'
-
+                'resources/css/Student/student-dashboard.css',
+                'resources/css/evaluatie-docent.css',
+                'resources/css/create-evaluatie.css',
+                'resources/css/import-klas.css',
+                'resources/css/groepen.css',
             ],
             refresh: true,
         }),
