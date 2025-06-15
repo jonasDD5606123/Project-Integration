@@ -10,8 +10,8 @@ DROP TABLE IF EXISTS studenten_groepen;
 DROP TABLE IF EXISTS studenten_klassen;
 DROP TABLE IF EXISTS docenten_vakken;
 DROP TABLE IF EXISTS criteria;
-DROP TABLE IF EXISTS evaluaties;
 DROP TABLE IF EXISTS groepen;
+DROP TABLE IF EXISTS evaluaties;
 DROP TABLE IF EXISTS gebruikers;
 DROP TABLE IF EXISTS klassen;
 DROP TABLE IF EXISTS rollen;
@@ -47,13 +47,6 @@ CREATE TABLE IF NOT EXISTS gebruikers (
     CONSTRAINT fk_gebruikers_rollen FOREIGN KEY (rol_id) REFERENCES rollen(id)
 );
 
-CREATE TABLE IF NOT EXISTS groepen (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    naam VARCHAR(100),
-    vak_id INT NOT NULL,
-    CONSTRAINT fk_groepen_vakken FOREIGN KEY (vak_id) REFERENCES vakken(id)
-);
-
 CREATE TABLE IF NOT EXISTS evaluaties (
     id INT PRIMARY KEY AUTO_INCREMENT,
     titel VARCHAR(100),
@@ -61,6 +54,15 @@ CREATE TABLE IF NOT EXISTS evaluaties (
     deadline DATETIME NOT NULL,
     vak_id INT NOT NULL,
     CONSTRAINT fk_evaluaties_vakken FOREIGN KEY (vak_id) REFERENCES vakken(id)
+);
+
+CREATE TABLE IF NOT EXISTS groepen (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    naam VARCHAR(100),
+    vak_id INT NOT NULL,
+    evaluatie_id int not null,
+    CONSTRAINT fk_groepen_evaluaties FOREIGN KEY (evaluatie_id) REFERENCES evaluaties(id),
+    CONSTRAINT fk_groepen_vakken FOREIGN KEY (vak_id) REFERENCES vakken(id)
 );
 
 CREATE TABLE IF NOT EXISTS criteria (
@@ -101,7 +103,7 @@ CREATE TABLE IF NOT EXISTS scores (
     student_id_geevalueerd INT NOT NULL,
     student_id_evalueert INT NOT NULL,
     score DECIMAL(10, 2) NOT NULL,
-    feedback VARCHAR(255) NOT NULL,
+    feedback VARCHAR(255),
     gescoord_op DATETIME NOT NULL,
     CONSTRAINT fk_scores_criteria FOREIGN KEY (criterium_id) REFERENCES criteria(id),
     CONSTRAINT fk_scores_studenten_geevalueerd FOREIGN KEY (student_id_geevalueerd) REFERENCES gebruikers(id),

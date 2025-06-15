@@ -21,30 +21,31 @@
         <h2>Student Dashboard</h2>
         <div class="row">
             <!-- Beheer Evaluaties -->
-        <section class="section" aria-labelledby="beheer-evaluaties-title">
-            <h4 id="beheer-evaluaties-title">Beheer Evaluaties</h4>
-            <p class="text-muted">
-                Bekijk of wijzig eerder ingevulde evaluaties.
-            </p>
-            <a href="{{ route('student.groepen')}}" class="btn btn-primary">Ga naar groepen</a>
-        </section>
+            <section class="section" aria-labelledby="beheer-evaluaties-title">
+                <h4 id="beheer-evaluaties-title">Beheer Evaluaties</h4>
+                <p class="text-muted">
+                    Bekijk of wijzig eerder ingevulde evaluaties.
+                </p>
+                <a href="{{ route('student.groepen')}}" class="btn btn-primary">Ga naar groepen</a>
+            </section>
 
-        <!-- Beheer Evaluaties -->
-        <section class="section" aria-labelledby="beheer-evaluaties-title">
-            <h4 id="beheer-evaluaties-title">Beheer Evaluaties</h4>
-            <p class="text-muted">
-                Bekijk of wijzig eerder ingevulde evaluaties.
-            </p>
-            <a href="{{route('student.evaluations')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
-        </section>
+            <!-- Beheer Evaluaties -->
+            <section class="section" aria-labelledby="beheer-evaluaties-title">
+                <h4 id="beheer-evaluaties-title">Beheer Evaluaties</h4>
+                <p class="text-muted">
+                    Bekijk of wijzig eerder ingevulde evaluaties.
+                </p>
+                <a href="{{route('student.evaluations')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
+            </section>
 
-        <!-- Profiel / Hulp -->
-        <section class="section" aria-labelledby="profiel-hulp-title">
-            <h4 id="profiel-hulp-title">Profiel / Hulp</h4>
-            <p class="text-muted">
-                Bekijk je profiel of krijg hulp bij het invullen van evaluaties.
-            </p>
-        </section>
+            <!-- Profiel / Hulp -->
+            <section class="section" aria-labelledby="profiel-hulp-title">
+                <h4 id="profiel-hulp-title">Profiel / Hulp</h4>
+                <p class="text-muted">
+                    Bekijk je profiel of krijg hulp bij het invullen van evaluaties.
+                </p>
+                <a href="{{route('profile.edit')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
+            </section>
     </main>
 
 </body>
