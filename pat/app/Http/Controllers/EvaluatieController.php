@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EvaluatieResultatenExport;
 use App\Models\Criterium;
 use App\Models\Evaluatie;
 use App\Models\Gebruiker;
@@ -10,6 +11,7 @@ use App\Models\Klas;
 use App\Models\Score;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class EvaluatieController extends Controller
 {
@@ -103,5 +105,9 @@ class EvaluatieController extends Controller
             'evaluatie' => $evaluatie,
             'groep' => $groep,
         ]);
+    }
+    public function exportExcel($evaluatieId)
+    {
+        return Excel::download(new EvaluatieResultatenExport($evaluatieId), 'evaluatie_resultaten.xlsx');
     }
 }
