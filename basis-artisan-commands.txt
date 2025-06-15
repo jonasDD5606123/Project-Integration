@@ -1,8 +1,0 @@
-1. Maken model:
-php artisan make:model ModelName
-
-2.make Request:
-php artisan make:Request RequestName
-
-3. Make controller
-php artisan make:Controller ControllerName
