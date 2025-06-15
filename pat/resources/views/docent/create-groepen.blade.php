@@ -30,7 +30,6 @@
                     <button id="resetBtn" class="btn small gray">↻ Reset</button>
                 </div>
 
-                <div class="info">Totaal studenten: <span class="badge">{{ count($studenten) }}</span></div>
 
                 <div id="studentList" class="student-list" ondrop="dropSidebar(event)" ondragover="allowDropSidebar(event)">
                     @php
