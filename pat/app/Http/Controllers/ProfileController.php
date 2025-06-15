@@ -57,4 +57,12 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
+    /**
+     * Display the user's password edit form.
+     */
+    public function editPassword()
+    {
+        return view('student.profile');
+    }
 }

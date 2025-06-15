@@ -44,7 +44,7 @@
             <p class="text-muted">
                 Bekijk je profiel of krijg hulp bij het invullen van evaluaties.
             </p>
-            <a href="#" class="btn"><span class="emoji">🙋</span> Naar profiel</a>
+            <a href="{{route('profile.edit')}}" class="btn"><span class="emoji">🙋</span> Naar profiel</a>
         </section>
     </main>
 

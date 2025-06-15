@@ -6,6 +6,7 @@ use App\Http\Controllers\EvaluatieStudentController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ImportGroepenController;
 use App\Http\Controllers\KlasController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VakController;
 use App\Http\Middleware\DecompressRequest;
 use App\Http\Middleware\DocentMiddleware;
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/evaluatie/submit/{evaluatie}/{student}/{groep}', [EvaluatieStudentController::class, 'storeEvaluatie'])->name('evaluatie.submit');
     Route::post('/evaluatie/{evaluatie}/student/{student}/groep/{groep}/submit', [EvaluatieStudentController::class, 'submit'])->name('evaluatie.submit');
     Route::get('/student/evaluations', [EvaluatieStudentController::class, 'index'])->name('student.evaluations');
+        Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
+    Route::get('/profile/password', [ProfileController::class, 'editPassword'])->name('profile.password.edit');
 });
 
 Route::middleware('auth', DocentMiddleware::class)->group(function () {
