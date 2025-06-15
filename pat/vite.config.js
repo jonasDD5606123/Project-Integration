@@ -25,6 +25,7 @@ export default defineConfig({
                 'resources/css/evaluaties.css',
                 'resources/css/evaluatie-groep.css',
                 'resources/css/vakkenbeheer.css',
+                'resources/css/docentbeheer.css',
             ],
             refresh: true,
         }),
