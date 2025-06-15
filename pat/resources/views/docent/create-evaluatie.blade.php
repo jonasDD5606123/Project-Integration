@@ -26,13 +26,13 @@
             <h2>Evaluatie Aanmaken</h2>
 
             @if ($errors->any())
-            <div class="alert">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+                <div class="alert">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
             @endif
 
             <form>
@@ -57,7 +57,7 @@
                     <select id="selVakId" name="vak_id" required>
                         <option value="">Selecteer een vak</option>
                         @foreach ($vakken as $vak)
-                        <option value="{{ $vak->id }}">{{ $vak->naam }}</option>
+                            <option value="{{ $vak->id }}">{{ $vak->naam }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -65,7 +65,7 @@
                 <div id="criteriaContainer" class="criteria-container"></div>
 
                 <button id="btnAddCriterium" type="button" class="btn btn-outline">➕ Criterium Toevoegen</button>
-                <button type="submit" class="btn btn-primary" style="margin-top: 30px;">✅ Evaluatie Aanmaken</button>
+                <button id="btnSubmit" type="submit" class="btn btn-primary" style="margin-top: 30px;">✅ Evaluatie Aanmaken</button>
             </form>
 
             <div id="feedback"></div>
