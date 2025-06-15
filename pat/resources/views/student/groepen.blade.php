@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,8 +8,12 @@
     <title>Groepen Selectie</title>
     @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
-<body>
+
+
+<body class="display d-flex flex-column">
+    @include('partials.header')
     <div class="container mt-4">
+
         <h2 class="mb-4 text-danger">Stap 1: Kies je groep</h2>
         <p class="text-muted">Selecteer de groep waarvoor je een evaluatie wilt invullen.</p>
 
@@ -35,4 +40,5 @@
         </div>
     </div>
 </body>
+
 </html>
