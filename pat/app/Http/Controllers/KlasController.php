@@ -11,22 +11,28 @@ use Illuminate\Support\Facades\Auth;
 class KlasController extends Controller
 {
     // Show all vakken with klassen and their studenten
-    public function manage()
+    public function manage(Request $request)
     {
         $userId = Auth::user()->id;
 
-        // Get vakken where the authenticated user is a docent
+        // Get all vakken for this docent
         $vakken = Vak::whereHas('docenten', function ($query) use ($userId) {
             $query->where('id', $userId);
-        })
-            ->with('klassen.studenten')
-            ->get();
+        })->with('klassen.studenten')->get();
 
-        // Get all gebruikers with role_id = 1 (students)
-        $students = Gebruiker::where('rol_id', 1)
-            ->get();
+        // Select the first vak if none is selected
+        $selectedVakId = $request->input('vak_id') ?? $vakken->first()?->id;
 
-        return view('docent.manage-class', compact('vakken', 'students'));
+        // Get klassen for the selected vak
+        $klassen = $vakken->where('id', $selectedVakId)->first()?->klassen ?? collect();
+
+        // Select the first klas if none is selected
+        $selectedKlasId = $request->input('klas_id') ?? $klassen->first()?->id;
+
+        // Get students for the selected klas
+        $students = $klassen->where('id', $selectedKlasId)->first()?->studenten ?? collect();
+
+        return view('docent.manage-class', compact('vakken', 'klassen', 'students', 'selectedVakId', 'selectedKlasId'));
     }
 
 

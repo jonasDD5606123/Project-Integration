@@ -14,7 +14,11 @@
         <h1 class="title">
             <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
         </h1>
-        <a href="{{ url('/') }}" class="btn-back" role="button" aria-label="Terug naar home">← Terug</a>
+        <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
+            @csrf
+            <button type="submit" class="btn-back">
+                🚪 Uitloggen
+            </button>
     </header>
 
     <main class="container" role="main">
@@ -28,7 +32,6 @@
                 </p>
                 <a href="{{ route('student.groepen')}}" class="btn btn-primary">Ga naar groepen</a>
             </section>
-            <br>
 
             <!-- Beheer Evaluaties -->
             <section class="section" aria-labelledby="beheer-evaluaties-title">
@@ -38,15 +41,14 @@
                 </p>
                 <a href="{{route('student.evaluations')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
             </section>
-            <br>
             <!-- Profiel / Hulp -->
             <section class="section" aria-labelledby="profiel-hulp-title">
                 <h4 id="profiel-hulp-title">Profiel / Hulp</h4>
                 <p class="text-muted">
                     Bekijk je profiel of krijg hulp bij het invullen van evaluaties.
                 </p>
+                <a href="{{route('profile.edit')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
             </section>
-            <br>
     </main>
 
 </body>

@@ -1,0 +1,188 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #f0f4f8;
+  font-family: 'Poppins', sans-serif;
+  color: #333;
+}
+
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto 80px;
+}
+
+/* Header */
+.header {
+  width: 100%;
+  min-height: 100px;
+  background: linear-gradient(90deg, #00b09b, #96c93d);
+  color: white;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.logout-form {
+  position: absolute;
+  top: 20px;
+  right: 60px;
+}
+
+.btn-back {
+  background: rgba(255 255 255 / 0.25);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn-back:hover,
+.btn-back:focus {
+  background: rgba(255 255 255 / 0.5);
+}
+
+/* Titel */
+h2 {
+  color: #00b09b;
+  font-weight: 700;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* Filter formulier */
+form {
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+form label {
+  font-weight: 600;
+  color: #019180;
+  margin-right: 10px;
+}
+
+form select {
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* Tabel */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+  background: #00b09b;
+  color: white;
+}
+
+thead th {
+  padding: 15px;
+  text-align: left;
+  font-size: 1rem;
+}
+
+tbody td {
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+tbody tr:hover {
+  background: #f8fdfc;
+}
+
+.text-muted {
+  color: #888;
+  text-align: center;
+}
+
+/* Actieknoppen */
+.btn-sm {
+  display: inline-block;
+  background: #00b09b;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.3s ease, box-shadow 0.2s ease;
+}
+
+.btn-sm:hover {
+  background: #019180;
+  box-shadow: 0 4px 10px rgba(1, 145, 128, 0.3);
+}
+
+/* Algemene knopstijl */
+.btn {
+  display: inline-block;
+  background: #00b09b;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.3s ease, box-shadow 0.2s ease;
+  margin-right: 10px;
+}
+
+.btn:hover {
+  background: #019180;
+  box-shadow: 0 4px 12px rgba(1, 145, 128, 0.3);
+}
+
+/* Outline variant */
+.btn-outline-secondary {
+  display: inline-block;
+  background: transparent;
+  border: 2px solid #00b09b;
+  color: #00b09b;
+  padding: 10px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background: #00b09b;
+  color: white;
+}
+
