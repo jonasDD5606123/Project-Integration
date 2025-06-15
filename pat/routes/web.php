@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/evaluatie/{evaluatie}/student/{student}/groep/{groep}/submit', [EvaluatieStudentController::class, 'submit'])->name('evaluatie.submit');
     Route::get('/student/evaluations', [EvaluatieStudentController::class, 'index'])->name('student.evaluations');
         Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
-    Route::get('/profile/password', [ProfileController::class, 'editPassword'])->name('profile.password.edit');
+    Route::get('/profile/password', [ProfileController::class, 'editPassword'])->name('profile.edit');
 });
 
 Route::middleware('auth', DocentMiddleware::class)->group(function () {
