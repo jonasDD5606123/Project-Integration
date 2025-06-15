@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Criterium;
 use App\Models\Evaluatie;
+use App\Models\Gebruiker;
+use App\Models\Groep;
+use App\Models\Klas;
+use App\Models\Score;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluatieController extends Controller
 {
@@ -50,6 +55,53 @@ class EvaluatieController extends Controller
         return response()->json([
             'msg' => 'success',
             'status' => 201
+        ]);
+    }
+
+    public function teacherIndex(Request $request)
+    {
+        $teacher = Gebruiker::find(Auth::user()->id)->first();
+        $vakken = $teacher->vakken;
+        $vakId = $request->input('vak_id');
+
+        $evaluatiesQuery = \App\Models\Evaluatie::whereIn('vak_id', $vakken->pluck('id'));
+        if ($vakId) {
+            $evaluatiesQuery->where('vak_id', $vakId);
+        }
+        $evaluaties = $evaluatiesQuery->with('vak')->get();
+
+        return view('docent.evaluaties', [
+            'vakken' => $vakken,
+            'evaluaties' => $evaluaties,
+        ]);
+    }
+    public function showGroepen($evaluatieId)
+    {
+        $evaluatie = \App\Models\Evaluatie::with(['groepen.vak'])->findOrFail($evaluatieId);
+
+        return view('docent.evaluatie-groepen', [
+            'evaluatie' => $evaluatie,
+        ]);
+    }
+    public function resultaten($evaluatieId)
+    {
+        $evaluatie = \App\Models\Evaluatie::with([
+            'groepen.studenten',
+            'criteria.scores'
+        ])->findOrFail($evaluatieId);
+
+        return view('docent.evaluatie-groep', [
+            'evaluatie' => $evaluatie,
+        ]);
+    }
+    public function groepResultaten($evaluatieId, $groepId)
+    {
+        $evaluatie = \App\Models\Evaluatie::with(['criteria.scores'])->findOrFail($evaluatieId);
+        $groep = \App\Models\Groep::with('studenten')->findOrFail($groepId);
+
+        return view('docent.evaluatie-groep', [
+            'evaluatie' => $evaluatie,
+            'groep' => $groep,
         ]);
     }
 }

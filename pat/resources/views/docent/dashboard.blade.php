@@ -38,7 +38,7 @@
         <section class="card">
             <h2>Rapportering</h2>
             <p>Rapporten van klassen en groepen bekijken.</p>
-            <a href="/docent/klassen" class="btn">Bekijk Details</a>
+            <a href="/docent/raporten" class="btn">Bekijk Details</a>
         </section>
 
         <section class="card">

@@ -35,7 +35,7 @@
             <p class="text-muted">
                 Bekijk of wijzig eerder ingevulde evaluaties.
             </p>
-            <a href="#" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
+            <a href="{{route('student.evaluations')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
         </section>
 
         <!-- Profiel / Hulp -->

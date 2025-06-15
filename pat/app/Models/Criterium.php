@@ -27,4 +27,9 @@ class Criterium extends Model
     {
         return $this->belongsTo(Evaluatie::class, 'evaluatie_id');
     }
+
+    public function scores()
+    {
+        return $this->hasMany(\App\Models\Score::class, 'criterium_id');
+    }
 }

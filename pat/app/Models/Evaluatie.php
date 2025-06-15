@@ -35,4 +35,35 @@ class Evaluatie extends Model
     {
         return $this->hasMany(Criterium::class, 'evaluatie_id');
     }
+
+    public function scores()
+    {
+        return $this->hasManyThrough(
+            \App\Models\Score::class,      // The final model
+            \App\Models\Criterium::class,  // The intermediate model
+            'evaluatie_id',                // Foreign key on criteria table...
+            'criterium_id',                // Foreign key on scores table...
+            'id',                          // Local key on evaluaties table...
+            'id'                           // Local key on criteria table...
+        );
+    }
+
+
+    public function studenten()
+    {
+        return $this->hasManyThrough(
+            Gebruiker::class,      // Final model (student)
+            Groep::class,          // Intermediate model (groep)
+            'evaluatie_id',        // Foreign key on groepen table
+            'id',                  // Foreign key on gebruikers table (assuming 'id')
+            'id',                  // Local key on evaluaties table
+            'id'                   // Local key on groepen table
+        );
+    }
+
+    public function allStudenten()
+    {
+        return $this->groepen->flatMap->studenten->unique('id');
+    }
+
 }

@@ -1,24 +1,16 @@
 <?php
 
-use App\Http\Controllers\Auth\PasswordSetupController as AuthPasswordSetupController;
 use App\Http\Controllers\DocentController;
 use App\Http\Controllers\EvaluatieController;
 use App\Http\Controllers\EvaluatieStudentController;
 use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ImportGroepenController;
 use App\Http\Controllers\KlasController;
-use App\Http\Controllers\PasswordSetupController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VakController;
 use App\Http\Middleware\DecompressRequest;
 use App\Http\Middleware\DocentMiddleware;
-use App\Models\Evaluatie;
-use App\Models\Groep;
-use App\Models\StudentGroepen;
-use App\Models\Vak;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use PhpParser\Node\Expr\Eval_;
 
 Route::get('/', function () {
     $user = Auth::user();
@@ -67,6 +59,11 @@ Route::middleware('auth', DocentMiddleware::class)->group(function () {
     Route::get('/klas/manage', [KlasController::class, 'manage'])->name('klas.manage');
 
     Route::post('/klas/add-student', [KlasController::class, 'addStudent'])->name('klas.addStudent');
+
+Route::get('/docent/raporten', [EvaluatieController::class, 'teacherIndex'])->name('docent.raporten');
+Route::get('/docent/evaluaties/{evaluatie}/groepen', [EvaluatieController::class, 'showGroepen'])->name('evaluatie.groepen');
+Route::get('/docent/evaluaties/{evaluatie}/resultaten', [EvaluatieController::class, 'resultaten'])->name('evaluatie.resultaten');
+Route::get('/docent/evaluaties/{evaluatie}/groepen/{groep}/resultaten', [EvaluatieController::class, 'groepResultaten'])->name('evaluatie.resultaten');
 });
 
 // For API route (recommended)
