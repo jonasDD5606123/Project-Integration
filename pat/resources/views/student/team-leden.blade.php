@@ -1,33 +1,35 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-        <title>Groepsgenoten Evaluatie</title>
-        @vite(['resources/js/app.js', 'resources/css/app.css'])
-    </head>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Groepsgenoten Evaluatie</title>
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
+</head>
 
-    <body>
-        <div class="container mt-4">
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <h2 class="text-danger">Stap 2: Kies je groepsgenoot</h2>
-                <a class="btn btn-outline-secondary btn-sm" href="{{ url()->previous() }}">
-                    <i class="fas fa-arrow-left"></i> Terug naar groepen
-                </a>
-            </div>
+<body>
+    @include('partials.header')
 
-            <div class="alert alert-danger">
-                <strong>Groep:</strong> {{ $groep->naam }}<br>
-                <strong>Evaluatie:</strong> {{ $groep->evaluatie->titel ?? 'Onbekende evaluatie' }}<br>
-                <strong>Vak:</strong> {{ $groep->vak->naam ?? 'Onbekend vak' }}
-            </div>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-danger">Stap 2: Kies je groepsgenoot</h2>
+            <a class="btn btn-outline-secondary btn-sm" href="{{ url()->previous() }}">
+                <i class="fas fa-arrow-left"></i> Terug naar groepen
+            </a>
+        </div>
 
-            <p class="text-muted">Selecteer de groepsgenoot die je wilt evalueren.</p>
+        <div class="alert alert-danger">
+            <strong>Groep:</strong> {{ $groep->naam }}<br>
+            <strong>Evaluatie:</strong> {{ $groep->evaluatie->titel ?? 'Onbekende evaluatie' }}<br>
+            <strong>Vak:</strong> {{ $groep->vak->naam ?? 'Onbekend vak' }}
+        </div>
 
-            <div class="row">
-                @forelse ($studenten as $student)
+        <p class="text-muted">Selecteer de groepsgenoot die je wilt evalueren.</p>
+
+        <div class="row">
+            @forelse ($studenten as $student)
                 <div class="col-md-4 mb-3">
                     <div class="card border-danger text-center h-100">
                         <div class="card-header bg-danger text-white">
@@ -42,28 +44,28 @@
                             </div>
 
                             @php
-                            $isFullyEvaluated = in_array($student->id, $fullyEvaluatedStudentIds ?? []);
+                                $isFullyEvaluated = in_array($student->id, $fullyEvaluatedStudentIds ?? []);
                             @endphp
 
                             <a href="{{ route('evaluatie.start', ['evaluatie' => $groep->evaluatie_id, 'student' => $student->id, 'groep' => $groep->id]) }}"
                                 class="btn {{ $isFullyEvaluated ? 'btn-success' : 'btn-danger' }} btn-sm mt-3">
                                 @if ($isFullyEvaluated)
-                                <i class="fas fa-check-circle"></i> Evaluatie bewerken
+                                    <i class="fas fa-check-circle"></i> Evaluatie bewerken
                                 @else
-                                Evalueer {{ explode(' ', $student->name)[0] ?? $student->name }}
+                                    Evalueer {{ explode(' ', $student->name)[0] ?? $student->name }}
                                 @endif
                             </a>
 
                         </div>
                     </div>
                 </div>
-                @empty
+            @empty
                 <div class="col-12">
                     <p class="text-muted">Geen groepsgenoten beschikbaar om te evalueren.</p>
                 </div>
-                @endforelse
-            </div>
+            @endforelse
         </div>
-    </body>
+    </div>
+</body>
 
-    </html>
+</html>

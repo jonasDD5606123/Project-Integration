@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Gebruiker;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,5 +65,21 @@ class ProfileController extends Controller
     public function editPassword()
     {
         return view('student.profile');
+    }
+
+    /**
+     * Update the user's password.
+     */
+    public function updatePassword(Request $request)
+    {
+        $request->validate([
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+
+        $user = Gebruiker::find(Auth::user()->id)->first();
+        $user->password = bcrypt($request->password);
+        $user->save();
+
+        return redirect()->back()->with('success', 'Wachtwoord succesvol gewijzigd.');
     }
 }

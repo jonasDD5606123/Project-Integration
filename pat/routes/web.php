@@ -62,11 +62,11 @@ Route::middleware('auth', DocentMiddleware::class)->group(function () {
     Route::get('/klas/manage', [KlasController::class, 'manage'])->name('klas.manage');
 
     Route::post('/klas/add-student', [KlasController::class, 'addStudent'])->name('klas.addStudent');
-
-Route::get('/docent/raporten', [EvaluatieController::class, 'teacherIndex'])->name('docent.raporten');
-Route::get('/docent/evaluaties/{evaluatie}/groepen', [EvaluatieController::class, 'showGroepen'])->name('evaluatie.groepen');
-Route::get('/docent/evaluaties/{evaluatie}/resultaten', [EvaluatieController::class, 'resultaten'])->name('evaluatie.resultaten');
-Route::get('/docent/evaluaties/{evaluatie}/groepen/{groep}/resultaten', [EvaluatieController::class, 'groepResultaten'])->name('evaluatie.resultaten');
+    Route::get('/docent/raporten', [EvaluatieController::class, 'teacherIndex'])->name('docent.raporten');
+    Route::get('/docent/evaluaties/{evaluatie}/groepen', [EvaluatieController::class, 'showGroepen'])->name('evaluatie.groepen');
+    Route::get('/docent/evaluaties/{evaluatie}/resultaten', [EvaluatieController::class, 'resultaten'])->name('evaluatie.resultaten');
+    Route::get('/docent/evaluaties/{evaluatie}/groepen/{groep}/resultaten', [EvaluatieController::class, 'groepResultaten'])->name('evaluatie.resultaten');
+    Route::get('/docent/evaluaties/{evaluatie}/export', [EvaluatieController::class, 'exportExcel'])->name('evaluatie.export');
 });
 
 // For API route (recommended)

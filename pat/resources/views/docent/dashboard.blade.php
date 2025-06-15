@@ -40,12 +40,6 @@
             <p>Rapporten van klassen en groepen bekijken.</p>
             <a href="/docent/raporten" class="btn">Bekijk Details</a>
         </section>
-
-        <section class="card">
-            <h2>Vakkenbeheer</h2>
-            <p>Vakken toevoegen, bewerken en beheren.</p>
-            <a href="/vakken" class="btn">Bekijk Details</a>
-        </section>
     </main>
 </body>
 

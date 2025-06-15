@@ -21,7 +21,8 @@ body {
 }
 
 /* Header (dashboard style) */
-.header {
+.header,
+header {
     width: 100%;
     min-height: 100px;
     background: linear-gradient(90deg, #d32f2f, #f44336);
@@ -40,7 +41,8 @@ body {
     user-select: none;
 }
 
-.header h1 {
+.header h1,
+header h1 {
     margin: 0;
     font-size: 2rem;
     font-weight: 400;
