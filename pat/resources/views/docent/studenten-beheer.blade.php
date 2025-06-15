@@ -54,6 +54,14 @@
       </p>
       <a href="{{ route('docent.groepen.import') }}" class="btn"><span class="emoji">📂</span> Import Groups (CSV/Excel)</a>
     </section>
+
+    <section class="section" aria-labelledby="groups-import-title">
+      <h4 id="groups-import-title">Import Groups from File</h4>
+      <p class="text-muted">
+        Import groups from a CSV or Excel file. Click the button below to upload your groups file.
+      </p>
+      <a href="/klas/manage" class="btn"><span class="emoji">📂</span> Import Groups (CSV/Excel)</a>
+    </section>
   </main>
 
 </body>

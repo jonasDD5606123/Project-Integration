@@ -10,54 +10,64 @@
 
 <body>
     <div class="container mt-4">
-        <h1>Klassenbeheer</h1>
+        <h1>Klasbeheer</h1>
+
+        <form method="GET" action="{{ route('klas.manage') }}">
+            <label for="vak_id">Vak:</label>
+            <select name="vak_id" id="vak_id" onchange="this.form.submit()">
+                    @foreach($vakken as $vak)
+                    <option value="{{ $vak->id }}" {{ $selectedVakId == $vak->id ? 'selected' : '' }}>
+                        {{ $vak->naam }}
+                    </option>
+                @endforeach
+            </select>
+
+            <label for="klas_id">Klas:</label>
+            <select name="klas_id" id="klas_id" onchange="this.form.submit()">
+                @foreach($klassen as $klas)
+                    <option value="{{ $klas->id }}" {{ $selectedKlasId == $klas->id ? 'selected' : '' }}>
+                        {{ $klas->naam }}
+                    </option>
+                @endforeach
+            </select>
+        </form>
+
+        @if($students->count())
+            <h2>Studenten in deze klas</h2>
+            <ul>
+                @foreach($students as $student)
+                    <li>{{ $student->voornaam }} {{ $student->achternaam }} ({{ $student->email }})</li>
+                @endforeach
+            </ul>
+        @elseif($selectedKlasId)
+            <p>Geen studenten gevonden in deze klas.</p>
+        @endif
 
         @if(session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        @foreach ($vakken as $vak)
-            <h2>Vak: {{ $vak->naam }}</h2>
+        <!-- Add Student Form -->
+        <form method="POST" action="{{ route('klas.addStudent') }}" class="mt-4">
+            @csrf
+            <input type="hidden" name="klas_id" value="{{ $selectedKlasId }}">
 
-            @foreach ($vak->klassen as $klas)
-                <div class="mb-4 border p-3 rounded">
-                    <h3>Klas: {{ $klas->naam }}</h3>
-
-                    <strong>Studenten:</strong>
-                    <ul>
-                        @forelse($klas->studenten as $student)
-                            <li>{{ $student->voornaam }} {{ $student->achternaam }} ({{ $student->r_nummer }})</li>
-                        @empty
-                            <li>Geen studenten gekoppeld.</li>
-                        @endforelse
-                    </ul>
-
-                    <form action="{{ route('klas.addStudent') }}" method="POST" class="mt-3">
-                        @csrf
-                        <input type="hidden" name="klas_id" value="{{ $klas->id }}">
-
-                        <div class="mb-3">
-                            <label for="student_id_{{ $klas->id }}" class="form-label">Student toevoegen</label>
-                            <select name="student_id" id="student_id_{{ $klas->id }}" class="form-select" required>
-                                <option value="">-- Kies een student --</option>
-                                @foreach ($students as $student)
-                                    @if(!$klas->studenten->contains($student->id))
-                                        <option value="{{ $student->id }}">{{ $student->voornaam }} {{ $student->achternaam }} ({{ $student->r_nummer }})</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            @error('student_id')
-                                <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Student toevoegen</button>
-                    </form>
-                </div>
-            @endforeach
-
-            <hr>
-        @endforeach
+            <label for="student_id">Student toevoegen:</label>
+            <select name="student_id" id="student_id" required>
+                <option value="">-- Kies een student --</option>
+                @foreach(
+                    \App\Models\Gebruiker::where('rol_id', 1)
+                        ->whereNotIn('id', $students->pluck('id'))
+                        ->orderBy('voornaam')
+                        ->get() as $student
+                )
+                    <option value="{{ $student->id }}">
+                        {{ $student->voornaam }} {{ $student->achternaam }} ({{ $student->email }})
+                    </option>
+                @endforeach
+            </select>
+            <button type="submit" class="btn btn-primary">Toevoegen</button>
+        </form>
     </div>
 </body>
 
