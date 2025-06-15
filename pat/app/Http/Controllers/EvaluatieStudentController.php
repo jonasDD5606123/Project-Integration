@@ -164,64 +164,70 @@ class EvaluatieStudentController extends Controller
         return redirect()->back()->with('success', 'Evaluatie succesvol ingediend.');
     }
 
-public function index()
-{
-    $student = Auth::user();
+    public function index($selectVak = null)
+    {
+        $student = Gebruiker::find(Auth::user()->id); // Get the logged-in student
 
-    // Get all evaluations connected via groups that include this student
-    $evaluaties = Evaluatie::whereHas('groepen.studenten', function ($query) use ($student) {
-        $query->where('gebruikers.id', $student->id);
-    })->with(['groepen.studenten', 'criteria', 'vak'])->get();
+        // Get all klassen for the student
+        $klassen = $student->klassen()->with('vak')->get();
 
-    $filteredEvaluaties = [];
+        // Get all vakken for those klassen (unique)
+        $vakken = $klassen->pluck('vak')->unique('id')->values();
+        // Get all evaluations connected via groups that include this student
+        $evaluaties = Evaluatie::whereHas('groepen.studenten', function ($query) use ($student) {
+            $query->where('gebruikers.id', $student->id);
+        })->with(['groepen.studenten', 'criteria', 'vak'])->get();
 
-    foreach ($evaluaties as $evaluatie) {
-        // Groups current student belongs to for this evaluation
-        $studentGroups = $evaluatie->groepen->filter(function ($groep) use ($student) {
-            return $groep->studenten->contains($student);
-        });
+        $filteredEvaluaties = [];
 
-        // Unique students in those groups
-        $studenten = $studentGroups->flatMap->studenten->unique('id');
+        foreach ($evaluaties as $evaluatie) {
+            // Groups current student belongs to for this evaluation
+            $studentGroups = $evaluatie->groepen->filter(function ($groep) use ($student) {
+                return $groep->studenten->contains($student);
+            });
 
-        // Skip if fewer than 2 students or no criteria
-        if ($studenten->count() < 2 || $evaluatie->criteria->isEmpty()) {
-            continue;
+            // Unique students in those groups
+            $studenten = $studentGroups->flatMap->studenten->unique('id');
+
+            // Skip if fewer than 2 students or no criteria
+            if ($studenten->count() < 2 || $evaluatie->criteria->isEmpty()) {
+                continue;
+            }
+
+            $aantalStudenten = $studenten->count();
+            $aantalCriteria = $evaluatie->criteria->count();
+
+            // Expected scores per student: criteria * (students - 1)
+            $verwachteScoresPerStudent = $aantalCriteria * ($aantalStudenten - 1);
+
+            // Actual scores given by current student for this evaluation's criteria
+            $aantalScoresByStudent = Score::where('student_id_evalueert', $student->id)
+                ->whereIn('criterium_id', $evaluatie->criteria->pluck('id'))
+                ->count();
+
+            $volledig = $aantalScoresByStudent >= $verwachteScoresPerStudent;
+            $deadlinePassed = $evaluatie->deadline->isPast();
+
+            // Show evaluations incomplete by this student (before or after deadline),
+            // and completed ones before deadline
+            if (!$volledig || ($volledig && !$deadlinePassed)) {
+                $filteredEvaluaties[] = [
+                    'evaluatie' => $evaluatie,
+                    'volledig' => $volledig,
+                    'deadlinePassed' => $deadlinePassed,
+                    'verwachteScoresPerStudent' => $verwachteScoresPerStudent,
+                    'aantalScoresByStudent' => $aantalScoresByStudent,
+                ];
+            }
         }
 
-        $aantalStudenten = $studenten->count();
-        $aantalCriteria = $evaluatie->criteria->count();
+        // Sort by deadline ascending
+        usort(
+            $filteredEvaluaties,
+            fn($a, $b) =>
+            $a['evaluatie']->deadline->timestamp <=> $b['evaluatie']->deadline->timestamp
+        );
 
-        // Expected scores per student: criteria * (students - 1)
-        $verwachteScoresPerStudent = $aantalCriteria * ($aantalStudenten - 1);
-
-        // Actual scores given by current student for this evaluation's criteria
-        $aantalScoresByStudent = Score::where('student_id_evalueert', $student->id)
-            ->whereIn('criterium_id', $evaluatie->criteria->pluck('id'))
-            ->count();
-
-        $volledig = $aantalScoresByStudent >= $verwachteScoresPerStudent;
-        $deadlinePassed = $evaluatie->deadline->isPast();
-
-        // Show evaluations incomplete by this student (before or after deadline),
-        // and completed ones before deadline
-        if (!$volledig || ($volledig && !$deadlinePassed)) {
-            $filteredEvaluaties[] = [
-                'evaluatie' => $evaluatie,
-                'volledig' => $volledig,
-                'deadlinePassed' => $deadlinePassed,
-                'verwachteScoresPerStudent' => $verwachteScoresPerStudent,
-                'aantalScoresByStudent' => $aantalScoresByStudent,
-            ];
-        }
+        return view('student.evaluations', ['evaluaties' => $filteredEvaluaties]);
     }
-
-    // Sort by deadline ascending
-    usort($filteredEvaluaties, fn($a, $b) =>
-        $a['evaluatie']->deadline->timestamp <=> $b['evaluatie']->deadline->timestamp
-    );
-
-    return view('student.evaluations', ['evaluaties' => $filteredEvaluaties]);
-}
-
 }

@@ -1,44 +1,40 @@
 <h1>Evaluaties - Mijn Groepen</h1>
 
-<form method="GET">
-    <label for="vak_id">Vak:</label>
-    <select name="vak_id" id="vak_id" onchange="this.form.submit()">
-        <option value="">-- Alle vakken --</option>
-        @foreach($vakken as $vak)
-            <option value="{{ $vak->id }}" {{ $selectedVak == $vak->id ? 'selected' : '' }}>
-                {{ $vak->naam }}
-            </option>
-        @endforeach
-    </select>
-
-    <label for="evaluatie_id">Evaluatie:</label>
-    <select name="evaluatie_id" id="evaluatie_id" onchange="this.form.submit()">
-        <option value="">-- Alle evaluaties --</option>
-        @foreach($vakken as $vak)
-            @foreach($vak->evaluaties as $evaluatie)
-                <option value="{{ $evaluatie->id }}" {{ $selectedEvaluatie == $evaluatie->id ? 'selected' : '' }}>
-                    {{ $evaluatie->naam ?? 'Evaluatie '.$evaluatie->id }}
-                </option>
-            @endforeach
-        @endforeach
-    </select>
-</form>
-
-<table>
+<table border="1" cellpadding="6" cellspacing="0">
     <thead>
         <tr>
-            <th>Groep</th>
-            <th>Vak</th>
             <th>Evaluatie</th>
+            <th>Vak</th>
+            <th>Deadline</th>
+            <th>Status</th>
+            <th>Scores gegeven</th>
+            <th>Scores verwacht</th>
         </tr>
     </thead>
     <tbody>
-        @foreach($groepen as $groep)
+        @forelse($evaluaties as $item)
             <tr>
-                <td>{{ $groep->naam }}</td>
-                <td>{{ $groep->vak->naam ?? '' }}</td>
-                <td>{{ $groep->evaluatie->naam ?? $groep->evaluatie->id }}</td>
+                <td>{{ $item['evaluatie']->titel ?? 'Evaluatie '.$item['evaluatie']->id }}</td>
+                <td>{{ $item['evaluatie']->vak->naam ?? '-' }}</td>
+                <td>
+                    {{ $item['evaluatie']->deadline ? $item['evaluatie']->deadline->format('d-m-Y H:i:s') : '-' }}
+                </td>
+                <td>
+                    @if($item['volledig'])
+                        Voltooid
+                    @elseif($item['deadlinePassed'])
+                        Te laat
+                    @else
+                        Open
+                    @endif
+                </td>
+                <td>{{ $item['aantalScoresByStudent'] }}</td>
+                <td>{{ $item['verwachteScoresPerStudent'] }}</td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="6">Geen evaluaties gevonden.</td>
+            </tr>
+        @endforelse
     </tbody>
 </table>

@@ -20,6 +20,7 @@
 
             <div class="alert alert-danger">
                 <strong>Groep:</strong> {{ $groep->naam }}<br>
+                <strong>Evaluatie:</strong> {{ $groep->evaluatie->titel ?? 'Onbekende evaluatie' }}<br>
                 <strong>Vak:</strong> {{ $groep->vak->naam ?? 'Onbekend vak' }}
             </div>
 

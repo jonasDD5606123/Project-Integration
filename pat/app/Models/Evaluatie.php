@@ -17,7 +17,7 @@ class Evaluatie extends Model
         'id' => 'integer',
         'titel' => 'string',
         'beschrijving' => 'string',
-        'deadline' => 'date',
+        'deadline' => 'datetime',
         'vak_id' => 'integer'
     ];
 

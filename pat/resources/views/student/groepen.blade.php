@@ -22,6 +22,7 @@
                         <div class="card-body">
                             <p class="card-text">
                                 <strong>Vak:</strong> {{ $groep->vak->naam }}<br>
+                                <strong>Evaluatie:</strong> {{ $groep->evaluatie->titel }}<br>
                                 <strong>Groepsleden:</strong> {{ count($groep->studenten) }}
                             </p>
                             <a href="{{ route('student.groep', ['groep' => $groep->id]) }}" class="btn btn-danger btn-sm">
