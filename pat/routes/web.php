@@ -12,6 +12,7 @@ use App\Http\Middleware\DecompressRequest;
 use App\Http\Middleware\DocentMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 Route::get('/', function () {
     $user = Auth::user();
@@ -67,9 +68,12 @@ Route::middleware('auth', DocentMiddleware::class)->group(function () {
     Route::get('/docent/evaluaties/{evaluatie}/resultaten', [EvaluatieController::class, 'resultaten'])->name('evaluatie.resultaten');
     Route::get('/docent/evaluaties/{evaluatie}/groepen/{groep}/resultaten', [EvaluatieController::class, 'groepResultaten'])->name('evaluatie.resultaten');
     Route::get('/docent/evaluaties/{evaluatie}/export', [EvaluatieController::class, 'exportExcel'])->name('evaluatie.export');
+    Route::get('/create-student', [RegisteredUserController::class, 'create'])->name('docent.student');
+    Route::post('/create-student', [RegisteredUserController::class, 'store'])->name('create-student');
 });
 
 // For API route (recommended)
+
 
 
 require __DIR__ . '/auth.php';
