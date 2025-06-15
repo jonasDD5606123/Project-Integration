@@ -12,7 +12,7 @@
 
     <header class="header" role="banner">
         <h1 class="title">
-            <span class="user__voornaam">{{ Auth::user()->name }}</span>
+            <span class="user__voornaam">{{ auth()->user()->voornaam }}</span>
         </h1>
         <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
             @csrf
@@ -23,7 +23,7 @@
 
     <main class="container" role="main">
         <h2>Student Dashboard</h2>
-        <div class="row">
+        <div class="dashboard-grid">
             <!-- Beheer Evaluaties -->
             <section class="section" aria-labelledby="beheer-evaluaties-title">
                 <h4 id="beheer-evaluaties-title">Beheer Evaluaties</h4>
@@ -41,7 +41,6 @@
                 </p>
                 <a href="{{route('student.evaluations')}}" class="btn"><span class="emoji">📋</span> Bekijk evaluaties</a>
             </section>
-
             <!-- Profiel / Hulp -->
             <section class="section" aria-labelledby="profiel-hulp-title">
                 <h4 id="profiel-hulp-title">Profiel / Hulp</h4>

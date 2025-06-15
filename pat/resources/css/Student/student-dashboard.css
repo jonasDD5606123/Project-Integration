@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* Reset & basis */
+/* Reset & base */
 body {
     margin: 0;
     padding: 0;
@@ -20,20 +20,35 @@ body {
     gap: 30px 40px;
 }
 
+.groep-card {
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    width: 280px;
+    transition: transform 0.2s ease;
+}
+
+.groep-card:hover {
+    transform: translateY(-4px);
+}
+
+.groep-naam {
+    font-size: 0.9rem;
+    color: #aaa;
+}
+
 /* Header (dashboard style) */
 .header,
 header {
     width: 100%;
     min-height: 100px;
     background: linear-gradient(90deg, #d32f2f, #f44336);
-    /* Red gradient */
     color: white;
     padding: 40px 60px;
     box-sizing: border-box;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,7 +63,7 @@ header h1 {
     font-weight: 400;
 }
 
-/* Terug knop als button */
+/* Back button */
 .btn-back {
     background: rgba(255, 255, 255, 0.25);
     color: white;
@@ -73,7 +88,7 @@ header h1 {
     outline: none;
 }
 
-/* Pagina titel */
+/* Page title */
 h2 {
     color: #d32f2f;
     font-weight: 700;
@@ -84,14 +99,15 @@ h2 {
     grid-column: 1 / -1;
 }
 
-/* Sections als cards */
+/* Section card */
 .section {
     background: white;
     padding: 30px 35px;
     border-radius: 18px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.07);
     transition: box-shadow 0.3s ease, transform 0.25s ease;
-    max-width: 100%;
+    max-width: 300px;
+    flex: 1 1 300px;
 }
 
 .section:hover {
@@ -113,7 +129,7 @@ h2 {
     line-height: 1.5;
 }
 
-/* Knoppen */
+/* Buttons */
 a.btn {
     display: inline-block;
     background: #d32f2f;
@@ -135,7 +151,6 @@ a.btn:focus {
     outline: none;
 }
 
-/* Optional outline button */
 .btn-outline-secondary {
     border: 2px solid #e57373;
     background: transparent;
@@ -161,9 +176,156 @@ a.btn:focus {
     outline: none;
 }
 
-/* Emoji correct spacing */
+.custom-container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto 80px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px 40px;
+}
+
 a.btn>span.emoji {
     margin-right: 8px;
     font-size: 1.2rem;
     line-height: 1;
+}
+
+/* Form elements */
+.input-range {
+    width: 100%;
+    margin: 10px 0 15px;
+}
+
+.textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    resize: vertical;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.textarea:focus {
+    border-color: #d32f2f;
+    outline: none;
+}
+
+.form-actions {
+    text-align: center;
+    grid-column: 1 / -1;
+    margin-top: 30px;
+}
+
+/* Header row */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-column: 1 / -1;
+    margin-bottom: 20px;
+}
+
+/* Alert box */
+.alert-box {
+    background: #ffe5e5;
+    border-left: 5px solid #d32f2f;
+    padding: 20px 25px;
+    border-radius: 12px;
+    color: #b71c1c;
+    margin-bottom: 25px;
+}
+
+/* Student card grid layout */
+.student-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+/* Individual student card */
+.student-card {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.student-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Card header */
+.student-card-header {
+    background: #d32f2f;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 1.5rem;
+}
+
+/* Card body */
+.student-card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    text-align: center;
+}
+
+.dashboard-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.student-card-body h4 {
+    margin: 0.5rem 0 0.25rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.student-email {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+/* Success button */
+.btn-success {
+    background: #4caf50;
+    color: white;
+    border-radius: 30px;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+    background: #388e3c;
+    outline: none;
+}
+
+/* Sticky top bar */
+.main-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+    padding: 12px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

@@ -5,19 +5,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Klas & Groups Management</title>
-    @vite(['resources/js/app.js', 'resources/css/student-beheer.css'])
+  @vite(['resources/js/app.js', 'resources/css/student-beheer.css'])
 
 </head>
 
 <body>
 
-<header class="header" role="banner">
-  <h1 class="title">
-    <span class="user__voornaam">{{ auth()->user()->voornaam }}  {{ auth()->user()->achternaam }}</span>
-  </h1>
+  <header class="header" role="banner">
+    <h1 class="title">
+      <span class="user__voornaam">{{ auth()->user()->voornaam }} {{ auth()->user()->achternaam }}</span>
+    </h1>
 
-  <a href="{{ url('/') }}" class="btn-back" role="button" aria-label="Terug naar home">← Terug</a>
-</header>
+    <div class="logout-form">
+      <a href="{{ url('/') }}" class="btn-back" role="button" aria-label="Terug naar home">← Terug</a>
+    </div>
+  </header>
 
 
   <main class="container" role="main">
@@ -55,20 +57,20 @@
       <a href="{{ route('docent.groepen.import') }}" class="btn"><span class="emoji">📂</span> Import Groups (CSV/Excel)</a>
     </section>
 
-    <section class="section" aria-labelledby="groups-import-title">
-      <h4 id="groups-import-title">Import Groups from File</h4>
+    <section class="section" aria-labelledby="classes-add-title">
+      <h4 id="classes-add-title">Add Students to Class</h4>
       <p class="text-muted">
-        Import groups from a CSV or Excel file. Click the button below to upload your groups file.
+        Add students to a class using a CSV or Excel file. Click the button below to upload your students file.
       </p>
-      <a href="/klas/manage" class="btn"><span class="emoji">📂</span> Import Groups (CSV/Excel)</a>
+      <a href="/klas/manage" class="btn"><span class="emoji">➕</span> Add Students</a>
     </section>
 
     <section class="section" aria-labelledby="groups-import-title">
-      <h4 id="groups-import-title">Import Groups from File</h4>
+      <h4 id="groups-import-title">Manage Subjects</h4>
       <p class="text-muted">
-        Import groups from a CSV or Excel file. Click the button below to upload your groups file.
+        Here you can add or manage subjects (courses) used in your evaluations. Click the button below to open the subject management page.
       </p>
-      <a href="/vakken" class="btn"><span class="emoji">📂</span> Import Groups (CSV/Excel)</a>
+      <a href="/vakken" class="btn"><span class="emoji">📘</span> Subject Management</a>
     </section>
   </main>
 

@@ -3,46 +3,37 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h2 class="text-2xl font-semibold mb-4">Welcome to the dashboard</h2>
-    <h1>Evaluaties - Mijn Groepen</h1>
+    <div class="container">
+        <h2>Evaluaties</h2>
 
-    <table border="1" cellpadding="6" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Evaluatie</th>
-                <th>Vak</th>
-                <th>Deadline</th>
-                <th>Status</th>
-                <th>Scores gegeven</th>
-                <th>Scores verwacht</th>
-            </tr>
-        </thead>
-        <tbody>
-            @forelse($evaluaties as $item)
-                <tr>
-                    <td>{{ $item['evaluatie']->titel ?? 'Evaluatie ' . $item['evaluatie']->id }}</td>
-                    <td>{{ $item['evaluatie']->vak->naam ?? '-' }}</td>
-                    <td>
-                        {{ $item['evaluatie']->deadline ? $item['evaluatie']->deadline->format('d-m-Y H:i:s') : '-' }}
-                    </td>
-                    <td>
-                        @if($item['volledig'])
-                            Voltooid
-                        @elseif($item['deadlinePassed'])
-                            Te laat
-                        @else
-                            Open
-                        @endif
-                    </td>
-                    <td>{{ $item['aantalScoresByStudent'] }}</td>
-                    <td>{{ $item['verwachteScoresPerStudent'] }}</td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="6">Geen evaluaties gevonden.</td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-
+        @if(count($evaluaties))
+            <div class="dashboard-grid">
+                @foreach($evaluaties as $item)
+                    <div class="section">
+                        <h4>{{ $item['evaluatie']->titel ?? 'Evaluatie ' . $item['evaluatie']->id }}</h4>
+                        <p class="text-muted"><strong>Vak:</strong> {{ $item['evaluatie']->vak->naam ?? '-' }}</p>
+                        <p class="text-muted"><strong>Deadline:</strong>
+                            {{ $item['evaluatie']->deadline ? $item['evaluatie']->deadline->format('d-m-Y H:i') : '-' }}
+                        </p>
+                        <p class="text-muted">
+                            <strong>Status:</strong>
+                            @if($item['volledig'])
+                                <span class="status success">Voltooid</span>
+                            @elseif($item['deadlinePassed'])
+                                <span class="status danger">Te laat</span>
+                            @else
+                                <span class="status warning">Open</span>
+                            @endif
+                        </p>
+                        <p class="text-muted"><strong>Scores gegeven:</strong> {{ $item['aantalScoresByStudent'] }}</p>
+                        <p class="text-muted"><strong>Scores verwacht:</strong> {{ $item['verwachteScoresPerStudent'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <div class="alert-box">
+                Geen evaluaties gevonden.
+            </div>
+        @endif
+    </div>
 @endsection
