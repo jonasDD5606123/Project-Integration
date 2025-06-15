@@ -4,18 +4,26 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    @vite(['resources/js/app.js', 'resources/css/klassenbeheer.css'])
     <title>Klassenbeheer</title>
 </head>
 
 <body>
-    <div class="container mt-4">
-        <h1>Klasbeheer</h1>
+  <header class="header" role="banner">
+    <h1 class="title">
+      <span class="user__voornaam">{{ auth()->user()->voornaam }} {{ auth()->user()->achternaam }}</span>
+    </h1>
+
+    <a href="{{ route('docent.studentenbeheer') }}" class="btn-back" role="button" aria-label="Terug naar home">← Terug</a>
+  </header>
+
+    <div class="container">
+        <h2>Klasbeheer</h2>
 
         <form method="GET" action="{{ route('klas.manage') }}">
             <label for="vak_id">Vak:</label>
             <select name="vak_id" id="vak_id" onchange="this.form.submit()">
-                    @foreach($vakken as $vak)
+                @foreach($vakken as $vak)
                     <option value="{{ $vak->id }}" {{ $selectedVakId == $vak->id ? 'selected' : '' }}>
                         {{ $vak->naam }}
                     </option>
@@ -33,7 +41,7 @@
         </form>
 
         @if($students->count())
-            <h2>Studenten in deze klas</h2>
+            <h3>Studenten in deze klas</h3>
             <ul>
                 @foreach($students as $student)
                     <li>{{ $student->voornaam }} {{ $student->achternaam }} ({{ $student->email }})</li>
@@ -47,7 +55,6 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
-        <!-- Add Student Form -->
         <form method="POST" action="{{ route('klas.addStudent') }}" class="mt-4">
             @csrf
             <input type="hidden" name="klas_id" value="{{ $selectedKlasId }}">
@@ -66,7 +73,7 @@
                     </option>
                 @endforeach
             </select>
-            <button type="submit" class="btn btn-primary">Toevoegen</button>
+            <button type="submit" class="btn">Toevoegen</button>
         </form>
     </div>
 </body>

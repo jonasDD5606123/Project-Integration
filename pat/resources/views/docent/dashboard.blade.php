@@ -14,12 +14,12 @@
             <h1>Welkom <span>{{ auth()->user()->voornaam }}</span></h1>
         </div>
 
-     <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
-        @csrf
-        <button type="submit" class="btn-back">
-            🚪 Uitloggen
-        </button>
-    </form>
+        <form method="POST" action="{{ route('logout') }}" class="logout-form" aria-label="Uitloggen">
+            @csrf
+            <button type="submit" class="btn-back">
+                🚪 Uitloggen
+            </button>
+        </form>
     </header>
 
     <main class="container">
@@ -42,8 +42,8 @@
         </section>
 
         <section class="card">
-            <h2>Rapportering</h2>
-            <p>Rapporten van klassen en groepen bekijken.</p>
+            <h2>Vakkenbeheer</h2>
+            <p>Vakken toevoegen, bewerken en beheren.</p>
             <a href="/vakken" class="btn">Bekijk Details</a>
         </section>
     </main>

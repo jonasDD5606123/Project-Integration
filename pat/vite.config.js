@@ -21,6 +21,8 @@ export default defineConfig({
                 'resources/css/create-evaluatie.css',
                 'resources/css/import-klas.css',
                 'resources/css/groepen.css',
+                'resources/css/klassenbeheer.css',
+                'resources/css/evaluaties.css'
             ],
             refresh: true,
         }),
