@@ -3,9 +3,9 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h2 class="text-2xl font-semibold mb-4">Welcome to the dashboard</h2>
-    <div class="container mt-4">
-        <h2 class="mb-4 text-danger">Evaluatie: {{ $evaluatie->titel }}</h2>
+
+    <div class="container">
+        <h2>Evaluatie: {{ $evaluatie->titel }}</h2>
 
         <form method="POST" action="{{ route('evaluatie.submit', ['evaluatie' => $evaluatie->id, 'student' => $gebruiker->id, 'groep' => $groep->id]) }}">
             @csrf
@@ -18,41 +18,42 @@
                     $existingFeedback = $existingScores[$criterium->id]->feedback ?? '';
                 @endphp
 
-                <div class="card mb-3">
-                    <div class="card-header">{{ $criterium->criterium }}</div>
-                    <div class="card-body">
-                        <label>Score ({{ $criterium->min_waarde }} - {{ $criterium->max_waarde }})</label>
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <input type="range"
-                                    class="form-range"
-                                    name="scores[{{ $criterium->id }}]"
-                                    min="{{ $criterium->min_waarde }}"
-                                    max="{{ $criterium->max_waarde }}"
-                                    value="{{ old('scores.' . $criterium->id, $existingScore) }}"
-                                    oninput="document.getElementById('score_{{ $criterium->id }}').innerText = this.value;">
-                            </div>
-                            <div class="col-md-4">
-                                <span class="badge bg-primary" id="score_{{ $criterium->id }}">
-                                    {{ old('scores.' . $criterium->id, $existingScore) }}
-                                </span>
-                            </div>
-                        </div>
+                <div class="section">
+                    <h4>{{ $criterium->criterium }}</h4>
 
-                        <label class="mt-2">Feedback (optioneel)</label>
-                        <textarea name="feedbacks[{{ $criterium->id }}]"
-                            class="form-control"
-                            rows="3"
-                            placeholder="Geef hier je feedback...">{{ old('feedbacks.' . $criterium->id, $existingFeedback) }}</textarea>
+                    <label for="score_{{ $criterium->id }}">Score ({{ $criterium->min_waarde }} - {{ $criterium->max_waarde }})</label>
+                    <input
+                        type="range"
+                        class="input-range"
+                        name="scores[{{ $criterium->id }}]"
+                        min="{{ $criterium->min_waarde }}"
+                        max="{{ $criterium->max_waarde }}"
+                        value="{{ old('scores.' . $criterium->id, $existingScore) }}"
+                        oninput="document.getElementById('score_value_{{ $criterium->id }}').innerText = this.value;">
+                    <div class="score-badge-wrapper">
+                        <span class="badge bg-primary" id="score_value_{{ $criterium->id }}">
+                            {{ old('scores.' . $criterium->id, $existingScore) }}
+                        </span>
                     </div>
+
+                    <label for="feedback_{{ $criterium->id }}">Feedback (optioneel)</label>
+                    <textarea
+                        id="feedback_{{ $criterium->id }}"
+                        class="textarea"
+                        name="feedbacks[{{ $criterium->id }}]"
+                        rows="3"
+                        placeholder="Geef hier je feedback...">
+                                {{ old('feedbacks.' . $criterium->id, $existingFeedback) }}</textarea>
                 </div>
             @endforeach
 
-            <div class="text-center">
-                <button type="submit" class="btn btn-danger btn-lg">
-                    <i class="fas fa-save"></i> Opslaan
+            <div class="form-actions">
+                <button type="submit" class="btn">
+                    💾 Opslaan
                 </button>
-                <a href="{{ url()->previous() }}" class="btn btn-secondary btn-lg ms-2">Annuleren</a>
+                <a href="{{ url()->previous() }}" class="btn-outline-secondary">
+                    Annuleren
+                </a>
             </div>
         </form>
     </div>

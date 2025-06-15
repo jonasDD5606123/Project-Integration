@@ -3,32 +3,27 @@
 @section('title', 'Dashboard')
 
 @section('content')
-    <h2 class="text-2xl font-semibold mb-4">Welcome to the dashboard</h2>
-    <div class="container mt-4">
+    <div class="custom-container">
 
-        <h2 class="mb-4 text-danger">Stap 1: Kies je groep</h2>
-        <p class="text-muted">Selecteer de groep waarvoor je een evaluatie wilt invullen.</p>
+        <h2>Stap 1: Kies je groep</h2>
 
-        <div class="row">
+        <div class="d-flex flex-wrap gap-4 justify-content-center">
             @foreach ($groepen as $groep)
-                <div class="col-md-6 mb-3">
-                    <div class="card border-danger">
-                        <div class="card-header bg-danger text-white">
-                            {{ $groep->naam }}
-                        </div>
-                        <div class="card-body ">
-                            <p class="card-text">
-                                <strong>Vak:</strong> {{ $groep->vak->naam }}<br>
-                                <strong>Evaluatie:</strong> {{ $groep->evaluatie->titel }}<br>
-                                <strong>Groepsleden:</strong> {{ count($groep->studenten) }}
-                            </p>
-                            <a href="{{ route('student.groep', ['groep' => $groep->id]) }}" class="btn btn-danger btn-sm">
-                                Selecteer Groep
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <section class="section" aria-labelledby="beheer-evaluaties-title">
+                    <h4 id="beheer-evaluaties-title">{{ $groep->naam }}</h4>
+                    <p class="text-muted">
+                        <strong>Vak:</strong> {{ $groep->vak->naam }}
+                    </p>
+                    <p class="text-muted">
+                        <strong>Evaluatie:</strong> {{ $groep->evaluatie->titel }}
+                    </p>
+                    <p class="text-muted">
+                        <strong>Groepsleden:</strong> {{ count($groep->studenten) }}
+                    </p>
+                    <a href="{{ route('student.groep', ['groep' => $groep->id]) }}" class="btn btn-primary">Selecteer Groep</a>
+                </section>
             @endforeach
         </div>
+
     </div>
 @endsection
