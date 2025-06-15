@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Set Your Password</title>
 </head>
+
 <body>
+    @include('partials.header')
+
     <h1>Set Your Password, {{ $user->voornaam }}</h1>
 
     <form method="POST" action="{{ $postUrl }}">
@@ -25,4 +29,5 @@
         <button type="submit">Set Password</button>
     </form>
 </body>
+
 </html>
